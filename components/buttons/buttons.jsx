@@ -1,0 +1,56 @@
+import React    from 'react'
+import ReactDOM from 'react-dom'
+
+class Buttons extends React.Component{
+    constructor (props){
+        super(props)
+        this.state = {
+            height: window.innerHeight,
+            width:  window.innerWidth,
+        }
+    }
+
+    componentDidMount(){
+        this.updateSize();
+        window.addEventListener("resize", this.updateSize.bind(this))
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("resize", this.updateSize.bind(this))
+    }
+
+    updateSize(){
+        this.setState({height: window.innerHeight, width: window.innerWidth})
+        if (this.state.height < this.state.width){
+            this.setState({width: '10vh', height: '10vh'})
+        }
+        else{
+            this.setState({width: '10vw', height: '10vw'})
+        }
+    }
+
+    render(){
+        const styles = {
+            containerStyle: {
+                display:        'block',
+                width:          '100%',
+                background:     'rgb(32, 34, 37)',
+                boxShadow:      'none',
+                color:          'white',
+                fontSize:       '2vmin' ,
+                border:         0,
+                borderBottom:   '1px solid grey',
+                boxShadow:      'none',
+                borderRadius:   '0px',
+                textAlign:      'center',
+                padding:        '25% 0',
+                height:         '25%',
+                boxSizing:      'border-box'
+          }
+        };
+        const {containerStyle} = styles
+        return (<a style={containerStyle} href={"#" + this.props.item}>{this.props.name}</a>)
+    }
+}
+
+export {Buttons}
