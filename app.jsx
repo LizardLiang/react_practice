@@ -41,7 +41,7 @@ class MainWindow extends React.Component {
         let item = fetch('https://cors-anywhere.herokuapp.com/http://114.32.157.74/PythonFlask/api/test', {
             method:  'GET',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
         }).then((response)=>{
             return response.json()
@@ -59,20 +59,35 @@ class MainWindow extends React.Component {
     render(){
         const Styles = {
             StyleContainer: {
-                width:      '100vw',
-                minHeight:  '920px',
+                width:      '100%',
+                height:     'auto',
                 background: 'rgb(47, 49, 54)',
                 margin:     '0',
                 boxSizing:  'border-box'
             },
             MainPageContainer: {
-                marginTop:  '2.5%',
+                marginTop:  '937px',
+                marginLeft: 'auto',
+                marginRight:'auto',
                 position:   'relative',
                 background: 'rgb(54, 57, 63)',
-                left:       '15vw',
                 boxSizing:  'border-box',
-                width:      '70vw',
-                minHeight:  '90vh',
+                width:      '50vw'
+            },
+            headerContainer:{
+                position:   'fixed',
+                top:        '0px',
+                left:       '0px',
+                height:     '937px', 
+                width:      '1377px', 
+                display:    'table',
+            },
+            h1Container:    {
+                display:        'table-cell',
+                textAlign:      'center',
+                verticalAlign:  'middle',
+                fontSize:       '6vmin',
+                color:          'white'
             }
         }
         const {StyleContainer} = Styles
@@ -94,8 +109,11 @@ class MainWindow extends React.Component {
         }
         return (
             <div style={StyleContainer}>
-                {/* <Main /> */}
-                {/* <PageBox /> */}
+                <header style={Styles.headerContainer}>
+                    <h1 style={Styles.h1Container}>
+                        Hello Everyone!
+                    </h1>
+                </header>
                 <div style={Styles.MainPageContainer}>
                     <Info           id="1" />
                     <Experience     id="2" />
