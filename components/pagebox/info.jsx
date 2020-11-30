@@ -30,14 +30,14 @@ class Info extends React.Component  {
         const Styles = {
             StyleContainer:{
                 color:      'white',
-                minHeight:  '25%',
+                height:     '25%',
                 fontSize:   '3vmin',
-                background:  'rgb(64, 68, 75)'
+                background: 'rgb(64, 68, 75)'
             },
             ImgContainer:{
                 position:   'absolute',
                 top:        '0',
-                left:       '0'
+                left:       '0',
             },
             spanContainer:{
                 marginLeft: '20%'
