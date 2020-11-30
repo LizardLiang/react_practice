@@ -4,6 +4,22 @@ import "./info.css"
 class Experience extends React.Component    {
     constructor(props){
         super(props)
+        this.state = {
+            opacity: 1
+        }
+        this.scrollHandler = this.scrollHandler.bind(this)
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.scrollHandler)
+    }
+
+    scrollHandler(){
+        let pos = window.pageYOffset
+        if(pos > 250 && pos < 485){
+            let diff = (pos - 250) / (485 - 250)
+            this.setState({opacity: diff})
+        }
     }
 
     render(){
@@ -13,7 +29,8 @@ class Experience extends React.Component    {
                 fontSize:       '3vmin',
                 background:     'rgb(64, 68, 75)',
                 height:         'auto',
-                overflow:       'auto'
+                overflow:       'auto',
+                opacity:        this.state.opacity
             },
             overallTitle:{
                 display:        'block',

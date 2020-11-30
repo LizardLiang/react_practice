@@ -2,6 +2,25 @@ import React, { Component } from 'react'
 import './info.css'
 
 class MyTool extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            opacity:    1
+        }
+        this.scrollHandler = this.scrollHandler.bind(this)
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.scrollHandler)
+    }
+
+    scrollHandler(e){
+        let pos = window.pageYOffset
+        if(pos > 655 && pos < 925){
+            let diff = (pos - 655) / (925 - 655)
+            this.setState({opacity:  diff})
+        }
+    }
 
     render(){
         const Styles = {
@@ -10,7 +29,8 @@ class MyTool extends Component{
                 color:          'white',
                 background:     'rgb(64, 68, 75)',
                 height:         'auto',
-                overflow:       'auto'
+                overflow:       'auto',
+                opacity:        this.state.opacity
             },
             titleContainer:{
                 display:        'block',
@@ -58,7 +78,7 @@ class MyTool extends Component{
                             編輯器: VsCode
                         </li>
                         <li className='li'>
-                            開發工具: Git, npm, webpack, flask, wfastcgi
+                            開發工具: Git, npm, webpack, flask
                         </li>
                     </ul>
                 </div>

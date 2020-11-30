@@ -26,21 +26,42 @@ class SchoolInfo extends Component{
 }
 
 class Info extends React.Component  {
+    constructor(props){
+        super(props)
+        this.state = {
+            opacity: 1
+        }
+        this.scrollHandler = this.scrollHandler.bind(this)
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.scrollHandler)
+    }
+
+    scrollHandler(e){
+        let pos = window.pageYOffset
+        if(pos > 20 && pos < 245){
+            let diff = (pos - 20)/(245 - 20)
+            this.setState({opacity: diff})
+        }
+    }
     render() {
         const Styles = {
             StyleContainer:{
                 color:      'white',
                 height:     '25%',
                 fontSize:   '3vmin',
-                background: 'rgb(64, 68, 75)'
+                background: 'rgb(64, 68, 75)',
+                opacity:    this.state.opacity
             },
             ImgContainer:{
-                position:   'absolute',
+                float:      'left',
                 top:        '0',
                 left:       '0',
+                height:     '100%',
             },
             spanContainer:{
-                marginLeft: '20%'
+                marginLeft: '5%'
             }
         }
         return(

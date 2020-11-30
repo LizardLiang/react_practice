@@ -57,19 +57,22 @@ class Projects extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            color: 'white'
+            color: 'white',
+            opacity:    1
         }
 
         // important to set this function to bind
-        this.changeColor = this.changeColor.bind(this)
+        this.scrollHandler = this.scrollHandler.bind(this)
+    }
+    componentDidMount(){
+        window.addEventListener('scroll', this.scrollHandler)
     }
 
-    changeColor(){
-        if(this.state.color === 'white'){
-            this.setState({color: 'blue'})
-        }
-        else{
-            this.setState({color: 'white'})
+    scrollHandler(e){
+        let pos = window.pageYOffset
+        if(pos > 495 && pos < 655){
+            let diff = (pos - 495) / (655 - 495)
+            this.setState({opacity: diff})
         }
     }
 
@@ -78,8 +81,9 @@ class Projects extends React.Component{
             StyleContainer:{
                 color:      this.state.color,
                 width:      "100%",
-                background:  'rgb(64, 68, 75)',
-                textAlign:  'center'
+                background: 'rgb(64, 68, 75)',
+                textAlign:  'center',
+                opacity:    this.state.opacity
             },
             spanContainer:{
                 display:        'block',
