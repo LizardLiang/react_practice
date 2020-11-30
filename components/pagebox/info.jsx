@@ -1,25 +1,39 @@
 import React, {Component} from 'react'
 import "./info.css"
 
-class SchoolInfo extends Component{
+class Intro extends Component {
     render(){
         const Styles = {
-            BlockContainer:{
-                position:       'relative',
-                background:     'rgb(64, 68, 75)',
-                marginTop:      '10%'
+            StyleContainer:{
+                color:      'white',
+                height:     'auto',
+                fontSize:   '3vmin',
+                background: 'rgb(64, 68, 75)'
             },
-            liContainer:{
-                paddingLeft:    '10%'
+            spanTitleContainer:{
+                display:    'block',
+                textAlign:  'center',
+                borderBottom:   '1px solid grey',
+                fontSize:   '3vmin'
+            },
+            spanContentContainer:{
+                fontSize:   '2vmin'
             }
         }
         return(
-            <div style={Styles.BlockContainer}>
-                <span>Graduate School:</span>
-                <ul>
-                    <li className="li">Yuan Zi university</li>
-                    <li className="li">Major in Electrical Engineering</li>
-                </ul>
+            <div style={Styles.StyleContainer}>
+                <span style={Styles.spanTitleContainer}>自我介紹</span>
+                <span style={Styles.spanContentContainer}>
+                    在軟體公司任職期間，開發一款馬達測試軟體以及協助編輯Odoo ERP系統和單晶片韌體的編寫
+                    <br/>
+                    <br/>
+                    空閒時間有接過一次 web 相關案件，是使用 HTML/CSS 搭配 Javascript完成<br/>
+                    之後我又將其重新使用ReactJS 改寫，並將成果放置在下方 project部分
+                    <br/>
+                    <br/>
+                    目前短期目標是成為一名前端工程師，並正在自學React的部分<br/>
+                    長期目標為成為全端工程師，目前僅學到使用Python + Flask作為web API，與我的前端網頁串接<br/>
+                </span>
             </div>
         )
     }
@@ -73,11 +87,14 @@ class Info extends React.Component  {
                     📱 0920173978
                 </span><br/>
                 <span style={Styles.spanContainer} role="img" aria-label="mail">
-                    ✉️ shotup0101@gmail.com
-                </span><br/>
+                    ✉️ 
+                    <a href="mailto: shotup0101@gmail.com">
+                            shotup0101@gmail.com
+                    </a>
+                </span>
             </div>
         )
     }
 }
 
-export { Info }
+export { Info, Intro }
