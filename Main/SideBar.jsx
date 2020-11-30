@@ -52,7 +52,7 @@ class SideBar extends React.Component{
                     <Buttons name="Info"  item="1"/>
                     <Buttons name="Experience" item="2" />
                     <Buttons name="Project" item="3" />
-                    <Buttons name="Contact" item="4" />
+                    <Buttons name="Tools" item="4" />
                     <Buttons name="Github" item="5" />
                 </div>
             </div>
