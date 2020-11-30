@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import {Provider, connect} from "react-redux"
 import {Main, SideBar} from "./Main"
-import {PageBox, Info, Experience, Projects } from "./components/pagebox"
+import {PageBox, Info, Experience, Projects, MyTool, AdditionInfo } from "./components/pagebox"
 import store from "./index.js"
 
 class MessageList extends React.Component {
@@ -66,6 +66,7 @@ class MainWindow extends React.Component {
                 boxSizing:  'border-box'
             },
             MainPageContainer: {
+                marginTop:  '2.5%',
                 position:   'relative',
                 background: 'rgb(54, 57, 63)',
                 left:       '15vw',
@@ -93,26 +94,29 @@ class MainWindow extends React.Component {
         }
         return (
             <div style={StyleContainer}>
-                <SideBar />
-                <Main />
+                {/* <Main /> */}
                 {/* <PageBox /> */}
                 <div style={Styles.MainPageContainer}>
-                    <Info id="1" />
-                    <Experience id="2" />
-                    <Projects id="3" />
+                    <Info           id="1" />
+                    <Experience     id="2" />
+                    <Projects       id="3" />
+                    <MyTool         id="4" />
+                    <AdditionInfo   id="5" />
+                    {/*}
                     <table>
                         <tr>
                             <th>Date</th>
                             <th>Price</th>
                         </tr>
-                        {/* render tbody */}
                         { list }
                     </table>
                     <button onClick={this.TryApi}>Fetch!!</button>
+                    */}
                 </div>
-                <Provider store={store}>
+                {/* <Provider store={store}>
                     <List />
-                </Provider>
+                </Provider> */}
+                <SideBar />
             </div>
         )
     }
