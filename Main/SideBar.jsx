@@ -3,6 +3,27 @@ import ReactDOM from "react-dom"
 import {Buttons}    from "../components/buttons"
 
 class SideBar extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            isVisible: 'hidden'
+        }
+        this.handleScrollEvent = this.handleScrollEvent.bind(this)
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.handleScrollEvent)
+    }
+
+    handleScrollEvent(e){
+        if(window.pageYOffset >= 937){
+            this.setState({isVisible: 'visible'})
+        }
+        else{
+            this.setState({isVisible: 'hidden'})
+        }
+    }
+
     render(){
         const Styles = {
             StyleContainer: {
@@ -15,7 +36,8 @@ class SideBar extends React.Component{
                 boxSizing:  'border-box',
                 maxWidth:   '130px',
                 minWidth:   '83.94px',
-                zIndex:     '2'
+                zIndex:     '2',
+                visibility: this.state.isVisible
             },
             offsetContainer:    {
                 position:   'relative',
