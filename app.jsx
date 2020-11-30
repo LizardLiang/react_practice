@@ -66,7 +66,7 @@ class MainWindow extends React.Component {
                 boxSizing:  'border-box'
             },
             MainPageContainer: {
-                marginTop:  '937px',
+                marginTop:  '100vh',
                 marginLeft: 'auto',
                 marginRight:'auto',
                 position:   'relative',
@@ -78,8 +78,8 @@ class MainWindow extends React.Component {
                 position:   'fixed',
                 top:        '0px',
                 left:       '0px',
-                height:     '937px', 
-                width:      '1377px', 
+                height:     '100vh', 
+                width:      '100vw', 
                 display:    'table',
             },
             h1Container:    {
@@ -109,11 +109,11 @@ class MainWindow extends React.Component {
         }
         return (
             <div style={StyleContainer}>
-                <header style={Styles.headerContainer}>
+                <div style={Styles.headerContainer}>
                     <h1 style={Styles.h1Container}>
                         Hello Everyone!
                     </h1>
-                </header>
+                </div>
                 <div style={Styles.MainPageContainer}>
                     <Info           id="1" />
                     <Experience     id="2" />
