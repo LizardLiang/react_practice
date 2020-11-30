@@ -6,7 +6,14 @@ import {PageBox, Info, Experience, Projects } from "./components/pagebox"
 class Default extends React.Component {
     constructor(){
         super();
+        // this.testFetch = this.testFetch.bind(this)
     }
+
+    // testFetch(){
+    //     fetch("https://api.ipify.org?format=json")
+    //     .then(response => response.json())
+    //     .then(response => console.log(response));
+    // }
 
     render(){
         const Styles = {
@@ -18,11 +25,12 @@ class Default extends React.Component {
                 boxSizing:  'border-box'
             },
             MainPageContainer: {
-                // overflow:   'scroll',
                 position:   'relative',
-                background: 'rgb(68, 68, 76)',
+                background: 'rgb(54, 57, 63)',
                 left:       '15vw',
-                width:      '70vw'
+                boxSizing:  'border-box',
+                width:      '70vw',
+                minHeight:  '90vh',
             }
         }
         const {StyleContainer} = Styles
