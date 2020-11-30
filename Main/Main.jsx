@@ -32,7 +32,7 @@ class Main extends React.Component{
         return (
             <div style={StyleContainer}>
                 <span style={Style.spanContainer}>
-                    Lizard's Web Presentation
+                    My Resume
                 </span>
             </div>
         )
