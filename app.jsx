@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import {Provider, connect} from "react-redux"
 import {Main, SideBar} from "./Main"
-import {PageBox, Info, Experience, Projects, MyTool, AdditionInfo } from "./components/pagebox"
+import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./components/pagebox"
 import store from "./index.js"
 
 class MessageList extends React.Component {
@@ -116,6 +116,7 @@ class MainWindow extends React.Component {
                 </div>
                 <div style={Styles.MainPageContainer}>
                     <Info           id="1" />
+                    <Intro                 />
                     <Experience     id="2" />
                     <Projects       id="3" />
                     <MyTool         id="4" />
