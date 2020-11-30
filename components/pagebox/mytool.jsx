@@ -80,6 +80,9 @@ class MyTool extends Component{
                         <li className='li'>
                             開發工具: Git, npm, webpack, flask
                         </li>
+                        <li className='li'>
+                            多益: 845分
+                        </li>
                     </ul>
                 </div>
             </div>
