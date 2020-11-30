@@ -15,11 +15,15 @@ class Test_Program extends React.Component  {
             },
             divContainer:{
                 background: 'rgb(64, 68, 75)',
-                visibility: this.props.isVisible,
+                // visibility: this.props.isVisible,
                 marginLeft: '20%',
                 width:      '60%',
-                display:    'block'
+                display:    this.props.isVisible
             },
+            imgContainer:{
+                width:  '100%',
+                height: 'auto'
+            }
         }
         return(
             <div style={Styles.divContainer}>
@@ -31,6 +35,7 @@ class Test_Program extends React.Component  {
                 <span style={Styles.spanContainer}>
                     Use RS232 as communication protocol!
                 </span>
+                <img src="../img/test_program.png" style={Styles.imgContainer}></img>
             </div>
         )
     }

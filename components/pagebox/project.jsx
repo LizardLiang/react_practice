@@ -1,12 +1,12 @@
 import React from 'react'
-import { Test_Program } from "../../Projects"
+import { Test_Program, WebGame } from "../../Projects"
 import { ContentTitle } from "../../components/ContentTitle"
 
 class Project extends React.Component   {
     constructor(props){
         super(props)
         this.state = {
-            isVisible: 'hidden'
+            isVisible: 'none'
         }
 
         this.setVisibility = this.setVisibility.bind(this)
@@ -17,6 +17,8 @@ class Project extends React.Component   {
             case "Test Program":
                 return <Test_Program isVisible={isVisible}/>
                 break
+            case "Web Game":
+                return <WebGame isVisible={isVisible}/>
             default:
                 return  <div></div>
                 break
@@ -24,40 +26,24 @@ class Project extends React.Component   {
     }
 
     setVisibility(){
-        if(this.state.isVisible === 'visible'){
-            this.setState({isVisible: 'hidden'})
+        if(this.state.isVisible === 'block'){
+            this.setState({isVisible: 'none'})
         }
         else{
-            this.setState({isVisible: 'visible'})
+            this.setState({isVisible: 'block'})
         }
     }
 
     render(){
         const Styles = {
-            buttonContainer:{
-                position:   'relative',
-                width:      '2%',
-                height:     '100%',
-                float:      'left',
-                border:     'none',
-                boxShadow:  'none',
-                background: 'rgb(68, 68, 76)',
-                fontSize:   '2vmin',
-                color:      'white',
-                padding:    '2% 0'
-            },
-            divTitleContainer:  {
-                height:     '8%'
-            },
-            spanTitleContainer: {
-                height:     '100%',
-                fontSize:   '5vmin',
-                display:    'inline-block',
-                padding:    '1% 0'
+            divContainer: {
+                height:         "auto",
+                width:          "100%",
+                verticalAlign:  "top"
             }
         }
         return (
-            <div>
+            <div style={Styles.divContainer}>
                 <ContentTitle   titletext={'Project #' + this.props.id + ' ' + this.props.name} 
                                 clickevent={this.setVisibility} 
                                 isVisible={this.state.isVisible}/>
@@ -90,13 +76,17 @@ class Projects extends React.Component{
     render(){
         const Styles = {
             StyleContainer:{
-                color: this.state.color,
+                color:      this.state.color,
+                display:    "inline-block",
+                width:      "100%",
+                background:  'rgb(64, 68, 75)'
             }
         }
         return (
             <div style={Styles.StyleContainer}>
-                <span>These are My Project</span>
+                <span>My Project</span><br/>
                 <Project id="1" name="Test Program"/>
+                <Project id="2" name="Web Game"/>
             </div>
         )
     }

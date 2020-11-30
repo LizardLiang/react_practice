@@ -10,7 +10,9 @@ module.exports = {
             //第一個loader編譯JSX
             { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
             //第二個loader編譯ES6
-            { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } }
+            { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
+            //第二個loader編譯ES6
+            { test: /.css$/, exclude: /node_modules/, use: ['style-loader','css-loader'] }
         ]
     },
     devServer:{

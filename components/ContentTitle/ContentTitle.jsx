@@ -4,6 +4,13 @@ import React from 'React'
 class ContentTitle extends React.Component{
     render(){
         const Styles = {
+            // Div contains title
+            divTitleContainer:  {
+                boxSizing:      'border-box',
+                height:         '8%',
+                display:        'block',
+                paddingLeft:    '10%'
+            },
             // Button before title
             buttonContainer:{
                 position:   'relative',
@@ -17,22 +24,18 @@ class ContentTitle extends React.Component{
                 color:      'white',
                 padding:    '2% 0'
             },
-            // Div contains title
-            divTitleContainer:  {
-                height:     '8%'
-            },
             // Title text block
             spanTitleContainer: {
                 height:     '100%',
                 fontSize:   '5vmin',
-                display:    'inline-block',
+                display:    'block',
                 padding:    '1% 0'
             }
         }
         return (
             <div style={Styles.divTitleContainer}>
                 <button onClick={() => this.props.clickevent()} style={Styles.buttonContainer}>
-                    {this.props.isVisible === 'hidden' ? '+' : '-'}
+                    {this.props.isVisible === 'none' ? '+' : '-'}
                 </button>
                 <span style={Styles.spanTitleContainer}>
                     {this.props.titletext}

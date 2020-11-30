@@ -13,7 +13,8 @@ class SideBar extends React.Component{
                 width:      '5vw',
                 float:      'left',
                 boxSizing:  'border-box',
-                maxWidth:   '130px'
+                maxWidth:   '130px',
+                minWidth:   '83.94px'
             },
             offsetContainer:    {
                 position:   'relative',

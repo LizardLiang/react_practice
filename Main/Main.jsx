@@ -10,7 +10,6 @@ class Main extends React.Component{
                 fontSize:       '5vmin',
                 width:          '100%',
                 height:         '10%',
-                // float:       'left',
                 position:       'sticky',
                 top:            '0',
                 left:           '0',
@@ -20,11 +19,12 @@ class Main extends React.Component{
                 borderBottom:   '5px solid black'
             },
             spanContainer:{
-                position:   'absolute',
+                boxSizing:  'border-box',
+                width:      '100%',
                 display:    'block',
+                position:   'absolute',
                 top:        '0',
                 left:       '0',
-
             }
         }
 

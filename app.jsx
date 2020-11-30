@@ -1,12 +1,53 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import {Provider, connect} from "react-redux"
 import {Main, SideBar} from "./Main"
 import {PageBox, Info, Experience, Projects } from "./components/pagebox"
+import store from "./index.js"
 
-class Default extends React.Component {
-    constructor(){
-        super();
-        // this.testFetch = this.testFetch.bind(this)
+class MessageList extends React.Component {
+    render(){
+        let message = this.props.data.map((item)=>{
+            return <li key={item.key}>{item.name}：{item.message}</li>
+        })
+        return(
+            <ul>
+                {message}
+            </ul>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return { data: state.message }       
+}
+
+const List = connect(mapStateToProps)(MessageList)
+
+class MainWindow extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            date: [],
+            value: []
+        }
+        this.tdList = []
+        this.props.date_res = []
+        this.value_res = []
+        this.TryApi = this.TryApi.bind(this)
+    }
+
+    TryApi(){
+        let item = fetch('https://cors-anywhere.herokuapp.com/http://114.32.157.74/PythonFlask/api/test', {
+            method:  'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        }).then((response)=>{
+            return response.json()
+        }).then((item)=>{
+            this.setState({date: item['date'], value: item['value']})
+        })
     }
 
     // testFetch(){
@@ -34,6 +75,22 @@ class Default extends React.Component {
             }
         }
         const {StyleContainer} = Styles
+
+        // Return tbody with results
+        let list = []
+        for(let i=0;i<this.state.date.length;i++){
+            // Append result into list
+            list.push(
+                <tr>
+                    <td>
+                        {this.state.date[i]}
+                    </td>
+                    <td>
+                        {this.state.value[i]}
+                    </td>
+                </tr>
+            )
+        }
         return (
             <div style={StyleContainer}>
                 <SideBar />
@@ -43,10 +100,22 @@ class Default extends React.Component {
                     <Info id="1" />
                     <Experience id="2" />
                     <Projects id="3" />
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Price</th>
+                        </tr>
+                        {/* render tbody */}
+                        { list }
+                    </table>
+                    <button onClick={this.TryApi}>Fetch!!</button>
                 </div>
+                <Provider store={store}>
+                    <List />
+                </Provider>
             </div>
         )
     }
 }
 
-ReactDOM.render(<Default />, document.getElementById("root"))
+ReactDOM.render(<MainWindow />, document.getElementById("root"))
