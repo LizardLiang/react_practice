@@ -18,7 +18,8 @@ class Test_Program extends React.Component  {
                 // visibility: this.props.isVisible,
                 marginLeft: '20%',
                 width:      '60%',
-                display:    this.props.isVisible
+                display:    this.props.isVisible,
+                textAlign:  'left'
             },
             imgContainer:{
                 width:  '100%',
