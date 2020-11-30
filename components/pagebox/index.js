@@ -1,3 +1,5 @@
 export * from "./info.jsx"
 export * from "./experience.jsx"
 export * from "./project.jsx"
+export * from "./mytool.jsx"
+export * from "./additioninfo.jsx"
