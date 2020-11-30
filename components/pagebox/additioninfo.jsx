@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
 
 class AdditionInfo extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            opacity:    1
+        }
+        this.scrollHandler = this.scrollHandler.bind(this)
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.scrollHandler)
+    }
+
+    scrollHandler(e){
+        let pos = window.pageYOffset
+        if(pos > 930 && pos < 1010){
+            let diff = (pos - 930) / (1010 - 930)
+            this.setState({opacity: diff})
+        }
+    }
 
     render(){
         const Styles = {
