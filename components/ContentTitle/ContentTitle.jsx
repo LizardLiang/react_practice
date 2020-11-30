@@ -7,9 +7,9 @@ class ContentTitle extends React.Component{
             // Div contains title
             divTitleContainer:  {
                 boxSizing:      'border-box',
-                height:         '8%',
+                height:         '6%',
                 display:        'block',
-                paddingLeft:    '10%'
+                textAlign:      'left'
             },
             // Button before title
             buttonContainer:{
@@ -27,9 +27,10 @@ class ContentTitle extends React.Component{
             // Title text block
             spanTitleContainer: {
                 height:     '100%',
-                fontSize:   '5vmin',
+                fontSize:   '3vmin',
                 display:    'block',
-                padding:    '1% 0'
+                padding:    '1% 0',
+                verticalAlign:  'middle'
             }
         }
         return (
