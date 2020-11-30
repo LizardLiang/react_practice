@@ -77,14 +77,20 @@ class Projects extends React.Component{
         const Styles = {
             StyleContainer:{
                 color:      this.state.color,
-                display:    "inline-block",
                 width:      "100%",
-                background:  'rgb(64, 68, 75)'
+                background:  'rgb(64, 68, 75)',
+                textAlign:  'center'
+            },
+            spanContainer:{
+                display:        'block',
+                width:          '100%',
+                fontSize:       '3vmin',
+                borderBottom:   '1px solid grey'
             }
         }
         return (
-            <div style={Styles.StyleContainer}>
-                <span>My Project</span><br/>
+            <div style={Styles.StyleContainer} id={this.props.id}>
+                <span style={Styles.spanContainer}>專業 / 經驗</span><br/>
                 <Project id="1" name="Test Program"/>
                 <Project id="2" name="Web Game"/>
             </div>
