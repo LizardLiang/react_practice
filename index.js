@@ -23,7 +23,6 @@ const rootReducer = (state = data, action) => {
     switch(action.type){
         case "addMessage":
             action.payload.key = String(state.message.length  + 1)
-            console.log(action.payload)
             return {...state, message: [...state.message, action.payload]}
         default:
             return state
@@ -33,4 +32,6 @@ const rootReducer = (state = data, action) => {
 // Setup a store to store reducer
 const store = createStore(rootReducer)
 
-export  {store, addMessage}
+window.store = store
+
+export  default store
