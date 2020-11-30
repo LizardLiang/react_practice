@@ -26,6 +26,7 @@ class AdditionInfo extends Component{
             divContainer:{
                 background:     'rgb(64, 68, 75)',
                 color:          'white',
+                fontSize:       '3vmin'
             },
             titleContainer:{
                 display:        'block',
@@ -39,10 +40,16 @@ class AdditionInfo extends Component{
                 <span style={Styles.titleContainer}>相關連結</span>
                 <div>
                     <ul>
-                        <li className='li'>
+                        <li>
                             <a  href="https://github.com/lizrad?tab=repositories"
                                 target='_blank'>
                                 Github repositories
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="https://github.com/lizrad/react_practice"
+                                target='_blank'>
+                                本頁原碼
                             </a>
                         </li>
                     </ul>
