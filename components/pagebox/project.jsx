@@ -1,5 +1,5 @@
 import React from 'react'
-import { Test_Program, WebGame } from "../../Projects"
+import { Test_Program, WebGame, StockChart } from "../../Projects"
 import { ContentTitle } from "../../components/ContentTitle"
 
 class Project extends React.Component   {
@@ -19,6 +19,8 @@ class Project extends React.Component   {
                 break
             case "Web Game":
                 return <WebGame isVisible={isVisible}/>
+            case "Python Web API":
+                return <StockChart isVisible={isVisible} />
             default:
                 return  <div></div>
                 break
@@ -97,6 +99,7 @@ class Projects extends React.Component{
                 <span style={Styles.spanContainer}>專業 / 經驗</span><br/>
                 <Project id="1" name="Test Program"/>
                 <Project id="2" name="Web Game"/>
+                <Project id="3" name="Python Web API"/>
             </div>
         )
     }
