@@ -64,7 +64,7 @@ class MainWindow extends React.Component {
                 marginLeft: 'auto',
                 marginRight:'auto',
                 position:   'relative',
-                background: 'rgb(54, 57, 63)',
+                background: 'rgb(47, 49, 54)',
                 boxSizing:  'border-box',
                 width:      '50vw'
             },
