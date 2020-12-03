@@ -31,7 +31,9 @@ class StockChart extends Component{
         }
         this.props.maxNum = 0
         this.props.minNum = 0
-        this.FetchStockInfo = this.FetchStockInfo.bind(this)
+
+        // use arrow function to replace binding
+        // this.FetchStockInfo = this.FetchStockInfo.bind(this)
     }
 
     calyPosition(num){
@@ -42,7 +44,7 @@ class StockChart extends Component{
         return (num / leng) * 100
     }
 
-    FetchStockInfo(){
+    FetchStockInfo = () => {
         let id = this.inputElement.value
         let url = 'https://cors-anywhere.herokuapp.com/http://114.32.157.74/PythonFlask/api/test?id='
         fetch(url + id)
@@ -65,6 +67,7 @@ class StockChart extends Component{
             this.setState({points: point, svgDisplay: 'inline'})
         }).catch((error)=>{
             this.setState({svgDisplay: 'none'})
+            alert('Stock id not exist')
         })
     }
 
