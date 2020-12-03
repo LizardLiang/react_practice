@@ -50,12 +50,6 @@ class MainWindow extends React.Component {
         })
     }
 
-    // testFetch(){
-    //     fetch("https://api.ipify.org?format=json")
-    //     .then(response => response.json())
-    //     .then(response => console.log(response));
-    // }
-
     render(){
         const Styles = {
             StyleContainer: {
