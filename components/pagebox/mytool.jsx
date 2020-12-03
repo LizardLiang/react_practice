@@ -5,7 +5,8 @@ class MyTool extends Component{
     constructor(props){
         super(props)
         this.state = {
-            opacity:    1
+            opacity:    1,
+            left:       '0%'
         }
         this.scrollHandler = this.scrollHandler.bind(this)
     }
@@ -15,22 +16,36 @@ class MyTool extends Component{
     }
 
     scrollHandler(e){
-        let pos = window.pageYOffset
-        if(pos > 655 && pos < 925){
-            let diff = (pos - 655) / (925 - 655)
+        let rec = this.MainElement.getBoundingClientRect()
+        let pos = rec['top']
+        if(pos >= 670 && pos <= 915){
+            let diff = 1 - ((pos - 670) / (915 - 670))
+            let offset = ( 1 - diff ) * 100
+            this.setState({left:     offset + '%'})
             this.setState({opacity:  diff})
+        }
+        else if (pos < 670){
+            this.setState({opacity: 1})
+            this.setState({left:     '0%'})
+        }
+        else if (pos > 915){
+            this.setState({opacity: 0})
+            this.setState({left:     '100%'})
         }
     }
 
     render(){
         const Styles = {
             divContainer:{
+                position:       'relative',
+                left:           this.state.left,
                 textAlign:      'left',
                 color:          'white',
                 background:     'rgb(64, 68, 75)',
                 height:         'auto',
                 overflow:       'auto',
-                opacity:        this.state.opacity
+                opacity:        this.state.opacity,
+                margin:         '2.5% 0'
             },
             titleContainer:{
                 display:        'block',
@@ -49,7 +64,8 @@ class MyTool extends Component{
             }
         }
         return(
-            <div style={Styles.divContainer} id={this.props.id}>
+            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
+                    style={Styles.divContainer} id={this.props.id}>
                 <span style={Styles.titleContainer}>
                     常用工具
                 </span>

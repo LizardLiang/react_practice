@@ -60,7 +60,8 @@ class Projects extends React.Component{
         super(props)
         this.state = {
             color: 'white',
-            opacity:    1
+            opacity:    1,
+            left:       '0%'
         }
 
         // important to set this function to bind
@@ -71,21 +72,35 @@ class Projects extends React.Component{
     }
 
     scrollHandler(e){
-        let pos = window.pageYOffset
-        if(pos > 495 && pos < 655){
-            let diff = (pos - 495) / (655 - 495)
+        let rec = this.MainElement.getBoundingClientRect()
+        let pos = rec['top']
+        if(pos >= 705 && pos <= 930){
+            let diff = 1 - ((pos - 705) / (930 - 705))
+            let offset =    (1- diff) * 100
+            this.setState({left:    offset + '%'})
             this.setState({opacity: diff})
+        }
+        else if (pos < 705){
+            this.setState({opacity: 1})
+            this.setState({left:    '0%'})
+        }
+        else if (pos > 930){
+            this.setState({opacity: 0})
+            this.setState({left:    '100%'})
         }
     }
 
     render(){
         const Styles = {
             StyleContainer:{
+                position:   'relative',
+                left:       this.state.left,
                 color:      this.state.color,
                 width:      "100%",
                 background: 'rgb(64, 68, 75)',
                 textAlign:  'center',
-                opacity:    this.state.opacity
+                opacity:    this.state.opacity,
+                margin:     '2.5% 0'
             },
             spanContainer:{
                 display:        'block',
@@ -95,7 +110,8 @@ class Projects extends React.Component{
             }
         }
         return (
-            <div style={Styles.StyleContainer} id={this.props.id}>
+            <div    ref = {(MainElement) => {this.MainElement = MainElement}}
+                    style={Styles.StyleContainer} id={this.props.id}>
                 <span style={Styles.spanContainer}>專業 / 經驗</span><br/>
                 <Project id="1" name="Test Program"/>
                 <Project id="2" name="Web Game"/>

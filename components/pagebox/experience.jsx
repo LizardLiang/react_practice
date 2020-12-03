@@ -5,32 +5,47 @@ class Experience extends React.Component    {
     constructor(props){
         super(props)
         this.state = {
-            opacity: 1
+            opacity: 1,
+            left:    '0%'
         }
-        this.scrollHandler = this.scrollHandler.bind(this)
+        // this.scrollHandler = this.scrollHandler.bind(this)
     }
 
     componentDidMount(){
         window.addEventListener('scroll', this.scrollHandler)
     }
 
-    scrollHandler(){
-        let pos = window.pageYOffset
-        if(pos > 250 && pos < 485){
-            let diff = (pos - 250) / (485 - 250)
-            this.setState({opacity: diff})
+    scrollHandler = () => {
+        let rec = this.MainElement.getBoundingClientRect()
+        let pos = rec['top']
+        if(pos >= 675 && pos <= 920){
+            let diff = 1 - ((pos - 675) / (920 - 675))
+            let offset = (1 - diff) * 100
+            this.setState({left:    offset + '%'})
+            this.setState({opacity:  diff})
+        }
+        else if (pos < 675){
+            this.setState({left:    '0%'})
+            this.setState({opacity: 1})
+        }
+        else if (pos > 920){
+            this.setState({left:    '100%'})
+            this.setState({opacity: 0})
         }
     }
 
     render(){
         const Styles = {
             StyleContainer:{
+                position:       'relative',
+                left:           this.state.left,
                 color:          'white',
                 fontSize:       '3vmin',
                 background:     'rgb(64, 68, 75)',
                 height:         'auto',
                 overflow:       'auto',
-                opacity:        this.state.opacity
+                opacity:        this.state.opacity,
+                margin:         '2.5% 0'
             },
             overallTitle:{
                 display:        'block',
@@ -48,7 +63,8 @@ class Experience extends React.Component    {
             }
         }
         return(
-            <div style={Styles.StyleContainer} id={this.props.id}>
+            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
+                    style={Styles.StyleContainer} id={this.props.id}>
                 <span style={Styles.overallTitle}>簡歷</span>
                 {/* <ul>
                     <li className="li">偉祺電機 (Famax) 3 years as Software engineer</li>
