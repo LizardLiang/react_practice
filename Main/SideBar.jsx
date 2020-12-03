@@ -16,8 +16,6 @@ class SideBar extends React.Component{
     }
 
     handleScrollEvent = (e) => {
-        let rect = this.MainElement.getBoundingClientRect()
-        console.log(rect['top'])
         if(window.pageYOffset >= 937){
             this.setState({isVisible: 'visible'})
         }
