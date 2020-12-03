@@ -8,14 +8,16 @@ class SideBar extends React.Component{
         this.state = {
             isVisible: 'hidden'
         }
-        this.handleScrollEvent = this.handleScrollEvent.bind(this)
+        // this.handleScrollEvent = this.handleScrollEvent.bind(this)
     }
 
     componentDidMount(){
         window.addEventListener('scroll', this.handleScrollEvent)
     }
 
-    handleScrollEvent(e){
+    handleScrollEvent = (e) => {
+        let rect = this.MainElement.getBoundingClientRect()
+        console.log(rect['top'])
         if(window.pageYOffset >= 937){
             this.setState({isVisible: 'visible'})
         }
@@ -47,7 +49,7 @@ class SideBar extends React.Component{
         }
         const {StyleContainer} = Styles
         return (
-            <div style={StyleContainer}>
+            <div ref={(MainElement) => {this.MainElement = MainElement}} style={StyleContainer}>
                 <div style={Styles.offsetContainer}>
                     <Buttons name="Info"  item="1"/>
                     <Buttons name="Experience" item="2" />
