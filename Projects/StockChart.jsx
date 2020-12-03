@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './project.css'
 
 class ChartLine extends Component{
     constructor(props){
@@ -113,7 +114,8 @@ class StockChart extends Component{
                 }
             })
         return(
-            <div style={Styles.divContainer}>
+            <div    className={this.props.isVisible == 'block'? 'projectAnim' : ''}
+                    style={Styles.divContainer}>
                 <span style={Styles.spanContainer}>
                     此專案用於測試我自己架設的Python web API是否正常運作
                     在輸入框輸入 股票代號後 會回傳相關最近一個月的資料

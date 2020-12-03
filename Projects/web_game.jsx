@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import './project.css'
 
 class WebGame extends Component{
 
@@ -22,7 +23,8 @@ class WebGame extends Component{
             }
         }
         return (
-            <div style={Styles.divContainer}>
+            <div    className={this.props.isVisible == 'block'? 'projectAnim' : ''} 
+                    style={Styles.divContainer}>
                 <span style={Styles.spanContainer}>
                     此遊戲是基於 ReactJS 所製作的小遊戲，且為RWD網頁<br/>
                     遊戲機制為在時限之內將點擊出所有汙染源<br/>

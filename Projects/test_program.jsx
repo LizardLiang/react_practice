@@ -1,4 +1,5 @@
 import React from "react"
+import './project.css'
 
 class Test_Program extends React.Component  {
     constructor(props){
@@ -27,7 +28,8 @@ class Test_Program extends React.Component  {
             }
         }
         return(
-            <div style={Styles.divContainer}>
+            <div    className={this.props.isVisible == 'block'? 'projectAnim' : ''}
+                    style={Styles.divContainer}>
                 <span style={Styles.spanContainer}>
                     This test program is used for testing motor quality</span>
                 <span style={Styles.spanContainer}>
