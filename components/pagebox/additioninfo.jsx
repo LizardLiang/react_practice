@@ -4,7 +4,8 @@ class AdditionInfo extends Component{
     constructor(props){
         super(props)
         this.state = {
-            opacity:    1
+            opacity:    1,
+            left:       '0%'
         }
         this.scrollHandler = this.scrollHandler.bind(this)
     }
@@ -14,10 +15,21 @@ class AdditionInfo extends Component{
     }
 
     scrollHandler(e){
-        let pos = window.pageYOffset
-        if(pos > 930 && pos < 1010){
-            let diff = (pos - 930) / (1010 - 930)
+        let rec = this.MainElement.getBoundingClientRect()
+        let pos = rec['top']
+        if(pos <= 930 && pos >= 785){
+            let diff = 1 - (pos - 785) / (930 - 785)
+            let offset = (1 - diff) * 100
             this.setState({opacity: diff})
+            this.setState({left: offset + '%'})
+        }
+        else if(pos > 930){
+            this.setState({opacity: 0})
+            this.setState({left: '100%'})
+        }
+        else if (pos < 785){
+            this.setState({opacity: 1})
+            this.setState({left: '0%'})
         }
     }
 
@@ -26,7 +38,12 @@ class AdditionInfo extends Component{
             divContainer:{
                 background:     'rgb(64, 68, 75)',
                 color:          'white',
-                fontSize:       '3vmin'
+                fontSize:       '3vmin',
+                margin:         '2.5% 0',
+                position:       'relative',
+                left:           this.state.left,
+                opacity:        this.state.opacity,
+                overflow:       'hidden'
             },
             titleContainer:{
                 display:        'block',
@@ -36,7 +53,8 @@ class AdditionInfo extends Component{
             }
         }
         return(
-            <div style={Styles.divContainer} id={this.props.id}>
+            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
+                    style={Styles.divContainer} id={this.props.id}>
                 <span style={Styles.titleContainer}>相關連結</span>
                 <div>
                     <ul>
