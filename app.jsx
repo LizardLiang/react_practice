@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import {HashRouter, Route, hashHistory} from 'react-router'
 import {Provider, connect} from "react-redux"
 import {Main, SideBar} from "./Main"
 import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./components/pagebox"
@@ -64,7 +65,7 @@ class MainWindow extends React.Component {
                 marginLeft: 'auto',
                 marginRight:'auto',
                 position:   'relative',
-                background: 'rgb(47, 49, 54)',
+                background: 'rgb(54, 57, 63)',
                 boxSizing:  'border-box',
                 width:      '50vw'
             },
@@ -102,37 +103,20 @@ class MainWindow extends React.Component {
             )
         }
         return (
-            <div style={StyleContainer}>
-                <div style={Styles.headerContainer}>
-                    <h1 style={Styles.h1Container}>
-                        Hello Everyone!
-                    </h1>
+            <HashRouter>
+                <div style={StyleContainer}>
+                    <div style={Styles.headerContainer}>
+                        <h1 style={Styles.h1Container}>
+                            Hello Everyone!
+                        </h1>
+                    </div>
+                    <Route  path='/' component={Home}/>
                 </div>
-                <div style={Styles.MainPageContainer}>
-                    <Info           id="1" />
-                    <Intro                 />
-                    <Experience     id="2" />
-                    <Projects       id="3" />
-                    <MyTool         id="4" />
-                    <AdditionInfo   id="5" />
-                    {/*}
-                    <table>
-                        <tr>
-                            <th>Date</th>
-                            <th>Price</th>
-                        </tr>
-                        { list }
-                    </table>
-                    <button onClick={this.TryApi}>Fetch!!</button>
-                    */}
-                </div>
-                {/* <Provider store={store}>
-                    <List />
-                </Provider> */}
-                <SideBar />
-            </div>
+            </HashRouter>
         )
     }
 }
 
 ReactDOM.render(<MainWindow />, document.getElementById("root"))
+
+export default {Home}

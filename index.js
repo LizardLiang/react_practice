@@ -1,3 +1,4 @@
+export * from './app.jsx'
 import {createStore} from "redux" // import createStore component from redux
 
 {/*
