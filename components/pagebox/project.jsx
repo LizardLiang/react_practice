@@ -71,6 +71,10 @@ class Projects extends React.Component{
         window.addEventListener('scroll', this.scrollHandler)
     }
 
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.scrollHandler)
+    }
+
     scrollHandler(e){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
