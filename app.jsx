@@ -1,10 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {HashRouter, Route, hashHistory} from 'react-router'
+import {HashRouter, Route, hashHistory} from 'react-router-dom'
 import {Provider, connect} from "react-redux"
-import {Main, SideBar} from "./Main"
-import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./components/pagebox"
+import { Main } from "./Main"
+import { Info, Experience, Projects, MyTool, AdditionInfo, Intro, Home } from "./components/pagebox"
 import store from "./index.js"
+import { StockMain } from './components/StockPage'
 
 class MessageList extends React.Component {
     render(){
@@ -76,6 +77,7 @@ class MainWindow extends React.Component {
                 height:     '100vh', 
                 width:      '100vw', 
                 display:    'table',
+                background: 'rgb(32, 34, 37)',
             },
             h1Container:    {
                 display:        'table-cell',
@@ -110,7 +112,8 @@ class MainWindow extends React.Component {
                             Hello Everyone!
                         </h1>
                     </div>
-                    <Route  path='/' component={Home}/>
+                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/StockSearch' component={ StockMain }/>
                 </div>
             </HashRouter>
         )
@@ -119,4 +122,4 @@ class MainWindow extends React.Component {
 
 ReactDOM.render(<MainWindow />, document.getElementById("root"))
 
-export default {Home}
+export { MainWindow }
