@@ -1,13 +1,18 @@
 import React from 'react'
+import { mount } from 'enzyme'
 import renderer from 'react-test-renderer'
-import render from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 
-import { Home } from '../components/pagebox'
+import { StockMain } from '../components/StockPage'
+import { Simulate } from 'react-dom/test-utils'
  
-describe('Counter', () => {
+describe('Stock Page', () => {
   test('snapshot renders', () => {
-    const component = renderer.create(<Home />);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const inputContainer = render(<StockMain/>)
+    const inst = inputContainer.getByLabelText('input')
+
+    fireEvent.change(inst, {target: {value: '123'}})
+    expect(inst.value).toBe('123')
+  })
+})
