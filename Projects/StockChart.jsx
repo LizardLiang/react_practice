@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './project.css'
 
 class ChartLine extends Component{
     constructor(props){
         super(props)
-        this.state = {
-            points:         '',
-        }
     }
 
     render(){
@@ -100,8 +98,13 @@ class StockChart extends Component{
                 width:      '60%',
                 margin:     'auto',
                 textAlign:  'left'
+            },
+            linkContainer:{
+                fontSize:   '2vmin'
             }
         }
+
+        // label on x axis
         const x_label = 
             this.state.x_texts.map((date, index)=>{
                 if (index % 7 == 0 || index == (this.state.x_texts.length - 1)){
@@ -121,7 +124,7 @@ class StockChart extends Component{
                     在輸入框輸入 股票代號後 會回傳相關最近一個月的資料
                 </span>
                 <br/>
-                <input  name='IdInput' 
+                {/* <input  name='IdInput' 
                         ref={(inputElement) => {this.inputElement = inputElement}}>
                 </input>
                 <button onClick={this.FetchStockInfo}>Fetch!!</button>
@@ -148,7 +151,12 @@ class StockChart extends Component{
                             {this.state.maxNum}
                         </text>
                     </g>
-                </svg>
+                </svg> */}
+                <Link
+                    to='/StockSearch'
+                    style={Styles.linkContainer}>
+                        Click here to go to Search page
+                </Link>
             </div>
         )
     }
