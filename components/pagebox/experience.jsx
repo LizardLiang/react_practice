@@ -15,6 +15,10 @@ class Experience extends React.Component    {
         window.addEventListener('scroll', this.scrollHandler)
     }
 
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.scrollHandler)
+    }
+
     scrollHandler = () => {
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
