@@ -52,6 +52,7 @@ class StockChart extends Component{
         }).then((item)=>{
             let values = item['value']
             this.setState({x_texts: item['date']})
+            console.log(this.state.x_texts)
             let point = ''
             values = values.map((value)=> {return parseFloat(value)})
             this.setState({maxNum: Math.max(...values), minNum: Math.min(...values)})
