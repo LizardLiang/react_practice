@@ -112,6 +112,7 @@ class MainWindow extends React.Component {
                             Hello Everyone!
                         </h1>
                     </div>
+                    {/* Use route to switch pages */}
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/StockSearch' component={ StockMain }/>
                 </div>
