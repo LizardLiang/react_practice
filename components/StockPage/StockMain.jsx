@@ -64,10 +64,21 @@ const GridLine = styles.line `
     stroke-opacity:     .5;
 `
 
+// calculate axis x text position
 function calxPosition(num, leng){
     return (num / leng) * 100
 };
 
+
+// add lines to grid
+function add_y_line(){
+    let list=[]
+    for (let i=0; i < 4; ++i){
+        <GridLine x1='0' x2='100' y1={i * 25} y2={i * 25}/>
+    }
+}
+
+// add axis y text
 function add_y_grid(min, max){
     let list = []
     for(let i=1; i < 5; ++i){
@@ -82,6 +93,7 @@ function add_y_grid(min, max){
     )
 }
 
+// dealing with line and data
 class ChartLine extends Component{
     render(){
         return (
@@ -94,14 +106,9 @@ class ChartLine extends Component{
     }
 }
 
+// dealing with svg
 class SvgChart extends Component    {
     render(){
-        let xgrid, ygrid=[], yGridText=[];
-        for (let i = 1; i <= 4; ++i){
-            ygrid.push(
-                <GridLine x1='0' x2='100' y1={i * 25} y2={i * 25}/>
-            )
-        }
         const xlabels = this.props.xlabel.map((value, index)=>{
             if(index % 7 == 0 || index == (this.props.xlabel.length - 1)){
                 return(
@@ -144,7 +151,7 @@ class SvgChart extends Component    {
                         y1='0'
                         y2='100'/>
                 </g>
-                {ygrid}
+                {add_y_line()}
                 {add_y_grid(this.props.min, this.props.max)}
                 {xlabels}
                 {datacircle}
