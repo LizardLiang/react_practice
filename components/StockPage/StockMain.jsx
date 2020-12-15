@@ -106,20 +106,24 @@ class ChartLine extends Component{
     }
 }
 
+function add_x_text(labels){
+    let list = labels.map((value, index)=>{
+        if(index % 7 == 0 || index == (labels.length - 1)){
+            return(
+                <Text 
+                    x={calxPosition(index, labels.length) - 10} 
+                    y='105'>
+                    {value}
+                </Text>
+            )
+        }
+    })
+    return list
+}
+
 // dealing with svg
 class SvgChart extends Component    {
     render(){
-        const xlabels = this.props.xlabel.map((value, index)=>{
-            if(index % 7 == 0 || index == (this.props.xlabel.length - 1)){
-                return(
-                    <Text 
-                        x={calxPosition(index, this.props.xlabel.length) - 10} 
-                        y='105'>
-                        {value}
-                    </Text>
-                )
-            }
-        })
         let pointList = this.props.points.split(' ')
         pointList = pointList.slice(0, -1)
         const datacircle = 
@@ -153,7 +157,7 @@ class SvgChart extends Component    {
                 </g>
                 {add_y_line()}
                 {add_y_grid(this.props.min, this.props.max)}
-                {xlabels}
+                {add_x_text(this.props.xlabel)}
                 {datacircle}
                 <ChartLine points={this.props.points} />
             </Svg>
