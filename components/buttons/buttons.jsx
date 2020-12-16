@@ -46,7 +46,7 @@ class Buttons extends React.Component{
                 padding:        '25% 0',
                 height:         '25%',
                 boxSizing:      'border-box'
-          }
+            }
         };
         const {containerStyle} = styles
         return (<a style={containerStyle} href={"#" + this.props.item}>{this.props.name}</a>)
