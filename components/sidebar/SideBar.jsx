@@ -20,7 +20,7 @@ class SideBar extends React.Component{
     }
 
     handleScrollEvent = () => {
-        if(window.pageYOffset >= 937){
+        if(window.pageYOffset >= 2393){
             this.setState({isVisible: 'visible'})
         }
         else{
