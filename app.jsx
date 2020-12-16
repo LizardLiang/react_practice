@@ -107,11 +107,11 @@ class MainWindow extends React.Component {
         return (
             <HashRouter>
                 <div style={StyleContainer}>
-                    <div style={Styles.headerContainer}>
+                    {/* <div style={Styles.headerContainer}>
                         <h1 style={Styles.h1Container}>
                             Hello Everyone!
                         </h1>
-                    </div>
+                    </div> */}
                     {/* Use route to switch pages */}
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/StockSearch' component={ StockMain }/>
