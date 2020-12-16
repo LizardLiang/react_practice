@@ -11,8 +11,10 @@ describe('Stock Page', () => {
   test('snapshot renders', () => {
     const inputContainer = render(<StockMain/>)
     const inst = inputContainer.getByLabelText('input')
+    const sButton = searchButton.getByLabelText('searchButton')
 
     fireEvent.change(inst, {target: {value: '123'}})
+    fireEvent.click(sButton)
     expect(inst.value).toBe('123')
   })
 })
