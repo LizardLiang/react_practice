@@ -22,17 +22,21 @@ class MyTool extends Component{
     scrollHandler(e){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos >= 670 && pos <= 915){
-            let diff = 1 - ((pos - 670) / (915 - 670))
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        if(pos >= minW && pos <= maxW){
+            let diff = 1 - ((pos - minW) / (maxW - minW))
             let offset = ( 1 - diff ) * 100
             this.setState({left:     offset + '%'})
             this.setState({opacity:  diff})
         }
-        else if (pos < 670){
+        else if (pos < minW){
             this.setState({opacity: 1})
             this.setState({left:     '0%'})
         }
-        else if (pos > 915){
+        else if (pos > maxW){
             this.setState({opacity: 0})
             this.setState({left:     '100%'})
         }
@@ -49,7 +53,8 @@ class MyTool extends Component{
                 height:         'auto',
                 overflow:       'auto',
                 opacity:        this.state.opacity,
-                margin:         '2.5% 0'
+                width:          '75%',
+                margin:         '2.5% 12.5%'
             },
             titleContainer:{
                 display:        'block',

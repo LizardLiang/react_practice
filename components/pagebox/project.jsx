@@ -40,8 +40,7 @@ class Project extends React.Component   {
         const Styles = {
             divContainer: {
                 height:         "auto",
-                width:          "100%",
-                verticalAlign:  "top"
+                verticalAlign:  "top",
             }
         }
         return (
@@ -78,17 +77,21 @@ class Projects extends React.Component{
     scrollHandler(e){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos >= 705 && pos <= 930){
-            let diff = 1 - ((pos - 705) / (930 - 705))
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        if(pos >= minW && pos <= maxW){
+            let diff = 1 - ((pos - minW) / (maxW - minW))
             let offset =    (1- diff) * 100
             this.setState({left:    offset + '%'})
             this.setState({opacity: diff})
         }
-        else if (pos < 705){
+        else if (pos < minW){
             this.setState({opacity: 1})
             this.setState({left:    '0%'})
         }
-        else if (pos > 930){
+        else if (pos > maxW){
             this.setState({opacity: 0})
             this.setState({left:    '100%'})
         }
@@ -104,7 +107,8 @@ class Projects extends React.Component{
                 background: 'rgb(64, 68, 75)',
                 textAlign:  'center',
                 opacity:    this.state.opacity,
-                margin:     '2.5% 0'
+                width:      '75%',
+                margin:     '2.5% 12.5%',
             },
             spanContainer:{
                 display:        'block',

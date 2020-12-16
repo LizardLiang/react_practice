@@ -1,5 +1,26 @@
 import React, {Component} from 'react'
+import styles from 'styled-components'
 import "./info.css"
+
+const Imgdiv = styles.div `
+    position:   relative;
+    @media screen and (max-width: 800px){
+        width:  100%;
+        height: 40%;
+    }
+    @media screen and (min-width:1080px){
+        width:      auto;
+        height:     100%;
+        display:    inline;
+    }
+`
+
+const Img = styles.img `
+    height:     100%;
+    float:      left;
+    top:        0;
+    left:       0;
+`
 
 class Intro extends Component {
     constructor(props){
@@ -21,17 +42,21 @@ class Intro extends Component {
     scrollHandler = ()=>{
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos >= 660 && pos <= 915){
-            let diff = 1 - ((pos - 660) / (915 - 660))
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        if(pos >= minW && pos <= maxW){
+            let diff = 1 - ((pos - minW) / (maxW - minW))
             let offset = (1 - diff) * 100
             this.setState({left:    offset + '%'})
             this.setState({opacity:  diff})
         }
-        else if (pos < 660){
+        else if (pos < minW){
             this.setState({left:    '0%'})
             this.setState({opacity: 1})
         }
-        else if (pos > 915){
+        else if (pos > maxW){
             this.setState({left:    '100%'})
             this.setState({opacity: 0})
         }
@@ -46,7 +71,8 @@ class Intro extends Component {
                 fontSize:   '3vmin',
                 background: 'rgb(64, 68, 75)',
                 opacity:    this.state.opacity,
-                margin:     '2.5% 0'
+                width:          '75%',
+                margin:         '2.5% 12.5%'
             },
             spanTitleContainer:{
                 display:    'block',
@@ -99,17 +125,21 @@ class Info extends React.Component  {
     scrollHandler = (e) => {
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos > 685 && pos < 915){
-            let diff = 1 - ((pos - 685)/(915 - 685))
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        if(pos > minW && pos < maxW){
+            let diff = 1 - ((pos - minW)/(maxW - minW))
             let offset = (1 - diff) * 100
             this.setState({left:    offset + '%'})
             this.setState({opacity: diff})
         }
-        else if (pos >= 915){
+        else if (pos >= maxW){
             this.setState({left:    '100%'})
             this.setState({opacity: 0})
         }
-        else if (pos < 685){
+        else if (pos < minW){
             this.setState({left:    '0%'})
             this.setState({opacity: 1})
         }
@@ -121,25 +151,28 @@ class Info extends React.Component  {
                 left:       this.state.left,
                 color:      'white',
                 height:     '25%',
+                width:      '75%',
                 fontSize:   '3vmin',
                 background: 'rgb(64, 68, 75)',
                 opacity:    this.state.opacity,
-                margin:     '2.5% 0'
+                margin:     '2.5% 12.5%'
             },
             ImgContainer:{
                 float:      'left',
                 top:        '0',
                 left:       '0',
-                height:     '100%',
+                height:     '50%',
             },
             spanContainer:{
-                marginLeft: '5%'
+                marginLeft: '5%',
             }
         }
         return(
             <div    ref={(MainElement)=>{this.MainElement = MainElement}}
                     style={Styles.StyleContainer} id={this.props.id}>
-                <img style={Styles.ImgContainer} src="../img/SelfPic.jpg"></img>
+                <Imgdiv>
+                    <Img src="../img/SelfPic.jpg"></Img>
+                </Imgdiv>
                 <span style={Styles.spanContainer}>梁芳銘</span><br/>
                 <span style={Styles.spanContainer}>Fang-Ming, Liang</span><br/>
                 <span style={Styles.spanContainer} role="img" aria-label="phone">

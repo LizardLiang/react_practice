@@ -22,17 +22,21 @@ class Experience extends React.Component    {
     scrollHandler = () => {
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos >= 675 && pos <= 920){
-            let diff = 1 - ((pos - 675) / (920 - 675))
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        if(pos >= minW && pos <= maxW){
+            let diff = 1 - ((pos - minW) / (maxW - minW))
             let offset = (1 - diff) * 100
             this.setState({left:    offset + '%'})
             this.setState({opacity:  diff})
         }
-        else if (pos < 675){
+        else if (pos < minW){
             this.setState({left:    '0%'})
             this.setState({opacity: 1})
         }
-        else if (pos > 920){
+        else if (pos > maxW){
             this.setState({left:    '100%'})
             this.setState({opacity: 0})
         }
@@ -49,7 +53,8 @@ class Experience extends React.Component    {
                 height:         'auto',
                 overflow:       'auto',
                 opacity:        this.state.opacity,
-                margin:         '2.5% 0'
+                width:          '75%',
+                margin:         '2.5% 12.5%'
             },
             overallTitle:{
                 display:        'block',

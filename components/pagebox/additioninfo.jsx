@@ -21,17 +21,22 @@ class AdditionInfo extends Component{
     scrollHandler(e){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
-        if(pos <= 930 && pos >= 785){
-            let diff = 1 - (pos - 785) / (930 - 785)
+        let height = rec['height']
+        let winHeight = window.innerHeight
+        let minW = winHeight - height
+        let maxW = winHeight
+        console.log(winHeight, pos, minW, maxW)
+        if(pos <= maxW && pos >= minW){
+            let diff = 1 - (pos - minW) / (maxW - minW)
             let offset = (1 - diff) * 100
             this.setState({opacity: diff})
             this.setState({left: offset + '%'})
         }
-        else if(pos > 930){
+        else if(pos > maxW){
             this.setState({opacity: 0})
             this.setState({left: '100%'})
         }
-        else if (pos < 785){
+        else if (pos < minW){
             this.setState({opacity: 1})
             this.setState({left: '0%'})
         }
@@ -43,7 +48,8 @@ class AdditionInfo extends Component{
                 background:     'rgb(64, 68, 75)',
                 color:          'white',
                 fontSize:       '3vmin',
-                margin:         '2.5% 0',
+                width:          '75%',
+                margin:         '2.5% 12.5%',
                 position:       'relative',
                 left:           this.state.left,
                 opacity:        this.state.opacity,
