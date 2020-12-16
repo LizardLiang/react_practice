@@ -6,8 +6,6 @@ const DivContainer = styles.div`
     position:       relative;
     width:          50%;
     height:         auto;
-    min-height:     98vh;
-    margin-top:     100vh;
     padding:        0 25%;
     background:     rgb(47, 49, 54);
 `
@@ -43,7 +41,7 @@ const Svg = styles.svg `
     }
     @media screen and (max-width: 600px){
         width:          50vw;
-        height:         50vh;
+        height:         25vh;
         overflow:       visible;
         margin-bottom:  10%;
         margin-top:     10%;
