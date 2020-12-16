@@ -13,23 +13,23 @@ class ContentTitle extends React.Component{
             },
             // Button before title
             buttonContainer:{
-                position:   'relative',
-                width:      '2%',
-                height:     '100%',
-                float:      'left',
-                border:     'none',
-                boxShadow:  'none',
-                background: 'rgb(68, 68, 76)',
-                fontSize:   '2vmin',
-                color:      'white',
-                padding:    '2% 0'
+                position:       'relative',
+                width:          '2%',
+                height:         '100%',
+                float:          'left',
+                border:         'none',
+                boxShadow:      'none',
+                background:     'rgb(68, 68, 76)',
+                fontSize:       '2vmin',
+                color:          'white',
+                lineHeight:     '50px',
             },
             // Title text block
             spanTitleContainer: {
-                height:     '100%',
-                fontSize:   '3vmin',
-                display:    'block',
-                padding:    '1% 0',
+                height:         '100%',
+                fontSize:       '3vmin',
+                display:        'block',
+                lineHeight:     '50px',
                 verticalAlign:  'middle'
             }
         }
