@@ -2,24 +2,112 @@ import React, {Component} from 'react'
 import styles from 'styled-components'
 import "./info.css"
 
-const Imgdiv = styles.div `
-    position:   relative;
-    @media screen and (max-width: 800px){
-        width:  100%;
-        height: 40%;
+const MainIntroDiv = styles.div `
+    position:           relative;
+    margin:             2.5% auto;
+    color:              white;
+    @media screen and (min-width:   1080px){
+        fontSize:       1.8rem;
+        width:          868px;
+        height:         176px;
     }
-    @media screen and (min-width:1080px){
-        width:      auto;
-        height:     100%;
-        display:    inline;
+
+    @media screen and (max-width:   1024px){
+        width:          85%;
+        height:         350px;
     }
 `
 
-const Img = styles.img `
-    height:     100%;
-    float:      left;
-    top:        0;
-    left:       0;
+const SpanTitle = styles.span `
+    @media screen and (min-width:   1080px){
+        position:           relative;
+        display:            inline-block;
+        // border-bottom:   1px solid grey;
+        z-index:            1;
+        color:              black;
+        height:             100%;
+        left:               50px;
+        font-size:          1.5rem;
+    }
+
+    @media screen and (max-width: 1024px){
+        position:           relative;
+        left:               0;
+        top:                0;
+        font-size:          0.5rem;
+        color:              black;
+        text-align:         right;
+        width:              100%;
+    }
+`
+
+const DivTitle  = styles.div `
+    @media screen and (min-width: 1080px){
+        float:              left;
+        width:              15%;
+        height:             100%;
+        position:           relative;
+        z-index:            1;
+        &:before  {
+            content:        '';
+            position:       absolute;
+            top:            0;
+            left:           0;
+            background:     pink;
+            z-index:        -1;
+            height:         100%;
+            width:          100%;
+            transform:      skew(-30deg);
+        }
+    }
+
+    @media screen and (max-width: 1024px){
+        width:              20%;
+        height:             20px;
+        position:           relative;
+        z-index:            1;
+        &:before  {
+            content:        '';
+            position:       absolute;
+            top:            0;
+            left:           0;
+            background:     pink;
+            z-index:        -1;
+            height:         100%;
+            width:          100%;
+            transform:      skew(-30deg);
+        }
+    }
+`
+
+const ShapeDiv = styles.div `
+    @media screen and (min-width: 1080px){
+        height:             176px;
+        width:              90px;
+        float:              left;
+        shape-outside:      polygon(0 0, 100% 0, 0 100%)
+    }
+
+    @media screen and (max-width: 1024px){
+        display:            none;
+    }
+`
+
+const DivContent  = styles.div `
+    @media screen and (min-width: 1080px){
+        float:              left;
+        width:              85%;
+        height:             176px;
+    }
+
+    @media screen and (max-width: 1024px){
+        width:              100%;
+    }
+`
+
+const SpanContent = styles.span `
+    width:                  100%;
+    fontSize:               0.5rem;
 `
 
 class Intro extends Component {
@@ -64,45 +152,78 @@ class Intro extends Component {
     render(){
         const Styles = {
             StyleContainer:{
-                position:   'relative',
-                left:       this.state.left,
-                color:      'white',
-                height:     'auto',
-                fontSize:   '3vmin',
-                background: 'rgb(64, 68, 75)',
-                opacity:    this.state.opacity,
-                width:          '75%',
-                margin:         '2.5% 12.5%'
-            },
-            spanTitleContainer:{
-                display:    'block',
-                textAlign:  'center',
-                borderBottom:   '1px solid grey',
-                fontSize:   '3vmin'
-            },
-            spanContentContainer:{
-                fontSize:   '2vmin'
+                left:           this.state.left,
+                opacity:        this.state.opacity,
             }
         }
         return(
-            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
-                    style={Styles.StyleContainer}>
-                <span style={Styles.spanTitleContainer}>自我介紹</span>
-                <span style={Styles.spanContentContainer}>
-                    在軟體公司任職期間，開發一款馬達測試軟體以及協助編輯Odoo ERP系統和單晶片韌體的編寫
-                    <br/>
-                    <br/>
-                    空閒時間有接過一次 web 相關案件，是使用 HTML/CSS 搭配 Javascript完成<br/>
-                    之後我又將其重新使用ReactJS 改寫，並將成果放置在下方 project部分
-                    <br/>
-                    <br/>
-                    目前短期目標是成為一名前端工程師，並正在自學React的部分<br/>
-                    長期目標為成為全端工程師，目前僅學到使用Python + Flask作為web API，與我的前端網頁串接<br/>
-                </span>
-            </div>
+            <MainIntroDiv    
+                ref={(MainElement)=>{this.MainElement = MainElement}}
+                style={Styles.StyleContainer}>
+                <DivTitle>
+                    <SpanTitle>自我介紹</SpanTitle>
+                </DivTitle>
+                <DivContent>
+                    <ShapeDiv></ShapeDiv>
+                    <SpanContent>
+                        在軟體公司任職期間，開發一款馬達測試軟體以及協助編輯Odoo ERP系統和單晶片韌體的編寫<br/><br/>
+                        空閒時間有進行過 web 相關案件，是使用 HTML/CSS 搭配Javascript完成，之後又將其重新使用ReactJS 改寫，並將成果放置在下方 project部分<br/><br/>
+                        目前短期目標是成為一名前端工程師，並正在自學React的部分<br/><br/>
+                        長期目標為成為全端工程師，目前僅學到使用Python + Flask作為web API，與我的前端網頁串接
+                    </SpanContent>
+                </DivContent>
+            </MainIntroDiv>
         )
     }
 }
+
+const MainInfoDiv = styles.div `
+    position:       relative;
+    color:          white;
+    margin:         2.5% auto;
+    @media screen and (min-width:   1080px){
+        height:     230.25px;
+        width:      837.75px;
+        fontSize:   3vmin;
+        // background: rgb(64, 68, 75);
+    }
+    @media screen and (max-width:   1024px){
+        width:      85%;
+        height:     200px;
+    }
+`
+const Imgdiv = styles.div `
+    position:       relative;
+    width:          auto;
+    height:         250px;
+    display:        inline;
+    // @media screen and (min-width:1080px){
+    // }
+    // @media screen and (max-width: 1024px){
+    //     width:      318.75px;
+    //     height:     125px;
+    // }
+`
+
+const Img = styles.img `
+    height:     100%;
+    float:      left;
+    top:        0;
+    left:       0;
+` 
+
+const SpanInfo = styles.span `
+    @media screen and (min-width:   1080px){
+        margin-left:        5%;
+        font-size:      2rem;
+        color:          white;
+    }
+
+    @media screen and (max-width:   1024px){
+        font-size:      1.5rem;
+        color:          white;
+    }
+`
 
 class Info extends React.Component  {
     constructor(props){
@@ -147,44 +268,28 @@ class Info extends React.Component  {
     render() {
         const Styles = {
             StyleContainer:{
-                position:   'relative',
                 left:       this.state.left,
-                color:      'white',
-                height:     '25%',
-                width:      '75%',
-                fontSize:   '3vmin',
-                background: 'rgb(64, 68, 75)',
                 opacity:    this.state.opacity,
-                margin:     '2.5% 12.5%'
-            },
-            ImgContainer:{
-                float:      'left',
-                top:        '0',
-                left:       '0',
-                height:     '50%',
-            },
-            spanContainer:{
-                marginLeft: '5%',
             }
         }
         return(
-            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
+            <MainInfoDiv    ref={(MainElement)=>{this.MainElement = MainElement}}
                     style={Styles.StyleContainer} id={this.props.id}>
                 <Imgdiv>
                     <Img src="../img/SelfPic.jpg"></Img>
                 </Imgdiv>
-                <span style={Styles.spanContainer}>梁芳銘</span><br/>
-                <span style={Styles.spanContainer}>Fang-Ming, Liang</span><br/>
-                <span style={Styles.spanContainer} role="img" aria-label="phone">
+                <SpanInfo>梁芳銘</SpanInfo><br/>
+                <SpanInfo>Fang-Ming, Liang</SpanInfo><br/>
+                <SpanInfo role="img" aria-label="phone">
                     📱 0920173978
-                </span><br/>
-                <span style={Styles.spanContainer} role="img" aria-label="mail">
+                </SpanInfo><br/>
+                <SpanInfo role="img" aria-label="mail">
                     ✉️ 
                     <a href="mailto: shotup0101@gmail.com">
                             shotup0101@gmail.com
                     </a>
-                </span>
-            </div>
+                </SpanInfo>
+            </MainInfoDiv>
         )
     }
 }
