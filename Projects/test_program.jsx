@@ -1,5 +1,23 @@
 import React from "react"
+import styles from 'styled-components'
 import './project.css'
+
+const MainSpan = styles.span `
+    display:        block;
+    font-size:      2vmin;
+`
+
+const MainDiv = styles.div `
+    margin-left:        20%;
+    width:              60%;
+    display:            ${props => props.isVisible || 'none'};
+    text-align:         left;
+`
+
+const MainImg = styles.img `
+    width:              100%;
+    height:             auto;
+`
 
 class Test_Program extends React.Component  {
     constructor(props){
@@ -9,37 +27,21 @@ class Test_Program extends React.Component  {
         }
     }
     render(){
-        const Styles ={
-            spanContainer:{
-                display:    'block',
-                fontSize:   '2vmin'
-            },
-            divContainer:{
-                background: 'rgb(64, 68, 75)',
-                // visibility: this.props.isVisible,
-                marginLeft: '20%',
-                width:      '60%',
-                display:    this.props.isVisible,
-                textAlign:  'left'
-            },
-            imgContainer:{
-                width:  '100%',
-                height: 'auto'
-            }
-        }
         return(
-            <div    className={this.props.isVisible == 'block'? 'projectAnim' : ''}
-                    style={Styles.divContainer}>
-                <span style={Styles.spanContainer}>
-                    This test program is used for testing motor quality</span>
-                <span style={Styles.spanContainer}>
+            <MainDiv    
+                isVisible={this.props.isVisible}
+                className={this.props.isVisible == 'block'? 'projectAnim' : ''}>
+                <MainSpan>
+                    This test program is used for testing motor quality
+                </MainSpan>
+                <MainSpan>
                     It use MySQL as database to restore data from inductance meter and resistance meter!
-                </span>
-                <span style={Styles.spanContainer}>
+                </MainSpan>
+                <MainSpan>
                     Use RS232 as communication protocol!
-                </span>
-                <img src="../img/test_program.png" style={Styles.imgContainer}></img>
-            </div>
+                </MainSpan>
+                <MainImg src="../img/test_program.png"></MainImg>
+            </MainDiv>
         )
     }
 }
