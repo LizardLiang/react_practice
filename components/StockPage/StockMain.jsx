@@ -32,6 +32,9 @@ const Button = styles.button `
     background:     grey;
     color:          white;
 
+    &:focus {
+        outline:    none;
+    }
 
     &:hover {
         background: white;

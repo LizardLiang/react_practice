@@ -23,6 +23,14 @@ const ProjectButton = styles.button `
     font-size:          2vmin;
     color:              white;
     line-height:        50px;              // To set span text vertical center
+
+    &:hover {
+        cursor:         pointer;
+    }
+
+    &:focus {
+        outline:        none;
+    }
 `
 
 // Span contain title
