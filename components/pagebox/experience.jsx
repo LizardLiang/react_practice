@@ -1,5 +1,54 @@
 import React from 'react'
+import styles from 'styled-components'
 import "./info.css"
+
+const MainDiv = styles.div `
+    position:       relative;
+    left:           ${props => props.left || 0};
+    color:          white;
+    font-size:      3vmin;
+    height:         auto;
+    overflow:       auto;
+    opacity:        ${props => props.opacity || 1};
+    width:          75%;
+    margin:         2.5% 12.5%;
+`
+
+const TitleDiv = styles.div `
+    display:        block;
+    position:       relative;
+    width:          95%;
+    height:         auto;
+    margin:         0 auto 5px auto;
+    z-index:        1;
+    &:before {
+        content:    '';
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      100%;
+        height:     100%;
+        background: grey;
+        z-index:    -1;
+        transform:  skew(-30deg);
+    }
+`
+
+const SpanTitle = styles.span `
+    display:        block;
+    text-align:     center;
+    // border-bottom:  1px solid grey;
+`
+
+const LeftDiv = styles.div `
+    float:          left;
+    width:          50%;
+`
+
+const RightDiv = styles.div `
+    float:          right;
+    width:          50%;
+`
 
 class Experience extends React.Component    {
     constructor(props){
@@ -44,41 +93,23 @@ class Experience extends React.Component    {
 
     render(){
         const Styles = {
-            StyleContainer:{
-                position:       'relative',
-                left:           this.state.left,
-                color:          'white',
-                fontSize:       '3vmin',
-                background:     'rgb(64, 68, 75)',
-                height:         'auto',
-                overflow:       'auto',
-                opacity:        this.state.opacity,
-                width:          '75%',
-                margin:         '2.5% 12.5%'
-            },
-            overallTitle:{
-                display:        'block',
-                textAlign:      'center',
-                borderBottom:   '1px solid grey'
-            },
-            leftElement:{
-                float:  'left',
-                width:  '50%'
-
-            },
             rightElement:{
                 float:  'right',
                 width:  '50%'
             }
         }
         return(
-            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
-                    style={Styles.StyleContainer} id={this.props.id}>
-                <span style={Styles.overallTitle}>簡歷</span>
+            <MainDiv    
+                left={this.state.left} opacity={this.state.opacity}
+                ref={(MainElement)=>{this.MainElement = MainElement}}
+                id={this.props.id}>
+                <TitleDiv>
+                    <SpanTitle>簡歷</SpanTitle>
+                </TitleDiv>
                 {/* <ul>
                     <li className="li">偉祺電機 (Famax) 3 years as Software engineer</li>
                 </ul> */}
-                <div style={Styles.leftElement}>
+                <LeftDiv>
                     工作經歷:
                     <ul>
                         <li className="li">
@@ -86,8 +117,8 @@ class Experience extends React.Component    {
                             擔任軟體工程師
                         </li>
                     </ul>
-                </div>
-                <div style={Styles.rightElement}>
+                </LeftDiv>
+                <RightDiv>
                     學歷:
                     <ul>
                         <li className="li">
@@ -95,8 +126,8 @@ class Experience extends React.Component    {
                             電機工程學系
                         </li>
                     </ul>
-                </div>
-            </div>
+                </RightDiv>
+            </MainDiv>
         )
     }
 }
