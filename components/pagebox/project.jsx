@@ -1,6 +1,12 @@
 import React from 'react'
+import styles from 'styled-components'
 import { Test_Program, WebGame, StockChart } from "../../Projects"
 import { ContentTitle } from "../../components/ContentTitle"
+
+const ContentDiv = styles.div `
+    height:             auto;
+    vertical-align:     top;
+`
 
 class Project extends React.Component   {
     constructor(props){
@@ -44,15 +50,50 @@ class Project extends React.Component   {
             }
         }
         return (
-            <div style={Styles.divContainer}>
+            <ContentDiv style={Styles.divContainer}>
                 <ContentTitle   titletext={'Project #' + this.props.id + ' ' + this.props.name} 
                                 clickevent={this.setVisibility} 
                                 isVisible={this.state.isVisible}/>
                 {this.switchProject(this.props.name, this.state.isVisible)}
-            </div>
+            </ContentDiv>
         )
     }
 }
+
+const MainDiv = styles.div `
+    position:       relative;
+    left:           ${props => props.left || 0};
+    color:          ${props => props.color || 'white'};
+    width:          100%;
+    // background:     rgb(64, 68, 75);
+    textAlign:      center;
+    opacity:        ${props => props.opacity || 1};
+    width:          75%;
+    margin:         2.5% 12.5%;
+`
+
+const TitleSpan = styles.span `
+    display:        block;
+    position:       relative;
+    width:          95%;
+    height:         auto;
+    font-size:      3vmin;
+    margin:         0 auto 5px auto;
+    // border-bottom:  1px solid grey;
+    text-align:     center;
+    z-index:        1;
+    &:before {
+        content:    '';
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      100%;
+        height:     100%;
+        background: grey;
+        z-index:    -1;
+        transform:  skew(-30deg);
+    }
+`
 
 class Projects extends React.Component{
     constructor(props){
@@ -98,33 +139,16 @@ class Projects extends React.Component{
     }
 
     render(){
-        const Styles = {
-            StyleContainer:{
-                position:   'relative',
-                left:       this.state.left,
-                color:      this.state.color,
-                width:      "100%",
-                background: 'rgb(64, 68, 75)',
-                textAlign:  'center',
-                opacity:    this.state.opacity,
-                width:      '75%',
-                margin:     '2.5% 12.5%',
-            },
-            spanContainer:{
-                display:        'block',
-                width:          '100%',
-                fontSize:       '3vmin',
-                borderBottom:   '1px solid grey'
-            }
-        }
         return (
-            <div    ref = {(MainElement) => {this.MainElement = MainElement}}
-                    style={Styles.StyleContainer} id={this.props.id}>
-                <span style={Styles.spanContainer}>專業 / 經驗</span><br/>
+            <MainDiv
+                color={this.state.color} left={this.state.left} opacity={this.state.opacity}
+                ref = {(MainElement) => {this.MainElement = MainElement}}
+                id={this.props.id}>
+                <TitleSpan>專業 / 經驗</TitleSpan><br/>
                 <Project id="1" name="Test Program"/>
                 <Project id="2" name="Web Game"/>
                 <Project id="3" name="Python Web API"/>
-            </div>
+            </MainDiv>
         )
     }
 }
