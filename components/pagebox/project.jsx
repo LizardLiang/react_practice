@@ -43,14 +43,8 @@ class Project extends React.Component   {
     }
 
     render(){
-        const Styles = {
-            divContainer: {
-                height:         "auto",
-                verticalAlign:  "top",
-            }
-        }
         return (
-            <ContentDiv style={Styles.divContainer}>
+            <ContentDiv>
                 <ContentTitle   titletext={'Project #' + this.props.id + ' ' + this.props.name} 
                                 clickevent={this.setVisibility} 
                                 isVisible={this.state.isVisible}/>
@@ -120,6 +114,11 @@ class Projects extends React.Component{
         let pos = rec['top']
         let height = rec['height']
         let winHeight = window.innerHeight
+        // If let it use new height to calculate 
+        // content can't be displayed properly
+        if (height > 837.75){
+            height = 837.75
+        }
         let minW = winHeight - height
         let maxW = winHeight
         if(pos >= minW && pos <= maxW){
