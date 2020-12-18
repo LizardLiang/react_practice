@@ -2,12 +2,24 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styles from 'styled-components'
 
+const HomeLink = styles(Link) `
+    float:          right;
+`
+
 const DivContainer = styles.div`
+    position:       absolute;
+    top:            0;
+    left:           0;
+    width:          100vw;
+    height:         100vh;
+    background:     rgb(32, 34, 37);
+`
+
+const InputDiv = styles.div `
     position:       relative;
-    width:          50%;
+    width:          868px;
     height:         auto;
-    padding:        0 25%;
-    background:     rgb(47, 49, 54);
+    margin:         0 auto;
 `
 
 const Span = styles.span `
@@ -234,7 +246,12 @@ class StockMain extends Component{
         return(
             <DivContainer>
                 <Span>輸入股票代碼以取得股票資訊</Span>
-                <div style={Styles.centerDiv}>
+                <HomeLink to='/'>
+                    <Button>
+                        回首頁
+                    </Button>
+                </HomeLink>
+                <InputDiv>
                     <input 
                         aria-label='input'
                         type='text'
@@ -247,18 +264,14 @@ class StockMain extends Component{
                         arial-label='searchButton'>
                             搜尋
                     </Button>
-                </div>
+                </InputDiv>
                 <SvgChart 
                     max={this.state.maxNum}
                     min={this.state.minNum}
                     SvgDisplay={this.state.svgDisplay}
                     points={this.state.points}
                     xlabel={this.state.x_texts}/>
-                <Link to='/'>
-                    <Button>
-                        回首頁
-                    </Button>
-                </Link>
+                
             </DivContainer>
         )
     }
