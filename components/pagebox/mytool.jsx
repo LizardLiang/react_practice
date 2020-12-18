@@ -1,5 +1,40 @@
 import React, { Component } from 'react'
+import styles from 'styled-components'
 import './info.css'
+
+const MainDiv = styles.div `
+    position:       relative;
+    left:           ${props => props.left || 0};
+    text-align:     left;
+    color:          white;
+    height:         auto;
+    overflow:       auto;
+    opacity:        ${props => props.opacity};
+    width:          75%;
+    margin:         2.5% 12.5%;
+`
+
+const TitleSpan = styles.span `
+    display:        block;
+    position:       relative;
+    width:          95%;
+    text-align:     center;
+    font-size:      3vmin;
+    margin:         0 auto 5px auto;
+    z-index:        1;
+
+    &:before {
+        content:    '';
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      100%;
+        height:     100%;
+        background: grey;
+        transform:  skew(-30deg);
+        z-index:    -1;
+    }
+`
 
 class MyTool extends Component{
     constructor(props){
@@ -44,24 +79,6 @@ class MyTool extends Component{
 
     render(){
         const Styles = {
-            divContainer:{
-                position:       'relative',
-                left:           this.state.left,
-                textAlign:      'left',
-                color:          'white',
-                background:     'rgb(64, 68, 75)',
-                height:         'auto',
-                overflow:       'auto',
-                opacity:        this.state.opacity,
-                width:          '75%',
-                margin:         '2.5% 12.5%'
-            },
-            titleContainer:{
-                display:        'block',
-                textAlign:      'center',
-                fontSize:       '3vmin',
-                borderBottom:   '1px solid grey'
-            },
             leftDivContainer:{
                 float:          'left',
                 width:          '50%',
@@ -73,11 +90,13 @@ class MyTool extends Component{
             }
         }
         return(
-            <div    ref={(MainElement)=>{this.MainElement = MainElement}}
-                    style={Styles.divContainer} id={this.props.id}>
-                <span style={Styles.titleContainer}>
+            <MainDiv
+                ref={(MainElement)=>{this.MainElement = MainElement}}
+                id={this.props.id}
+                left={this.state.left} opacity={this.state.opacity}>
+                <TitleSpan>
                     常用工具
-                </span>
+                </TitleSpan>
                 <div style={Styles.leftDivContainer}>
                     <span>
                         程式語言:
@@ -110,7 +129,7 @@ class MyTool extends Component{
                         </li>
                     </ul>
                 </div>
-            </div>
+            </MainDiv>
         )
     }
 }
