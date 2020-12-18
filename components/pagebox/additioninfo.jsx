@@ -79,14 +79,6 @@ class AdditionInfo extends Component{
     }
 
     render(){
-        const Styles = {
-            titleContainer:{
-                display:        'block',
-                textAlign:      'center',
-                fontSize:       '3vmin',
-                borderBottom:   '1px solid grey'
-            }
-        }
         return(
             <MainDiv
                 opacity={this.state.opacity}

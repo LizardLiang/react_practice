@@ -69,41 +69,7 @@ class StockChart extends Component{
         })
     }
 
-
     render(){
-        const Styles = {
-            svgContainer:{
-                width:  '50%',
-                height: '25%',
-                overflow:   'visible',
-                marginBottom:   '10%',
-                marginTop:      '10%',
-                display:        this.state.svgDisplay
-            },
-            gridContainer:{
-                stroke: 'grey'
-            },
-            textContainer:{
-                fontSize:   '0.5vmin',
-                fill:      'white'
-            },
-            linkContainer:{
-                fontSize:   '2vmin'
-            }
-        }
-
-        // label on x axis
-        const x_label = 
-            this.state.x_texts.map((date, index)=>{
-                if (index % 7 == 0 || index == (this.state.x_texts.length - 1)){
-                    return(
-                        <text   x={this.calxPosition(index, this.state.x_texts.length) - 10} y='110'
-                                style={Styles.textContainer}>
-                            {date}
-                        </text>
-                    )
-                }
-            })
         return(
             <MainDiv
                 className={this.props.isVisible == 'block'? 'projectAnim' : ''}
@@ -111,9 +77,7 @@ class StockChart extends Component{
                 <MainSpan>
                     此專案用於測試我自己架設的Python web API是否正常運作<br/>
                     在輸入框輸入股票代號後，會回傳相關最近一個月的資料<br/>
-                    <Link
-                        to='/StockSearch'
-                        style={Styles.linkContainer}>
+                    <Link to='/StockSearch'>
                             Click here to go to Search page
                     </Link>
                 </MainSpan>
