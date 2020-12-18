@@ -23,7 +23,6 @@ const SpanTitle = styles.span `
         position:           relative;
         display:            inline-block;
         // border-bottom:   1px solid grey;
-        z-index:            1;
         color:              black;
         height:             100%;
         left:               50px;
