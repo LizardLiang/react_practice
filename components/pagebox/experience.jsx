@@ -40,6 +40,11 @@ const SpanTitle = styles.span `
     // border-bottom:  1px solid grey;
 `
 
+const ContentDiv = styles.div `
+    width:          95%;
+    margin:         0 auto;
+`
+
 const LeftDiv = styles.div `
     float:          left;
     width:          50%;
@@ -92,12 +97,6 @@ class Experience extends React.Component    {
     }
 
     render(){
-        const Styles = {
-            rightElement:{
-                float:  'right',
-                width:  '50%'
-            }
-        }
         return(
             <MainDiv    
                 left={this.state.left} opacity={this.state.opacity}
@@ -109,24 +108,26 @@ class Experience extends React.Component    {
                 {/* <ul>
                     <li className="li">偉祺電機 (Famax) 3 years as Software engineer</li>
                 </ul> */}
-                <LeftDiv>
-                    工作經歷:
-                    <ul>
-                        <li className="li">
-                            偉祺電機 2017/11 ~ 現在<br/>
-                            擔任軟體工程師
-                        </li>
-                    </ul>
-                </LeftDiv>
-                <RightDiv>
-                    學歷:
-                    <ul>
-                        <li className="li">
-                            元智大學<br/>
-                            電機工程學系
-                        </li>
-                    </ul>
-                </RightDiv>
+                <ContentDiv>
+                    <LeftDiv>
+                        工作經歷:
+                        <ul>
+                            <li className="li">
+                                偉祺電機 2017/11 ~ 現在<br/>
+                                擔任軟體工程師
+                            </li>
+                        </ul>
+                    </LeftDiv>
+                    <RightDiv>
+                        學歷:
+                        <ul>
+                            <li className="li">
+                                元智大學<br/>
+                                電機工程學系
+                            </li>
+                        </ul>
+                    </RightDiv>
+                </ContentDiv>
             </MainDiv>
         )
     }

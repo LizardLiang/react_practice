@@ -3,10 +3,12 @@ import styles from 'styled-components'
 
 // An overall div contain all content
 const MainDiv = styles.div `
-    boxSizing:          border-box;
+    box-sizing:         border-box;
+    width:              95%;
     height:             6%;
     display:            block;
-    textAlign:          left;
+    text-align:         left;
+    margin:             0 auto;
 `
 
 // Button for title

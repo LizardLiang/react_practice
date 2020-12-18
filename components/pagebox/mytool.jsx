@@ -36,6 +36,11 @@ const TitleSpan = styles.span `
     }
 `
 
+const ContentDiv = styles.div `
+    width:          95%;
+    margin:         0 auto;
+`
+
 const LeftDiv = styles.div `
     float:          left;
     width:          50%;
@@ -97,38 +102,40 @@ class MyTool extends Component{
                 <TitleSpan>
                     常用工具
                 </TitleSpan>
-                <LeftDiv>
-                    <span>
-                        程式語言:
-                    </span>
-                    <ul>
-                        <li className='li'>
-                            C語言
-                        </li>
-                        <li className='li'>
-                            Python
-                        </li>
-                        <li className='li'>
-                            HTML/CSS
-                        </li>
-                        <li className='li'>
-                            Javascript、ReactJS
-                        </li>
-                    </ul>
-                </LeftDiv>
-                <RightDiv>
-                    <ul>
-                        <li className='li'>
-                            編輯器: VsCode
-                        </li>
-                        <li className='li'>
-                            開發工具: Git, npm, webpack, flask
-                        </li>
-                        <li className='li'>
-                            多益: 845分
-                        </li>
-                    </ul>
-                </RightDiv>
+                <ContentDiv>
+                    <LeftDiv>
+                        <span>
+                            程式語言:
+                        </span>
+                        <ul>
+                            <li className='li'>
+                                C語言
+                            </li>
+                            <li className='li'>
+                                Python
+                            </li>
+                            <li className='li'>
+                                HTML/CSS
+                            </li>
+                            <li className='li'>
+                                Javascript、ReactJS
+                            </li>
+                        </ul>
+                    </LeftDiv>
+                    <RightDiv>
+                        <ul>
+                            <li className='li'>
+                                編輯器: VsCode
+                            </li>
+                            <li className='li'>
+                                開發工具: Git, npm, webpack, flask
+                            </li>
+                            <li className='li'>
+                                多益: 845分
+                            </li>
+                        </ul>
+                    </RightDiv>
+                </ContentDiv>
             </MainDiv>
         )
     }
