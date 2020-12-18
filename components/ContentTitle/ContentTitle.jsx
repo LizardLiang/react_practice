@@ -25,11 +25,12 @@ const ProjectButton = styles.button `
 
 // Span contain title
 const TitleSpan = styles.span `
+    display:            inline-block;
     height:             100%;
     font-size:          3vmin;
-    display:            block;
     line-height:        50px;
     vertical-align:     middle;
+    margin-left:        5px;
 `
 
 class ContentTitle extends React.Component{
