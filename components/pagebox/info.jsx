@@ -193,19 +193,22 @@ const MainInfoDiv = styles.div `
     }
 `
 const Imgdiv = styles.div `
-    position:       relative;
-    width:          auto;
-    height:         250px;
-    display:        inline;
-    // @media screen and (min-width:1080px){
-    // }
-    // @media screen and (max-width: 1024px){
-    //     width:      318.75px;
-    //     height:     125px;
-    // }
+    @media screen and (min-width:   1080px){
+        position:       relative;
+        display:        inline-block;
+        width:          171.23px;
+        height:         100%;
+    }
+    @media screen and (max-width:   1024px){
+        position:       relative;
+        width:          92.97px;
+        height:         125px;
+        display:        inline-block;
+    }
 `
 
 const Img = styles.img `
+    position:   absolute;
     height:     100%;
     float:      left;
     top:        0;
@@ -214,14 +217,29 @@ const Img = styles.img `
 
 const SpanInfo = styles.span `
     @media screen and (min-width:   1080px){
-        margin-left:        5%;
+        margin-left:    5%;
         font-size:      2rem;
         color:          white;
     }
 
     @media screen and (max-width:   1024px){
-        font-size:      1.5rem;
+        display:        inline-block;
+        font-size:      1rem;
         color:          white;
+    }
+`
+const MainSpanDive = styles.div `
+    @media screen and (min-width:   1080px){
+        position:       absolute;
+        display:        inline-block;
+        width:          calc(100% - 181.23px)
+    }
+    @media screen and (max-width:   1024px){
+        position:       absolute;
+        margin:         0 5px;
+        display:        inline-block;
+        width:          calc(100% - 102.97px);
+        height:         100%;
     }
 `
 
@@ -278,17 +296,19 @@ class Info extends React.Component  {
                 <Imgdiv>
                     <Img src="../img/SelfPic.jpg"></Img>
                 </Imgdiv>
-                <SpanInfo>梁芳銘</SpanInfo><br/>
-                <SpanInfo>Fang-Ming, Liang</SpanInfo><br/>
-                <SpanInfo role="img" aria-label="phone">
-                    📱 0920173978
-                </SpanInfo><br/>
-                <SpanInfo role="img" aria-label="mail">
-                    ✉️ 
-                    <a href="mailto: shotup0101@gmail.com">
-                            shotup0101@gmail.com
-                    </a>
-                </SpanInfo>
+                <MainSpanDive>
+                    <SpanInfo>梁芳銘</SpanInfo><br/>
+                    <SpanInfo>Fang-Ming, Liang</SpanInfo><br/>
+                    <SpanInfo role="img" aria-label="phone">
+                        📱 0920173978
+                    </SpanInfo><br/>
+                    <SpanInfo role="img" aria-label="mail">
+                        ✉️ 
+                        <a href="mailto: shotup0101@gmail.com">
+                                shotup0101@gmail.com
+                        </a>
+                    </SpanInfo>
+                </MainSpanDive>
             </MainInfoDiv>
         )
     }
