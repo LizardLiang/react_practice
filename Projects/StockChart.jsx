@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
+import styles from 'styled-components'
 import { Link } from 'react-router-dom'
 import './project.css'
 
-class ChartLine extends Component{
-    constructor(props){
-        super(props)
-    }
+const MainDiv = styles.div  `
+    display:        ${props => props.isVisible || 'none'};
+`
 
-    render(){
-        return(
-            <polyline   fill="none"
-                        stroke="#0074d9"
-                        stroke-width="1"
-                        points={this.props.points}/>
-        )
-    }
-}
+const MainSpan = styles.span `
+    font-size:       2vmin;
+    color:          white;
+    display:        block;
+    width:          60%;
+    margin:         auto;
+    text-align:     left;
+`
 
 class StockChart extends Component{
     constructor(props){
@@ -73,9 +72,6 @@ class StockChart extends Component{
 
     render(){
         const Styles = {
-            divContainer:{
-                display: this.props.isVisible
-            },
             svgContainer:{
                 width:  '50%',
                 height: '25%',
@@ -90,14 +86,6 @@ class StockChart extends Component{
             textContainer:{
                 fontSize:   '0.5vmin',
                 fill:      'white'
-            },
-            spanContainer:{
-                fontSize:   '2vmin',
-                color:      'white',
-                display:    'block',
-                width:      '60%',
-                margin:     'auto',
-                textAlign:  'left'
             },
             linkContainer:{
                 fontSize:   '2vmin'
@@ -117,47 +105,21 @@ class StockChart extends Component{
                 }
             })
         return(
-            <div    className={this.props.isVisible == 'block'? 'projectAnim' : ''}
-                    style={Styles.divContainer}>
-                <span style={Styles.spanContainer}>
-                    此專案用於測試我自己架設的Python web API是否正常運作
-                    在輸入框輸入 股票代號後 會回傳相關最近一個月的資料
-                </span>
+            <MainDiv
+                className={this.props.isVisible == 'block'? 'projectAnim' : ''}
+                isVisible={this.props.isVisible}>
+                <MainSpan>
+                    此專案用於測試我自己架設的Python web API是否正常運作<br/>
+                    在輸入框輸入股票代號後，會回傳相關最近一個月的資料
+                    <Link
+                        to='/StockSearch'
+                        style={Styles.linkContainer}>
+                            Click here to go to Search page
+                    </Link>
+                </MainSpan>
                 <br/>
-                {/* <input  name='IdInput' 
-                        ref={(inputElement) => {this.inputElement = inputElement}}>
-                </input>
-                <button onClick={this.FetchStockInfo}>Fetch!!</button>
-                <br/>
-                <svg    id='stockChart' style={Styles.svgContainer}
-                        ref={ (svgElement) => { this.svgElement = svgElement } }
-                        viewBox='0 0 100 100'
-                        preserveAspectRatio='none'>
-                    <ChartLine  points={this.state.points} />
-                    <g id='x-grid' style={Styles.gridContainer}>
-                        <line x1='0' x2='100' y1='100' y2='100'></line>
-                    </g>
-                    <g id='y-grid' style={Styles.gridContainer}>
-                        <line x1='0' x2='0' y1='0' y2='100'></line>
-                    </g>
-                    <g>
-                        {x_label}
-                    </g>
-                    <g>
-                        <text style={Styles.textContainer} x='-15' y='100'>
-                            {this.state.minNum}
-                        </text>
-                        <text style={Styles.textContainer} x='-15' y='0'>
-                            {this.state.maxNum}
-                        </text>
-                    </g>
-                </svg> */}
-                <Link
-                    to='/StockSearch'
-                    style={Styles.linkContainer}>
-                        Click here to go to Search page
-                </Link>
-            </div>
+                
+            </MainDiv>
         )
     }
 }
