@@ -58,12 +58,11 @@ const MainDiv = styles.div `
     position:       relative;
     left:           ${props => props.left || 0};
     color:          ${props => props.color || 'white'};
-    width:          100%;
     // background:     rgb(64, 68, 75);
     textAlign:      center;
     opacity:        ${props => props.opacity || 1};
-    width:          75%;
-    margin:         2.5% 12.5%;
+    width:          868px;
+    margin:         2.5% auto;
 `
 
 const TitleSpan = styles.span `

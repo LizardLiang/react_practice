@@ -4,8 +4,8 @@ import styles from 'styled-components'
 const MainDiv = styles.div `
     color:          white;
     fontSize:       3vmin;
-    width:          75%;
-    margin:         2.5% 12.5%;
+    width:          868px;
+    margin:         2.5% auto;
     position:       relative;
     left:           ${props => props.left || 0};
     opacity:        ${props => props.opacity};

@@ -10,8 +10,8 @@ const MainDiv = styles.div `
     height:         auto;
     overflow:       auto;
     opacity:        ${props => props.opacity || 1};
-    width:          75%;
-    margin:         2.5% 12.5%;
+    width:          868px;
+    margin:         2.5% auto;
 `
 
 const TitleDiv = styles.div `

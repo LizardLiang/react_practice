@@ -110,7 +110,7 @@ class StockChart extends Component{
                 isVisible={this.props.isVisible}>
                 <MainSpan>
                     此專案用於測試我自己架設的Python web API是否正常運作<br/>
-                    在輸入框輸入股票代號後，會回傳相關最近一個月的資料
+                    在輸入框輸入股票代號後，會回傳相關最近一個月的資料<br/>
                     <Link
                         to='/StockSearch'
                         style={Styles.linkContainer}>
@@ -118,7 +118,6 @@ class StockChart extends Component{
                     </Link>
                 </MainSpan>
                 <br/>
-                
             </MainDiv>
         )
     }
