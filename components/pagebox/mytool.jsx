@@ -36,6 +36,17 @@ const TitleSpan = styles.span `
     }
 `
 
+const LeftDiv = styles.div `
+    float:          left;
+    width:          50%;
+    font-size:      3vmin;
+`
+
+const RightDiv = styles.div `
+    float:          right;
+    width:          50%;
+`
+
 class MyTool extends Component{
     constructor(props){
         super(props)
@@ -78,17 +89,6 @@ class MyTool extends Component{
     }
 
     render(){
-        const Styles = {
-            leftDivContainer:{
-                float:          'left',
-                width:          '50%',
-                fontSize:       '3vmin'
-            },
-            rightDivContainer:{
-                float:          'right',
-                width:          '50%'
-            }
-        }
         return(
             <MainDiv
                 ref={(MainElement)=>{this.MainElement = MainElement}}
@@ -97,7 +97,7 @@ class MyTool extends Component{
                 <TitleSpan>
                     常用工具
                 </TitleSpan>
-                <div style={Styles.leftDivContainer}>
+                <LeftDiv>
                     <span>
                         程式語言:
                     </span>
@@ -115,8 +115,8 @@ class MyTool extends Component{
                             Javascript、ReactJS
                         </li>
                     </ul>
-                </div>
-                <div style={Styles.rightDivContainer}>
+                </LeftDiv>
+                <RightDiv>
                     <ul>
                         <li className='li'>
                             編輯器: VsCode
@@ -128,7 +128,7 @@ class MyTool extends Component{
                             多益: 845分
                         </li>
                     </ul>
-                </div>
+                </RightDiv>
             </MainDiv>
         )
     }
