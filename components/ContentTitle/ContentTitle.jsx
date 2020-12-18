@@ -1,6 +1,7 @@
 import React from 'React'
 import styles from 'styled-components'
 
+// An overall div contain all content
 const MainDiv = styles.div `
     boxSizing:          border-box;
     height:             6%;
@@ -25,38 +26,21 @@ const ProjectButton = styles.button `
 // Span contain title
 const TitleSpan = styles.span `
     height:             100%;
-    fontSize:           3vmin;
+    font-size:          3vmin;
     display:            block;
-    lineHeight:         50px;
-    verticalAlign:      middle;
+    line-height:        50px;
+    vertical-align:     middle;
 `
 
 class ContentTitle extends React.Component{
     render(){
-        const Styles = {
-            // Div contains title
-            divTitleContainer:  {
-                boxSizing:      'border-box',
-                height:         '6%',
-                display:        'block',
-                textAlign:      'left'
-            },
-            // Title text block
-            spanTitleContainer: {
-                height:         '100%',
-                fontSize:       '3vmin',
-                display:        'block',
-                lineHeight:     '50px',
-                verticalAlign:  'middle'
-            }
-        }
         return (
             <MainDiv>
                 <ProjectButton 
                     onClick={() => this.props.clickevent()}>
                     {this.props.isVisible === 'none' ? '+' : '-'}
                 </ProjectButton>
-                <TitleSpan style={Styles.spanTitleContainer}>
+                <TitleSpan>
                     {this.props.titletext}
                 </TitleSpan>
             </MainDiv>
