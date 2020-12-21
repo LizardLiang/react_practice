@@ -10,6 +10,10 @@ const MainDiv = styles.div `
     left:           ${props => props.left || 0};
     opacity:        ${props => props.opacity};
     overflow:       hidden;
+    @media screen and (max-width:   1079px){
+        width:          85%;
+        height:         auto;
+    }
 `
 const TitleSpan = styles.span `
     display:        block;
@@ -19,6 +23,10 @@ const TitleSpan = styles.span `
     text-align:     center;
     font-size:      3vmin;
     z-index:        1;
+
+    @media screen and (min-width:   1080px){
+        font-size:  30px;
+    }
 
     &:before {
         content:    '';
