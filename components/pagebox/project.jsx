@@ -6,6 +6,7 @@ import { ContentTitle } from "../../components/ContentTitle"
 const ContentDiv = styles.div `
     height:             auto;
     vertical-align:     top;
+    margin:             5px 0;
 `
 
 class Project extends React.Component   {
@@ -63,6 +64,10 @@ const MainDiv = styles.div `
     opacity:        ${props => props.opacity || 1};
     width:          868px;
     margin:         2.5% auto;
+    @media screen and (max-width:   1079px){
+        width:          85%;
+        height:         auto;
+    }
 `
 
 const TitleSpan = styles.span `
@@ -72,9 +77,13 @@ const TitleSpan = styles.span `
     height:         auto;
     font-size:      3vmin;
     margin:         0 auto 5px auto;
-    // border-bottom:  1px solid grey;
     text-align:     center;
     z-index:        1;
+
+    @media screen and (min-width:   1080px){
+        font-size:  30px;
+    }
+
     &:before {
         content:    '';
         position:   absolute;
@@ -142,7 +151,7 @@ class Projects extends React.Component{
                 color={this.state.color} left={this.state.left} opacity={this.state.opacity}
                 ref = {(MainElement) => {this.MainElement = MainElement}}
                 id={this.props.id}>
-                <TitleSpan>專業 / 經驗</TitleSpan><br/>
+                <TitleSpan>專業 / 經驗</TitleSpan>
                 <Project id="1" name="Test Program"/>
                 <Project id="2" name="Web Game"/>
                 <Project id="3" name="Python Web API"/>

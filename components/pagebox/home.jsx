@@ -27,13 +27,13 @@ class Home extends Component{
         const Styles = {
             MainPageContainer: {
                 marginTop:  '100vh',
-                marginLeft: 'auto',
-                marginRight:'auto',
                 position:   'relative',
+                margin:     '100vh 0 0 0',
                 // background: 'rgb(54, 57, 63)',
                 background: 'rgb(32, 34, 37)',
                 boxSizing:  'border-box',
                 width:      '100vw',
+                overflowX:  'hidden',
             },
             Container:  {
                 // background: 'rgb(47, 49, 54)',

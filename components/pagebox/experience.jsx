@@ -12,6 +12,11 @@ const MainDiv = styles.div `
     opacity:        ${props => props.opacity || 1};
     width:          868px;
     margin:         2.5% auto;
+
+    @media screen and (max-width:   1079px){
+        width:          85%;
+        height:         auto;
+    }
 `
 
 const TitleDiv = styles.div `
@@ -37,6 +42,10 @@ const TitleDiv = styles.div `
 const SpanTitle = styles.span `
     display:        block;
     text-align:     center;
+    font-size:      3vmin;
+    @media screen and (min-width:       1080px){
+        font-size:  30px;
+    }
     // border-bottom:  1px solid grey;
 `
 

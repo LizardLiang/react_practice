@@ -12,6 +12,10 @@ const MainDiv = styles.div `
     opacity:        ${props => props.opacity};
     width:          868px;
     margin:         2.5% auto;
+    @media screen and (max-width:   1079px){
+        width:          85%;
+        height:         auto;
+    }
 `
 
 const TitleSpan = styles.span `
@@ -22,6 +26,10 @@ const TitleSpan = styles.span `
     font-size:      3vmin;
     margin:         0 auto 5px auto;
     z-index:        1;
+
+    @media screen and (min-width:   1080px){
+        font-size:  30px;
+    }
 
     &:before {
         content:    '';
