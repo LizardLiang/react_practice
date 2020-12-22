@@ -1,5 +1,7 @@
-import React    from "react"
+import React, { Component }    from "react"
 import ReactDOM from "react-dom"
+import {Link} from 'react-router-dom'
+import styles from 'styled-components'
 import {Buttons}    from "../buttons"
 
 class SideBar extends React.Component{
@@ -64,4 +66,72 @@ class SideBar extends React.Component{
     }
 }
 
-export { SideBar }
+const MainDiv = styles.div `
+    position:           fixed;
+    display:            flex;
+    top:                0;
+    left:               0;
+    height:             3rem;
+    width:              100%;
+    z-index:            3;
+    color:              white;
+    justify-content:    flex-end;
+    background:         rgb(32, 34, 37);
+    box-shadow:         0 0 10px 20px rgba(0, 0, 0, 0.5);
+
+    
+`
+
+const GuideButton = styles.button `
+    min-width:          5rem;
+    width:              auto;
+    align-content:      center;
+    background:         rgb(32, 34, 37);
+    border:             none;
+    color:              white;
+    font-size:          2rem;
+    opacity:            0.3;
+    margin:             0 2rem;
+
+    @media screen and (max-width:   425px){
+        font-size:      1rem;
+        margin:         0;
+    }
+
+    &:hover {
+        opacity:        1;
+    }
+`
+
+const GuideLink = styles(Link) `
+    text-decoration:    none;
+`
+
+class HeadBanner extends Component {
+    render(){
+        return (
+            <MainDiv>
+                <GuideButton>
+                    <GuideLink to='/'>
+                        Home 
+                    </GuideLink> 
+                </GuideButton>
+                <GuideButton>
+                    <GuideLink to='/StockSearch'>
+                        Stock
+                    </GuideLink>
+                </GuideButton>
+                <GuideButton>
+                    <GuideLink to='./CountDown'>
+                        Count down
+                    </GuideLink>
+                </GuideButton>
+                {/*<GuideButton>
+                    4
+                </GuideButton> */}
+            </MainDiv>
+        )
+    }
+}
+
+export { SideBar, HeadBanner }
