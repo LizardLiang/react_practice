@@ -181,7 +181,7 @@ const HeaderButton = styles.button `
         font-size:  2rem;
     }
     
-    &:hover {
+    &:hover, &:active {
         opacity:    0.9;
     }
 `
