@@ -13,6 +13,8 @@ const DivContainer = styles.div`
     width:          100vw;
     height:         100vh;
     background:     rgb(32, 34, 37);
+    box-sizing:     border-box;
+    padding-top:    3.5rem;
 `
 
 const InputDiv = styles.div `
@@ -54,9 +56,9 @@ const Svg = styles.svg `
         display:        ${props => props.svgDisplay || 
                                     "block"};
     }
-    @media screen and (max-width: 600px){
+    @media screen and (max-width: 1079px){
         width:          50vw;
-        height:         25vh;
+        height:         50%;
         overflow:       visible;
         margin-bottom:  10%;
         margin-top:     10%;
