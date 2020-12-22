@@ -1,11 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {HashRouter, Route, hashHistory} from 'react-router-dom'
-import {Provider, connect} from "react-redux"
-import { Main } from "./Main"
-import { Info, Experience, Projects, MyTool, AdditionInfo, Intro, Home } from "./components/pagebox"
-import store from "./index.js"
-import { StockMain } from './components/StockPage'
+import {connect} from "react-redux"
+import {Main} from "./Main"
+import {Info, Experience, Projects, MyTool, AdditionInfo, Intro, Home } from "./components/pagebox"
+import {HeadBanner} from './components/sidebar'
+import {MapCountDown} from './CountDown'
+import {StockMain} from './components/StockPage'
+import './index.css'
 
 class MessageList extends React.Component {
     render(){
@@ -112,9 +114,11 @@ class MainWindow extends React.Component {
                             Hello Everyone!
                         </h1>
                     </div> */}
+                    <HeadBanner></HeadBanner>
                     {/* Use route to switch pages */}
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/StockSearch' component={ StockMain }/>
+                    <Route exact path='/CountDown' component={ MapCountDown }/>
                 </div>
             </HashRouter>
         )
