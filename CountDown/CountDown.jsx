@@ -307,6 +307,27 @@ class CountDown extends Component {
         this.timerID = 0
     }
 
+    FetchOld = async () => {
+        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
+            method: 'POST',
+            headers:    {
+                'content-type': 'application/json'
+            },
+            body:   JSON.stringify({
+                method: 'get-timer'
+            })
+        }).then((res)=>{
+            return res.json()
+        }).then((items)=>{
+            console.log(items)
+            items['timers'].map((item)=>{
+                this.SendDateToStore(item, false)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
     countdown = () => {
         let nowDate = new Date();
         this.setState({passTime:    nowDate})
@@ -316,13 +337,54 @@ class CountDown extends Component {
         this.setState({editDis: dis})
     }
 
-    SendDateToStore = (obj) => {
+    SendDateToStore = (obj, isNew = true) => {
+        if(isNew){
+            fetch('http://114.32.157.74/PythonFlask/api/v1/', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body:   JSON.stringify({
+                    method: 'insert-timer',
+                    title:  obj.title,
+                    year:   parseInt(obj.year),
+                    month:  parseInt(obj.month),
+                    day:    parseInt(obj.day),
+                    hour:   parseInt(obj.hour),
+                    minute: parseInt(obj.minute),
+                    second: parseInt(obj.second),
+                })
+            })   
+        }
+        
         this.props.addDate(obj)
         this.setState({editDis: 'none'})
     }
 
+    deleteTimerAPI = (title) => {
+        console.log(title)
+        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+            method: 'POST',
+            headers:    {
+                'content-type': 'application/json'
+            },
+            body:   JSON.stringify({
+                method:   'del-timer',
+                title:  title
+            })
+        }).catch((e)=>{
+            console.log(e)
+        })
+    }
+
+    deleteTimer = (title) => {
+        this.deleteTimerAPI(title)
+        this.props.deleteDate(title)
+    }
+
     componentDidMount(){
         this.timerID = setInterval(this.countdown, 1000)
+        this.FetchOld()
     }
 
     componentWillUnmount(){
@@ -330,22 +392,25 @@ class CountDown extends Component {
     }
 
     render(){
-        let Timers = this.props.data.map((value) => {
-            let date = new Date(
-                value.year, 
-                value.month - 1, 
-                value.day, 
-                value.hour, 
-                value.minute, 
-                value.second)
-            
-            return (
-                <TimerBlock
-                    title={value.title}
-                    targetDate={date}
-                    passTime={this.state.passTime}
-                    delTimer={this.props.deleteDate}/>
-            )
+        let Timers = this.props.data.map((value, index) => {
+            // ignore default date when user add there own
+            if(this.props.data.length > 1 && index != 0){
+                let date = new Date(
+                    value.year, 
+                    value.month - 1, 
+                    value.day, 
+                    value.hour, 
+                    value.minute, 
+                    value.second)
+                
+                return (
+                    <TimerBlock
+                        title={value.title}
+                        targetDate={date}
+                        passTime={this.state.passTime}
+                        delTimer={this.deleteTimer}/>
+                )
+            }
         })
         return (
             <MainDiv>
