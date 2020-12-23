@@ -6,8 +6,7 @@ import {createStore} from 'redux' // import store component
 const Datas = {
     dates: [
         //default countdown
-        {title:'New Year!!', year: 2021, month:  1, day: 1, hour: 0, minute: 0, second: 0},
-        {title:'My Birthday', year: 2021, month: 5, day: 20, hour: 0, minute: 0, second: 0}
+        {title:'New Year!!', year: 2021, month:  1, day: 1, hour: 0, minute: 0, second: 0}
     ]
 }
 
