@@ -27,13 +27,13 @@ const SpanTitleIntro = styles.span `
         // border-bottom:   1px solid grey;
         height:             100%;
         left:               40px;
-        font-size:          30px;
+        font-size:          3vmin;
     }
 
     @media screen and (max-width: 1079px){
         position:           relative;
         top:                0;
-        font-size:          1.5vmin;
+        font-size:          3vmin;
         text-align:         right;
         width:              100%;
         left:               5px;
@@ -44,7 +44,7 @@ const DivTitleIntro  = styles.div `
     @media screen and (min-width: 1080px){
         float:              left;
         width:              15%;
-        height:             100%;
+        height:             auto;
         position:           relative;
         z-index:            1;
         &:before  {
@@ -62,7 +62,7 @@ const DivTitleIntro  = styles.div `
 
     @media screen and (max-width: 1079px){
         width:              95%;
-        height:             20px;
+        height:             auto;
         position:           relative;
         z-index:            1;
         margin:             2.5% auto;
@@ -220,9 +220,9 @@ const ImgInfo = styles.img `
 ` 
 
 const SpanInfo = styles.span `
-    @media screen and (min-width:   1080px){
+    @media screen and (min-width:   1025px){
         margin-left:    5%;
-        font-size:      2rem;
+        font-size:      1.3rem;
         color:          white;
     }
 
