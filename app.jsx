@@ -8,6 +8,7 @@ import {HeadBanner} from './components/sidebar'
 import {MapCountDown} from './CountDown'
 import {StockMain} from './components/StockPage'
 import './index.css'
+import { ShowIP } from "./ShowIp"
 
 class MessageList extends React.Component {
     render(){
@@ -119,6 +120,7 @@ class MainWindow extends React.Component {
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/StockSearch' component={ StockMain }/>
                     <Route exact path='/CountDown' component={ MapCountDown }/>
+                    <Route exact path='/CheckIP' render={() => {return <ShowIP/>}}/>
                 </div>
             </HashRouter>
         )
