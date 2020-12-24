@@ -2,11 +2,19 @@ export * from './CountDown.jsx'
 
 import {createStore} from 'redux' // import store component
 
+const defaultDate = {
+    title:  'New Year!!',
+    year:   2021,
+    month:  1,
+    day:    1,
+    hour:   0,
+    minute: 0,
+    second: 0
+}
+
 // create data
 const Datas = {
     dates: [
-        //default countdown
-        {title:'New Year!!', year: 2021, month:  1, day: 1, hour: 0, minute: 0, second: 0}
     ]
 }
 
@@ -32,4 +40,4 @@ const store = createStore(rootReducer)
 window.store = store;
 window.deleteDate = deleteDate;
 
-export {store, addDate, deleteDate}
+export {store, addDate, deleteDate, defaultDate}
