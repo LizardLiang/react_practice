@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Provider, connect} from 'react-redux'
 import styles from 'styled-components'
-import {store, addDate} from './index.js'
+import {store, addDate, defaultDate, deleteDate} from './index.js'
 import { Link } from 'react-router-dom'
 import { Main } from '../Main'
 
@@ -164,6 +164,18 @@ const TimerBlockDiv = styles.div `
     }
 `
 
+const SettingButton = styles.button `
+    display:            flex;
+    justify-content:    center;
+    align-items:        center;
+    background:         grey;
+    opacity:            0.3;
+    
+    &:hover {
+        opacity:        0.7;
+    }
+`
+
 const HeaderDiv = styles.div `
     display:        flex;
     width:          100%;
@@ -226,6 +238,7 @@ class TimerBlock extends Component {
                         {this.props.title}
                     </div>
                     <div>
+                        <HeaderButton>...</HeaderButton>
                         <HeaderButton onClick={() => {this.props.delTimer(this.props.title)}}>
                             x
                         </HeaderButton>
@@ -278,11 +291,14 @@ const MainDiv = styles.div `
 
 
 const PlusButton = styles.button `
-    font-size:      5rem;
-    border-radius:  50%;
-    width:          5.5rem;
-    height:         5.5rem;
-    margin:         2rem;
+    font-size:          5rem;
+    border-radius:      50%;
+    width:              5.5rem;
+    height:             5.5rem;
+    margin:             2rem;
+    display:            flex;
+    justify-content:    center;
+    align-items:        center;
 
     @media screen and (max-width:   768px){
         width:      2.5rem;
@@ -294,6 +310,7 @@ const PlusButton = styles.button `
         box-shadow: 0 0 20px rgba(255,255,255, 0.5)
     }
 `
+
 
 class CountDown extends Component {
     constructor(props){
@@ -319,7 +336,6 @@ class CountDown extends Component {
         }).then((res)=>{
             return res.json()
         }).then((items)=>{
-            console.log(items)
             items['timers'].map((item)=>{
                 this.SendDateToStore(item, false)
             })
@@ -362,7 +378,6 @@ class CountDown extends Component {
     }
 
     deleteTimerAPI = (title) => {
-        console.log(title)
         fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
@@ -384,7 +399,14 @@ class CountDown extends Component {
 
     componentDidMount(){
         this.timerID = setInterval(this.countdown, 1000)
-        this.FetchOld()
+        if(this.props.data.length <= 0){
+            this.FetchOld().then(()=>{
+                if(this.props.data.length <= 0){
+                    console.log(defaultDate)
+                    this.props.addDate(defaultDate)
+                }
+            })
+        }
     }
 
     componentWillUnmount(){
@@ -394,23 +416,21 @@ class CountDown extends Component {
     render(){
         let Timers = this.props.data.map((value, index) => {
             // ignore default date when user add there own
-            if(this.props.data.length > 1 && index != 0){
-                let date = new Date(
-                    value.year, 
-                    value.month - 1, 
-                    value.day, 
-                    value.hour, 
-                    value.minute, 
-                    value.second)
-                
-                return (
-                    <TimerBlock
-                        title={value.title}
-                        targetDate={date}
-                        passTime={this.state.passTime}
-                        delTimer={this.deleteTimer}/>
-                )
-            }
+            let date = new Date(
+                value.year, 
+                value.month - 1, 
+                value.day, 
+                value.hour, 
+                value.minute, 
+                value.second)
+            
+            return (
+                <TimerBlock
+                    title={value.title}
+                    targetDate={date}
+                    passTime={this.state.passTime}
+                    delTimer={this.deleteTimer}/>
+            )
         })
         return (
             <MainDiv>
