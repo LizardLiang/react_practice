@@ -186,16 +186,40 @@ const HeaderDiv = styles.div `
 const HeaderButton = styles.button `
     font-size:      3rem;
     background:     none;
-    color:          white;
-    opacity:        0.3;
+    color:          #B6B8C1;
+    text-align:     right;
 
     @media screen and (max-width:   425px){
         font-size:  2rem;
     }
     
     &:hover, &:active {
-        opacity:    0.9;
+        color:      white;
     }
+
+    &:focus {
+        outline:    none;
+        div {
+            display:    flex;
+        }
+    }
+`
+
+const HeaderDropDown = styles.div `
+    display:        none;
+    position:       absolute;
+    background:     #152338;
+    z-index:        1;
+
+    &:hover {
+        background: rgb(32, 34, 37);
+    }
+`
+
+// Cuz using justify-content with space-between need to have same width to 
+// center middle element
+const TimerTitleSep = styles.div `
+    width:  25%;
 `
 
 class TimerBlock extends Component {
@@ -233,16 +257,21 @@ class TimerBlock extends Component {
         return (
             <TimerBlockDiv>
                 <HeaderDiv>
-                    <div/>
-                    <div>
+                    <TimerTitleSep/>
+                    <TimerTitleSep>
                         {this.props.title}
-                    </div>
-                    <div>
-                        <HeaderButton>...</HeaderButton>
+                    </TimerTitleSep>
+                    <TimerTitleSep>
+                        {/* <HeaderButton>
+                            ...
+                            <HeaderDropDown>
+                                123
+                            </HeaderDropDown>
+                        </HeaderButton> */}
                         <HeaderButton onClick={() => {this.props.delTimer(this.props.title)}}>
                             x
                         </HeaderButton>
-                    </div>
+                    </TimerTitleSep>
                 </HeaderDiv>
                 <TimeDiv>
                     <div>
@@ -308,6 +337,10 @@ const PlusButton = styles.button `
 
     &:hover {
         box-shadow: 0 0 20px rgba(255,255,255, 0.5)
+    }
+
+    &:focus {
+        outline:    none;
     }
 `
 
