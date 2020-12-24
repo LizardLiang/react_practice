@@ -113,17 +113,22 @@ class HeadBanner extends Component {
             <MainDiv>
                 <GuideButton>
                     <GuideLink to='/'>
-                        Home 
+                        首頁
                     </GuideLink> 
                 </GuideButton>
                 <GuideButton>
                     <GuideLink to='/StockSearch'>
-                        Stock
+                        股票查詢
                     </GuideLink>
                 </GuideButton>
                 <GuideButton>
                     <GuideLink to='./CountDown'>
-                        Count down
+                        計時器
+                    </GuideLink>
+                </GuideButton>
+                <GuideButton>
+                    <GuideLink to='./CheckIP'>
+                        IP 查詢
                     </GuideLink>
                 </GuideButton>
                 {/*<GuideButton>
