@@ -48,6 +48,8 @@ const Svg = styles.svg `
     @media screen and (min-width: 1080px){
         width:          50%;
         height:         auto;
+        max-height:     440.5px;
+        max-width:      521px;
         overflow:       visible;
         margin-bottom:  10%;
         margin-top:     10%;
