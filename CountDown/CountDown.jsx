@@ -64,7 +64,7 @@ const EditButton = styles.button `
     border-radius:      9px;
     color:              white;
 
-    @media screen and (max-width:   375px){
+    @media screen and (max-width:   414px){
         font-size:      1rem;
         margin:         0 0.2rem;
     }
@@ -181,6 +181,10 @@ const HeaderDiv = styles.div `
     width:          100%;
     justify-content:space-between;
     align-items:    center;
+
+    .lastButton {
+        justify-content:    flex-end;
+    }
 `
 
 const HeaderButton = styles.button `
@@ -220,6 +224,7 @@ const HeaderDropDown = styles.div `
 // center middle element
 const TimerTitleSep = styles.div `
     width:  25%;
+    display:    flex;
 `
 
 class TimerBlock extends Component {
@@ -261,7 +266,7 @@ class TimerBlock extends Component {
                     <TimerTitleSep>
                         {this.props.title}
                     </TimerTitleSep>
-                    <TimerTitleSep>
+                    <TimerTitleSep className='lastButton'>
                         {/* <HeaderButton>
                             ...
                             <HeaderDropDown>
@@ -328,11 +333,14 @@ const PlusButton = styles.button `
     display:            flex;
     justify-content:    center;
     align-items:        center;
+    background:         white;
+    -webkit-appearance: none;
+    appearance:         none;
 
     @media screen and (max-width:   768px){
-        width:      2.5rem;
-        height:     2.5rem;
-        font-size:  2rem;
+        width:      40px;
+        height:     40px;
+        font-size:  1.5rem;
     }
 
     &:hover {
@@ -472,9 +480,7 @@ class CountDown extends Component {
                     display={this.state.editDis}
                     setDis={this.SetEditDisplay}
                     sendDate={this.SendDateToStore}/>
-                <PlusButton onClick={() => {this.setState({editDis: 'flex'})}}>
-                    +
-                </PlusButton>
+                <PlusButton onClick={() => {this.setState({editDis: 'flex'})}}>+</PlusButton>
             </MainDiv>
         )
     }
