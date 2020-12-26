@@ -7,7 +7,8 @@
     "open": "webpack serve",
     "test": "jest",
     "start": "webpack-dev-server --mode development",
-    "clear": "jest --clearCache"
+    "clear": "jest --clearCache",
+    "weinre": "weinre --httpPort 8000 --boundHost  0.0.0.0"
   },
   "author": "",
   "license": "ISC",
@@ -36,10 +37,13 @@
     "sync-request": "^6.1.0",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "weinre": "^3.0.0",
+    "weinre-webpack-plugin": "^2.3.0"
   },
   "dependencies": {
     "identity-obj-proxy": "^3.0.0",
+    "ios-webkit-debug-proxy": "0.0.3",
     "react": "^17.0.1",
     "react-datetime": "^3.0.4",
     "react-dom": "^17.0.1",
