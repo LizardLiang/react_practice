@@ -111,7 +111,7 @@ const GuideLink = styles(Link) `
     text-decoration:    none;
 `
 
-class HeadBanner extends Component {
+export default class HeadBanner extends Component {
     render(){
         return (
             <MainDiv>
@@ -142,5 +142,3 @@ class HeadBanner extends Component {
         )
     }
 }
-
-export { SideBar, HeadBanner }
