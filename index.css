@@ -20,3 +20,11 @@ button {
   outline: none;
   border: none;
 }
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
