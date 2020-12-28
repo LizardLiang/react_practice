@@ -1,33 +1,17 @@
-import React from "react"
+import React, {Suspense, lazy} from "react"
 import ReactDOM from "react-dom"
 import {HashRouter, Route, hashHistory} from 'react-router-dom'
 import {connect} from "react-redux"
-import {Main} from "./Main"
-import {Info, Experience, Projects, MyTool, AdditionInfo, Intro, Home } from "./components/pagebox"
-import {HeadBanner} from './components/sidebar'
-import {MapCountDown} from './CountDown'
-import {StockMain} from './components/StockPage'
+const Home = lazy(() => 
+                    import(/*webpackChunkName:"Home"*/ './components/pagebox/home.jsx'))
+const HeadBanner = lazy(() => 
+                    import(/*webpackChunkName:"HeadBanner"*/'./components/sidebar/SideBar.jsx'))
+const MapCountDown = lazy(() => 
+                    import(/*webpackChunkName:"CountDown"*/'./CountDown/CountDown.jsx'))
+const StockMain = lazy(()=>
+                    import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
 import './index.css'
-import { ShowIP } from "./ShowIp"
-
-class MessageList extends React.Component {
-    render(){
-        let message = this.props.data.map((item)=>{
-            return <li key={item.key}>{item.name}：{item.message}</li>
-        })
-        return(
-            <ul>
-                {message}
-            </ul>
-        )
-    }
-}
-
-const mapStateToProps = state => {
-    return { data: state.message }       
-}
-
-const List = connect(mapStateToProps)(MessageList)
+const ShowIp = lazy(()=>import(/*webpackChunkName:"ShowIp"*/"./ShowIp/ShowIp.jsx"))
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -115,12 +99,14 @@ class MainWindow extends React.Component {
                             Hello Everyone!
                         </h1>
                     </div> */}
-                    <HeadBanner></HeadBanner>
                     {/* Use route to switch pages */}
-                    <Route exact path='/' component={Home}/>
-                    <Route exact path='/StockSearch' component={ StockMain }/>
-                    <Route exact path='/CountDown' component={ MapCountDown }/>
-                    <Route exact path='/CheckIP' render={() => {return <ShowIP/>}}/>
+                    <Suspense fallback={<div>Loading</div>}>
+                        <HeadBanner/>
+                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/StockSearch' component={ StockMain }/>
+                        <Route exact path='/CountDown' component={ MapCountDown }/>
+                        <Route exact path='/CheckIP' render={() => {return <ShowIp/>}}/>
+                    </Suspense>
                 </div>
             </HashRouter>
         )

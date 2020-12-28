@@ -7,6 +7,8 @@ const HomeLink = styles(Link) `
 `
 
 const DivContainer = styles.div`
+    display:        flex;
+    flex-direction: column;
     position:       absolute;
     top:            0;
     left:           0;
@@ -14,14 +16,28 @@ const DivContainer = styles.div`
     height:         100vh;
     background:     rgb(32, 34, 37);
     box-sizing:     border-box;
-    padding-top:    3.5rem;
+    padding-top:    4rem;
+    font-size:      2.8rem;
+    align-items:    center;
 `
+
+const HeaderDiv = styles.div `
+    display:        flex;
+    justify-content:space-between;
+    width:          100%;
+
+    div {
+        width:      30%;
+    }
+`
+
 
 const InputDiv = styles.div `
     position:       relative;
     width:          868px;
     height:         auto;
     margin:         0 auto;
+    font-size:      1.5rem;
 `
 
 const Span = styles.span `
@@ -33,6 +49,7 @@ const Span = styles.span `
 const Button = styles.button `
     background:     grey;
     color:          white;
+    font-size:      1.5rem;
 
     &:focus {
         outline:    none;
@@ -45,6 +62,7 @@ const Button = styles.button `
 `
 
 const Svg = styles.svg `
+    font-size:          1rem;
     @media screen and (min-width: 1080px){
         width:          50%;
         height:         auto;
@@ -182,7 +200,7 @@ class SvgChart extends Component    {
     }
 }
 
-class StockMain extends Component{
+export default class StockMain extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -252,12 +270,19 @@ class StockMain extends Component{
         }
         return(
             <DivContainer>
-                <Span>輸入股票代碼以取得股票資訊</Span>
-                <HomeLink to='/'>
-                    <Button>
-                        回首頁
-                    </Button>
-                </HomeLink>
+                <HeaderDiv>
+                    <div/>
+                    <div>
+                        <Span>輸入股票代碼以取得股票資訊</Span>
+                    </div>
+                    <div>
+                        <HomeLink to='/'>
+                            <Button>
+                                回首頁
+                            </Button>
+                        </HomeLink>
+                    </div>
+                </HeaderDiv>
                 <InputDiv>
                     <input 
                         aria-label='input'
@@ -278,10 +303,7 @@ class StockMain extends Component{
                     SvgDisplay={this.state.svgDisplay}
                     points={this.state.points}
                     xlabel={this.state.x_texts}/>
-                
             </DivContainer>
         )
     }
 }
-
-export { StockMain }

@@ -21,7 +21,7 @@ const MainDiv = styles.div `
     }
 `
 
-function ShowIP() {
+function ShowIp() {
     const [Ip, setIp] = useState('')
 
     let FetchIp = () => {
@@ -52,4 +52,4 @@ function ShowIP() {
     )
 }
 
-export {ShowIP}
+export default ShowIp

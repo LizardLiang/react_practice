@@ -22,7 +22,7 @@ const HeaderH1 = styles.h1 `
     color:          white
 `
 
-class Home extends Component{
+export default class Home extends Component{
     render(){
         const Styles = {
             MainPageContainer: {
@@ -61,5 +61,3 @@ class Home extends Component{
         )
     }
 }
-
-export { Home }
