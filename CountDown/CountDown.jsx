@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {Provider, connect} from 'react-redux'
 import styles from 'styled-components'
 import {store, addDate, defaultDate, deleteDate} from './index.js'
-import { Link } from 'react-router-dom'
-import { Main } from '../Main'
 
 const EditDiv = styles.div `
     width:          70%;
@@ -502,7 +500,7 @@ const mapDispatchToProps = dispatch => {
 
 const ConnCountDown = connect(mapStateToProps, mapDispatchToProps)(CountDown)
 
-class MapCountDown extends Component {
+export default class MapCountDown extends Component {
     render(){
         return (
             <Provider store={store}>
@@ -511,5 +509,3 @@ class MapCountDown extends Component {
         )
     }
 }
-
-export { MapCountDown }
