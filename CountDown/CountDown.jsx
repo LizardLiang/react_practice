@@ -227,33 +227,36 @@ const TimerTitleSep = styles.div `
     display:    flex;
 `
 
+let SecOfDay = (3600000 * 24)
+let SecOfHour = 3600000
+let SecOfMin = 60000
 class TimerBlock extends Component {
     constructor(props){
         super(props)
     }
 
     ToDays = () => {
-        let days = Math.floor(((this.props.targetDate - this.props.passTime) / (3600000 * 24)))
+        let days = Math.floor(((this.props.targetDate - this.props.passTime) / SecOfDay))
         return days < 10 ? '0' + days : days
     }
 
     ToHour = () => {
         let hours = Math.floor(
-            ((this.props.targetDate - this.props.passTime) % (3600000 * 24)) / (3600000)
+            ((this.props.targetDate - this.props.passTime) % SecOfDay) / SecOfHour
         )
         return hours < 10 ? '0' + hours : hours
     }
 
     ToMin = () => {
         let mins = Math.floor(
-            ((this.props.targetDate - this.props.passTime) % (3600000)) / 60000
+            ((this.props.targetDate - this.props.passTime) % SecOfHour) / SecOfMin
         )
         return mins < 10 ? '0' + mins : mins
     }
 
     ToSec = () => {
         let secs = Math.floor(
-            ((this.props.targetDate - this.props.passTime) % (60000)) / 1000
+            ((this.props.targetDate - this.props.passTime) % SecOfMin) / 1000
         )
         return secs < 10 ? '0' + secs : secs
     }
