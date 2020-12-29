@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from 'styled-components'
-import { Test_Program, WebGame, StockChart } from "../../Projects"
+import { Test_Program, WebGame, StockChart } from "../../components/Projects"
 import { ContentTitle } from "../../components/ContentTitle"
 
 const ContentDiv = styles.div `

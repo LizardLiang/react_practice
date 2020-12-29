@@ -22,17 +22,27 @@ const DivContainer = styles.div`
 `
 
 const HeaderDiv = styles.div `
+    position:       relative;
     display:        flex;
-    justify-content:space-between;
     width:          100%;
+    justify-content:center;
 
     div {
         width:      30%;
+    }
+
+    .homebutton {
+        position:   absolute;
+        right:      0;
+        top:        0;
+        float:      right;
     }
 `
 
 
 const InputDiv = styles.div `
+    display:        flex;
+    justify-content:center;
     position:       relative;
     width:          868px;
     height:         auto;
@@ -109,8 +119,9 @@ function calxPosition(num, leng){
 function add_y_line(){
     let list=[]
     for (let i=0; i < 4; ++i){
-        <GridLine x1='0' x2='100' y1={i * 25} y2={i * 25}/>
+        list.push(<GridLine x1='0' x2='100' y1={i * 25} y2={i * 25}/>)
     }
+    return list
 }
 
 // add axis y text
@@ -118,7 +129,7 @@ function add_y_grid(min, max){
     let list = []
     for(let i=1; i < 5; ++i){
         list.push(
-            <Text x='-5' y={100 - i * 25}>
+            <Text x='-15' y={100 - i * 25}>
                 {(max - min) / 4 * i + min}
             </Text>
         )
@@ -271,17 +282,12 @@ export default class StockMain extends Component{
         return(
             <DivContainer>
                 <HeaderDiv>
-                    <div/>
-                    <div>
-                        <Span>輸入股票代碼以取得股票資訊</Span>
-                    </div>
-                    <div>
-                        <HomeLink to='/'>
-                            <Button>
-                                回首頁
-                            </Button>
-                        </HomeLink>
-                    </div>
+                    <Span>輸入股票代碼以取得股票資訊</Span>
+                    <HomeLink to='/'>
+                        <Button className="homebutton">
+                            回首頁
+                        </Button>
+                    </HomeLink>
                 </HeaderDiv>
                 <InputDiv>
                     <input 

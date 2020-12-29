@@ -135,6 +135,11 @@ export default class HeadBanner extends Component {
                         IP 查詢
                     </GuideLink>
                 </GuideButton>
+                <GuideButton>
+                    <GuideLink to='./Scripts'>
+                        外掛下載
+                    </GuideLink>
+                </GuideButton>
                 {/*<GuideButton>
                     4
                 </GuideButton> */}
