@@ -70,7 +70,7 @@ export default class ScriptDl extends Component {
     }
 
     FetchScripts = async () => {
-        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+        fetch('http://MyIP/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -83,13 +83,20 @@ export default class ScriptDl extends Component {
         }).then((obj)=>{
             let Urls = obj.scripts
             Urls.map((obj)=>{
+                // remove Hack in name
                 let dir_ = obj.dir.replace('Hack', '')
+
+                // do not repeatly add category
                 if(!this.state.Games.includes(dir_)){
                     this.setState({Games: [...this.state.Games, dir_]})
                 }
+                
+                // try to remove E://Hacks no need for this
                 let path = obj.fullpath.split('\\')
                 path.splice(0, 2)
-                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
+
+                // rejoin the path to server location
+                let newPath = 'http://MyIP/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
                     fullpath: newPath,
