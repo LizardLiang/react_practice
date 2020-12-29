@@ -2,6 +2,25 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import styles from 'styled-components'
 
+const LinkButton = styles.button `
+    width:          60%;
+    background:     none;
+    color:          white;
+    font-size:      1.5rem;
+    text-align:     left;
+    &:hover {
+        background: grey;
+    }
+`
+
+function Scripts(props){
+    return (
+        <LinkButton onClick={()=>{props.setSrc(props.fullpath)}}>
+            {props.name}
+        </LinkButton>
+    )
+}
+
 const MainDiv = styles.div `       
     display:        flex;
     flex-direction: column;
@@ -18,19 +37,32 @@ const HeaderDiv = styles.div `
     font-size:      4rem;
 `
 
-function Scripts(props){
-    return (
-        <a src={props.fullpath}>{props.name}</a>
-    )
-}
+
+const LinkDiv = styles.div `
+    display:            flex;
+    flex-direction:     column;
+    width:              100%;
+    align-items:        center;
+    justify-content:    flex-start;
+`
+
+const LinkCatSpan = styles.span `
+    width:              70%;
+    font-size:          2rem;
+`
 
 export default class ScriptDl extends Component {
     constructor(props){
         super(props)
         this.state = {
             Games:  [],
-            Game:   []
+            Game:   [],
+            src:    ''
         }
+    }
+
+    setSource = (src) => {
+        this.setState({src: src})
     }
 
     componentDidMount(){
@@ -51,13 +83,17 @@ export default class ScriptDl extends Component {
         }).then((obj)=>{
             let Urls = obj.scripts
             Urls.map((obj)=>{
-                if(!this.state.Games.includes(obj.dir)){
-                    this.setState({Games: [...this.state.Games, obj.dir]})
+                let dir_ = obj.dir.replace('Hack', '')
+                if(!this.state.Games.includes(dir_)){
+                    this.setState({Games: [...this.state.Games, dir_]})
                 }
+                let path = obj.fullpath.split('\\')
+                path.splice(0, 2)
+                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
-                    fullpath: obj.fullpath,
-                    dir: obj.dir
+                    fullpath: newPath,
+                    dir: dir_
                 }
                 this.setState({Game: [...this.state.Game, obj_game]})
             })
@@ -69,26 +105,23 @@ export default class ScriptDl extends Component {
             let tmp = []
             tmp = this.state.Game.map((item)=>{
                 if (item.dir == game){
-                    console.log(item.name, item.fullpath)
-                    return (<Scripts name={item.name} path={item.path} />)
+                    return (<Scripts setSrc={this.setSource} name={item.name} fullpath={item.fullpath} />)
                 }
             })
             return (
-                <div>
-                    <span>{game}</span>
+                <LinkDiv>
+                    <LinkCatSpan>{game}</LinkCatSpan>
                     {tmp}
-                </div>
+                </LinkDiv>
             )
         })
-        console.log(Spans)
         return (
             <MainDiv>
                 <HeaderDiv>
                     外掛下載區
                 </HeaderDiv>
                 {Spans}
-                <button onClick={this.DownloadScript}></button>
-                <iframe style={{display: 'none'}}></iframe>
+                <iframe src={this.state.src} style={{display: 'none'}}></iframe>
             </MainDiv>
         )
     }
