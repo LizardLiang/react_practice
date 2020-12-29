@@ -40,7 +40,7 @@ class WebGame extends Component{
                     </a>
                 </MainSpan>
                 <MainIframe 
-                    src="http://114.32.157.74" 
+                    src="http://MyIP" 
                     scrolling='no'/>
             </MainDiv>
         )

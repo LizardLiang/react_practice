@@ -44,7 +44,7 @@ class StockChart extends Component{
 
     FetchStockInfo = () => {
         let id = this.inputElement.value
-        let url = 'https://cors-anywhere.herokuapp.com/http://114.32.157.74/PythonFlask/api/test?id='
+        let url = 'https://cors-anywhere.herokuapp.com/http://MyIP/PythonFlask/api/test?id='
         fetch(url + id)
         .then((response)=>{
             return response.json()

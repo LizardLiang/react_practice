@@ -367,7 +367,7 @@ class CountDown extends Component {
     }
 
     FetchOld = async () => {
-        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
+        fetch('http://MyIP/PythonFlask/api/v1/', {
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -397,7 +397,7 @@ class CountDown extends Component {
 
     SendDateToStore = (obj, isNew = true) => {
         if(isNew){
-            fetch('http://114.32.157.74/PythonFlask/api/v1/', {
+            fetch('http://MyIP/PythonFlask/api/v1/', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -420,7 +420,7 @@ class CountDown extends Component {
     }
 
     deleteTimerAPI = (title) => {
-        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+        fetch('http://MyIP/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
