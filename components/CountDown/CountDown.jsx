@@ -183,6 +183,10 @@ const HeaderDiv = styles.div `
     .lastButton {
         justify-content:    flex-end;
     }
+
+    .blockTitle {
+        justify-content:    center;
+    }
 `
 
 const HeaderButton = styles.button `
@@ -264,7 +268,7 @@ class TimerBlock extends Component {
             <TimerBlockDiv>
                 <HeaderDiv>
                     <TimerTitleSep/>
-                    <TimerTitleSep>
+                    <TimerTitleSep className="blockTitle">
                         {this.props.title}
                     </TimerTitleSep>
                     <TimerTitleSep className='lastButton'>
@@ -367,7 +371,7 @@ class CountDown extends Component {
     }
 
     FetchOld = async () => {
-        fetch('http://MyIP/PythonFlask/api/v1/', {
+        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -397,7 +401,7 @@ class CountDown extends Component {
 
     SendDateToStore = (obj, isNew = true) => {
         if(isNew){
-            fetch('http://MyIP/PythonFlask/api/v1/', {
+            fetch('http://114.32.157.74/PythonFlask/api/v1/', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -420,7 +424,7 @@ class CountDown extends Component {
     }
 
     deleteTimerAPI = (title) => {
-        fetch('http://MyIP/PythonFlask/api/v1/',{
+        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
