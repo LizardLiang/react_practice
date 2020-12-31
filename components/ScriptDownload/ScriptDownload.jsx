@@ -3,21 +3,35 @@ import {Link} from 'react-router-dom'
 import styles from 'styled-components'
 
 const LinkButton = styles.button `
-    width:          60%;
+    width:          10%;
     background:     none;
     color:          white;
-    font-size:      1.5rem;
     text-align:     left;
+    float:          right;
+
     &:hover {
         background: grey;
     }
 `
 
+const LinkBlock = styles.div `
+    width:          60%;
+    display:        flex;
+    font-size:      1.5rem;
+`
+
+const LinkName = styles.span `
+    width:          90%;
+`
+
 function Scripts(props){
     return (
-        <LinkButton onClick={()=>{props.setSrc(props.fullpath)}}>
-            {props.name}
-        </LinkButton>
+        <LinkBlock>
+            <LinkName>{props.name}</LinkName>
+            <LinkButton onClick={()=>{props.setSrc(props.fullpath)}}>
+                點此下載
+            </LinkButton>
+        </LinkBlock>
     )
 }
 
@@ -36,7 +50,6 @@ const HeaderDiv = styles.div `
     align-items:    center;
     font-size:      4rem;
 `
-
 
 const LinkDiv = styles.div `
     display:            flex;
@@ -70,7 +83,7 @@ export default class ScriptDl extends Component {
     }
 
     FetchScripts = async () => {
-        fetch('http://MyIP/PythonFlask/api/v1/',{
+        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -96,7 +109,7 @@ export default class ScriptDl extends Component {
                 path.splice(0, 2)
 
                 // rejoin the path to server location
-                let newPath = 'http://MyIP/Scripts/' + path.join('/')
+                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
                     fullpath: newPath,
