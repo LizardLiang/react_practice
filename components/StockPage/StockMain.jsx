@@ -236,7 +236,7 @@ export default class StockMain extends Component{
         }
         else{
             let url = 
-            'http://MyIP/PythonFlask/api/v1/?id='
+            'http://114.32.157.74/PythonFlask/api/v1/?id='
             fetch(url + id)
             .then((response)=>{
                 return response.json()
