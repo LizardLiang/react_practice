@@ -5,3 +5,5 @@
 3. Use -scope to select scope
 4. Use -ExecutionPolicy to select policy
 5. To use webpack in visual studio code, select Unrestricted as policy and currentuser as scope
+
+If want to search video on youtube use "GET https://www.googleapis.com/youtube/v3/search"
