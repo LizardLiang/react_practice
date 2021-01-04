@@ -8,6 +8,28 @@ const LinkButton = styles.button `
     color:          white;
     text-align:     left;
     float:          right;
+    display:        flex;
+    align-items:    flex-end;
+
+    @media screen and (max-width:   1440px){
+        font-size:  1.163rem;
+    }
+
+    @media screen and (max-width:   1024px){
+        font-size:  0.7731rem;
+    }
+
+    @media screen and (max-width:   768px){
+        width:      14%;
+    }
+
+    @media screen and (max-width:   425px){
+        width:      28%;
+    }
+
+    @media screen and (max-width:   320px){
+        width:      34%;
+    }
 
     &:hover {
         background: grey;
@@ -22,6 +44,19 @@ const LinkBlock = styles.div `
 
 const LinkName = styles.span `
     width:          90%;
+    word-wrap:      break-word;
+
+    @media screen and (max-width:   768px){
+        font-size:  1rem;
+    }
+
+    @media screen and (max-width:   425px){
+        width:      71%;
+    }
+
+    @media screen and (max-width:   320px){
+        width:      68%;
+    }
 `
 
 function Scripts(props){
@@ -49,6 +84,14 @@ const HeaderDiv = styles.div `
     justify-content:center;
     align-items:    center;
     font-size:      4rem;
+
+    @media screen and (max-width:   425px){
+        font-size:  3rem;
+    }
+
+    @media screen and (max-width:   320px){
+        font-size:  2rem;
+    }
 `
 
 const LinkDiv = styles.div `
