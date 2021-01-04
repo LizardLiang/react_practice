@@ -27,7 +27,7 @@ const EditInput = styles.input `
     border-radius:  9px;
     margin:         0 1rem;
     color:          white;
-    
+
     &:hover {
         box-shadow: inset 0 0 10px white;
     }
@@ -45,6 +45,10 @@ const EditSecDiv = styles.div `
     display:        flex;
     width:          100%;
     margin:         1rem 0;
+
+    #title {
+        width:      80%;
+    }
 `
 
 const EditButSecDiv = styles.div `
@@ -68,6 +72,45 @@ const EditButton = styles.button `
     }
 `
 
+const OptionDiv = styles.div `
+    display:            flex;
+    align-items:        center;
+    justify-content:    center;
+    width:              15%;
+
+    @media screen and (max-width:  768px){
+        width:          25%;
+    }
+
+    @media screen and (max-width:   540px){
+        width:          36%;
+    }
+
+    @media screen and (max-width:   375px){
+        width:          27%;
+    }
+`
+
+const OptionInput = styles.input `
+    margin:             5px;
+    width:              31.719px;
+    height:             31.719px;
+
+    @media screen and (max-width:   425px){
+        width:          15px;
+        height:         15px;
+    }
+`
+
+const OptionLabel = styles.label `
+    font-size:          2rem;
+    margin-bottom:      0;
+
+    @media screen and (max-width:   425px){
+        font-size:      1rem;
+    }
+`
+
 class EditPage extends Component {
     gatherDateInfo = () => {
         let msg = {
@@ -87,7 +130,11 @@ class EditPage extends Component {
             <EditDiv display={this.props.display}>
                 Add your own timer
                 <EditSecDiv>
-                    <EditInput id='title' placeholder='Title'/>
+                    <EditInput id='title' className="title" placeholder='Title'/>
+                    <OptionDiv>
+                        <OptionInput type="checkbox" id="IsAnnually"/>
+                        <OptionLabel>每年</OptionLabel>
+                    </OptionDiv>
                 </EditSecDiv>
                 <EditSecDiv>
                     <EditInput id='y' placeholder='year'/>
@@ -119,6 +166,10 @@ const TimeDiv = styles.div `
 
     div {
         margin:         0 2rem;
+
+        @media screen and (max-width:   540px){
+            margin:     0 1rem;
+        }
     }
 
     p {
@@ -175,10 +226,10 @@ const SettingButton = styles.button `
 `
 
 const HeaderDiv = styles.div `
-    display:        flex;
-    width:          100%;
-    justify-content:space-between;
-    align-items:    center;
+    display:            flex;
+    width:              100%;
+    justify-content:    space-between;
+    align-items:        center;
 
     .lastButton {
         justify-content:    flex-end;
@@ -186,14 +237,15 @@ const HeaderDiv = styles.div `
 
     .blockTitle {
         justify-content:    center;
+        text-align:         center;
     }
 `
 
 const HeaderButton = styles.button `
-    font-size:      3rem;
-    background:     none;
-    color:          #B6B8C1;
-    text-align:     right;
+    font-size:          3rem;
+    background:         none;
+    color:              #B6B8C1;
+    text-align:         right;
 
     @media screen and (max-width:   425px){
         font-size:  2rem;
@@ -210,18 +262,6 @@ const HeaderButton = styles.button `
         }
     }
 `
-
-const HeaderDropDown = styles.div `
-    display:        none;
-    position:       absolute;
-    background:     #152338;
-    z-index:        1;
-
-    &:hover {
-        background: rgb(32, 34, 37);
-    }
-`
-
 // Cuz using justify-content with space-between need to have same width to 
 // center middle element
 const TimerTitleSep = styles.div `
@@ -460,6 +500,7 @@ class CountDown extends Component {
 
     render(){
         let Timers = this.props.data.map((value, index) => {
+            let cur_year = new Date().getFullYear()
             // ignore default date when user add there own
             let date = new Date(
                 value.year, 
@@ -468,6 +509,17 @@ class CountDown extends Component {
                 value.hour, 
                 value.minute, 
                 value.second)
+
+            if (date < (new Date())){
+                date = new Date(
+                    cur_year + 1, 
+                    value.month - 1, 
+                    value.day, 
+                    value.hour, 
+                    value.minute, 
+                    value.second
+                )
+            }
             
             return (
                 <TimerBlock
