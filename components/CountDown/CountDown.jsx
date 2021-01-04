@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import {Provider, connect} from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import styles from 'styled-components'
-import {store, addDate, defaultDate, deleteDate} from './index.js'
+import { store, addDate, defaultDate, deleteDate } from './index.js'
 
-const EditDiv = styles.div `
+const EditDiv = styles.div`
     width:          70%;
     height:         auto;
     display:        ${props => props.display || 'flex'};
@@ -19,7 +19,7 @@ const EditDiv = styles.div `
     }
 `
 
-const EditInput = styles.input `
+const EditInput = styles.input`
     font-size:      2rem;
     width:          100%;
     background:     rgb(47, 49, 54);
@@ -41,7 +41,7 @@ const EditInput = styles.input `
     }
 `
 
-const EditSecDiv = styles.div `
+const EditSecDiv = styles.div`
     display:        flex;
     width:          100%;
     margin:         1rem 0;
@@ -51,14 +51,14 @@ const EditSecDiv = styles.div `
     }
 `
 
-const EditButSecDiv = styles.div `
+const EditButSecDiv = styles.div`
     display:            flex;
     justify-content:    flex-end;
     width:              100%;
     margin:             1rem 0;
 `
 
-const EditButton = styles.button `
+const EditButton = styles.button`
     margin:             0 1rem;
     font-size:          2rem;
     background:         rgb(47,49,54);
@@ -72,7 +72,7 @@ const EditButton = styles.button `
     }
 `
 
-const OptionDiv = styles.div `
+const OptionDiv = styles.div`
     display:            flex;
     align-items:        center;
     justify-content:    center;
@@ -91,7 +91,7 @@ const OptionDiv = styles.div `
     }
 `
 
-const OptionInput = styles.input `
+const OptionInput = styles.input`
     margin:             5px;
     width:              31.719px;
     height:             31.719px;
@@ -102,7 +102,7 @@ const OptionInput = styles.input `
     }
 `
 
-const OptionLabel = styles.label `
+const OptionLabel = styles.label`
     font-size:          2rem;
     margin-bottom:      0;
 
@@ -113,6 +113,8 @@ const OptionLabel = styles.label `
 
 class EditPage extends Component {
     gatherDateInfo = () => {
+        let isAnnually = document.getElementById('IsAnnually').checked
+        console.log("checked ? ", isAnnually)
         let msg = {
             title: document.getElementById('title').value,
             year: document.getElementById('y').value,
@@ -120,46 +122,101 @@ class EditPage extends Component {
             day: document.getElementById('d').value,
             hour: document.getElementById('hr').value,
             minute: document.getElementById('min').value,
-            second: document.getElementById('sec').value
+            second: document.getElementById('sec').value,
+            isAnnual: isAnnually
+        }
+
+        for (let key in msg) {
+            if (key == 'isAnnual') {
+                if (isAnnually == null) {
+                    alert('checkbox error')
+                    return
+                }
+            }
+            else {
+                if (key == 'year' && msg['isAnnual'] == false) {
+                    if (isNaN(msg[key]) || msg[key] == "") {
+                        alert('未指定年分')
+                        return
+                    }
+                }
+                else if (key == 'month') {
+                    if (msg[key] > 12 || msg[key] < 1) {
+                        alert('指定月份錯誤')
+                        return
+                    }
+                }
+                else if (key == 'day') {
+                    let lastDay = new Date(msg.year, msg.month, 0).toString().split(' ')[2]
+                    if (msg[key] < 1 || msg[key] > lastDay) {
+                        alert('指定日期錯誤')
+                        return
+                    }
+                }
+                else if (key == 'hour') {
+                    if (msg[key] < 0 || msg[key] >= 24) {
+                        alert('指定小時數錯誤');
+                        return
+                    }
+                }
+                else if (key == 'minute') {
+                    if (msg[key] < 0 || msg[key] >= 60) {
+                        alert('指定分鐘數錯誤')
+                        return
+                    }
+                }
+                else if (key == 'second') {
+                    if (msg[key] < 0 || msg[key] >= 60) {
+                        alert('指定秒數錯誤')
+                        return
+                    }
+                }
+                else if (key == 'title') {
+                    if (msg[key] == null) {
+                        alert('未輸入標題')
+                        return
+                    }
+                }
+            }
         }
 
         this.props.sendDate(msg)
     }
-    render(){
+    render() {
         return (
             <EditDiv display={this.props.display}>
-                Add your own timer
+                輸入你自己的計時器
                 <EditSecDiv>
-                    <EditInput id='title' className="title" placeholder='Title'/>
+                    <EditInput id='title' className="title" placeholder='Title' />
                     <OptionDiv>
-                        <OptionInput type="checkbox" id="IsAnnually"/>
+                        <OptionInput type="checkbox" id="IsAnnually" />
                         <OptionLabel>每年</OptionLabel>
                     </OptionDiv>
                 </EditSecDiv>
                 <EditSecDiv>
-                    <EditInput id='y' placeholder='year'/>
-                    <EditInput id='m' placeholder='month'/>
-                    <EditInput id='d' placeholder='day'/>
+                    <EditInput id='y' placeholder='year' />
+                    <EditInput id='m' placeholder='month' />
+                    <EditInput id='d' placeholder='day' />
                 </EditSecDiv>
                 <EditSecDiv>
-                    <EditInput id='hr' placeholder='hour'/>
-                    <EditInput id='min' placeholder='minute'/>
-                    <EditInput id='sec' placeholder='second'/>
+                    <EditInput id='hr' placeholder='hour' />
+                    <EditInput id='min' placeholder='minute' />
+                    <EditInput id='sec' placeholder='second' />
                 </EditSecDiv>
                 <EditButSecDiv>
                     <EditButton onClick={this.gatherDateInfo}>
                         Save
                     </EditButton>
-                    <EditButton onClick={() => {this.props.setDis('none')}}>
+                    <EditButton onClick={() => { this.props.setDis('none') }}>
                         Cancel
                     </EditButton>
                 </EditButSecDiv>
-            </EditDiv> 
+            </EditDiv>
         )
     }
 }
 
-const TimeDiv = styles.div `
+const TimeDiv = styles.div`
     display:        flex;
     font-size:      2rem;
     text-align:     center;
@@ -199,7 +256,7 @@ const TimeDiv = styles.div `
     }
 `
 
-const TimerBlockDiv = styles.div `
+const TimerBlockDiv = styles.div`
     display:            flex;
     align-items:        center;
     justify-content:    center;
@@ -213,7 +270,7 @@ const TimerBlockDiv = styles.div `
     }
 `
 
-const SettingButton = styles.button `
+const SettingButton = styles.button`
     display:            flex;
     justify-content:    center;
     align-items:        center;
@@ -225,7 +282,7 @@ const SettingButton = styles.button `
     }
 `
 
-const HeaderDiv = styles.div `
+const HeaderDiv = styles.div`
     display:            flex;
     width:              100%;
     justify-content:    space-between;
@@ -241,7 +298,7 @@ const HeaderDiv = styles.div `
     }
 `
 
-const HeaderButton = styles.button `
+const HeaderButton = styles.button`
     font-size:          3rem;
     background:         none;
     color:              #B6B8C1;
@@ -264,7 +321,7 @@ const HeaderButton = styles.button `
 `
 // Cuz using justify-content with space-between need to have same width to 
 // center middle element
-const TimerTitleSep = styles.div `
+const TimerTitleSep = styles.div`
     width:  25%;
     display:    flex;
 `
@@ -273,7 +330,7 @@ let SecOfDay = (3600000 * 24)
 let SecOfHour = 3600000
 let SecOfMin = 60000
 class TimerBlock extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
@@ -303,11 +360,11 @@ class TimerBlock extends Component {
         return secs < 10 ? '0' + secs : secs
     }
 
-    render(){
+    render() {
         return (
             <TimerBlockDiv>
                 <HeaderDiv>
-                    <TimerTitleSep/>
+                    <TimerTitleSep />
                     <TimerTitleSep className="blockTitle">
                         {this.props.title}
                     </TimerTitleSep>
@@ -318,7 +375,7 @@ class TimerBlock extends Component {
                                 123
                             </HeaderDropDown>
                         </HeaderButton> */}
-                        <HeaderButton onClick={() => {this.props.delTimer(this.props.title)}}>
+                        <HeaderButton onClick={() => { this.props.delTimer(this.props.title) }}>
                             x
                         </HeaderButton>
                     </TimerTitleSep>
@@ -346,7 +403,7 @@ class TimerBlock extends Component {
     }
 }
 
-const MainDiv = styles.div `
+const MainDiv = styles.div`
     * {
         box-sizing:     border-box;
     }
@@ -369,7 +426,7 @@ const MainDiv = styles.div `
 `
 
 
-const PlusButton = styles.button `
+const PlusButton = styles.button`
     font-size:          5rem;
     border-radius:      50%;
     width:              5.5rem;
@@ -399,11 +456,11 @@ const PlusButton = styles.button `
 
 
 class CountDown extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            passTime:   0,
-            editDis:    'none'
+            passTime: 0,
+            editDis: 'none'
         }
 
         this.newYear = new Date("1 Jan 2021")
@@ -413,67 +470,67 @@ class CountDown extends Component {
     FetchOld = async () => {
         fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
-            headers:    {
+            headers: {
                 'content-type': 'application/json'
             },
-            body:   JSON.stringify({
+            body: JSON.stringify({
                 method: 'get-timer'
             })
-        }).then((res)=>{
+        }).then((res) => {
             return res.json()
-        }).then((items)=>{
-            items['timers'].map((item)=>{
+        }).then((items) => {
+            items['timers'].map((item) => {
                 this.SendDateToStore(item, false)
             })
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err)
         })
     }
 
     countdown = () => {
         let nowDate = new Date();
-        this.setState({passTime:    nowDate})
+        this.setState({ passTime: nowDate })
     }
 
     SetEditDisplay = (dis) => {
-        this.setState({editDis: dis})
+        this.setState({ editDis: dis })
     }
 
     SendDateToStore = (obj, isNew = true) => {
-        if(isNew){
+        if (isNew) {
             fetch('http://114.32.157.74/PythonFlask/api/v1/', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body:   JSON.stringify({
+                body: JSON.stringify({
                     method: 'insert-timer',
-                    title:  obj.title,
-                    year:   parseInt(obj.year),
-                    month:  parseInt(obj.month),
-                    day:    parseInt(obj.day),
-                    hour:   parseInt(obj.hour),
+                    title: obj.title,
+                    year: parseInt(obj.year),
+                    month: parseInt(obj.month),
+                    day: parseInt(obj.day),
+                    hour: parseInt(obj.hour),
                     minute: parseInt(obj.minute),
                     second: parseInt(obj.second),
                 })
-            })   
+            })
         }
-        
+
         this.props.addDate(obj)
-        this.setState({editDis: 'none'})
+        this.setState({ editDis: 'none' })
     }
 
     deleteTimerAPI = (title) => {
-        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
-            headers:    {
+            headers: {
                 'content-type': 'application/json'
             },
-            body:   JSON.stringify({
-                method:   'del-timer',
-                title:  title
+            body: JSON.stringify({
+                method: 'del-timer',
+                title: title
             })
-        }).catch((e)=>{
+        }).catch((e) => {
             console.log(e)
         })
     }
@@ -483,67 +540,67 @@ class CountDown extends Component {
         this.props.deleteDate(title)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.timerID = setInterval(this.countdown, 1000)
-        if(this.props.data.length <= 0){
-            this.FetchOld().then(()=>{
-                if(this.props.data.length <= 0){
+        if (this.props.data.length <= 0) {
+            this.FetchOld().then(() => {
+                if (this.props.data.length <= 0) {
                     this.props.addDate(defaultDate)
                 }
             })
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.timerID)
     }
 
-    render(){
+    render() {
         let Timers = this.props.data.map((value, index) => {
             let cur_year = new Date().getFullYear()
             // ignore default date when user add there own
             let date = new Date(
-                value.year, 
-                value.month - 1, 
-                value.day, 
-                value.hour, 
-                value.minute, 
+                value.year,
+                value.month - 1,
+                value.day,
+                value.hour,
+                value.minute,
                 value.second)
 
-            if (date < (new Date())){
+            if (date < (new Date())) {
                 date = new Date(
-                    cur_year + 1, 
-                    value.month - 1, 
-                    value.day, 
-                    value.hour, 
-                    value.minute, 
+                    cur_year + 1,
+                    value.month - 1,
+                    value.day,
+                    value.hour,
+                    value.minute,
                     value.second
                 )
             }
-            
+
             return (
                 <TimerBlock
                     title={value.title}
                     targetDate={date}
                     passTime={this.state.passTime}
-                    delTimer={this.deleteTimer}/>
+                    delTimer={this.deleteTimer} />
             )
         })
         return (
             <MainDiv>
                 {Timers}
-                <EditPage 
+                <EditPage
                     display={this.state.editDis}
                     setDis={this.SetEditDisplay}
-                    sendDate={this.SendDateToStore}/>
-                <PlusButton onClick={() => {this.setState({editDis: 'flex'})}}>+</PlusButton>
+                    sendDate={this.SendDateToStore} />
+                <PlusButton onClick={() => { this.setState({ editDis: 'flex' }) }}>+</PlusButton>
             </MainDiv>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return {data: state.dates}
+    return { data: state.dates }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -556,10 +613,10 @@ const mapDispatchToProps = dispatch => {
 const ConnCountDown = connect(mapStateToProps, mapDispatchToProps)(CountDown)
 
 export default class MapCountDown extends Component {
-    render(){
+    render() {
         return (
             <Provider store={store}>
-                <ConnCountDown/>
+                <ConnCountDown />
             </Provider>
         )
     }
