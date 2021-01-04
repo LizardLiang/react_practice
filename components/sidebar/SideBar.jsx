@@ -93,13 +93,26 @@ const GuideButton = styles.button `
     opacity:            0.3;
     margin:             0 2rem;
 
-    @media screen and (max-width:   768px) and (min-width:  426px){
-        font-size:      1.5rem;
+    @media screen and (max-width:   768px){
+        font-size:      1.41rem;
+    }
+
+    @media screen and (max-width:   540px){
+        min-width:      3rem;
+        font-size:      1rem;
     }
 
     @media screen and (max-width:   425px){
         font-size:      1rem;
         margin:         0;
+    }
+
+    @media screen and (max-width:   375px){
+        min-width:      4rem;
+    }
+
+    @media screen and (max-width:   320px){
+        font-size:      0.81rem;
     }
 
     &:hover {
