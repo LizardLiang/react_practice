@@ -12,12 +12,12 @@ const MainDiv = styles.div `
     padding-top:        2rem;
     font-size:          5rem;
 
-    @media screen and (max-width:   425px) and (min-width:  376px){
-        font-size:      4rem;
+    @media screen and (max-width:   425px){
+        font-size:      3rem;
     }
 
-    @media screen and (max-width:   375px) {
-        font-size:      3rem;
+    @media screen and (max-width:   320px) {
+        font-size:      2rem;
     }
 `
 
