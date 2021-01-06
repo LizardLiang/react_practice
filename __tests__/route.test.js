@@ -6,6 +6,8 @@ import '@testing-library/jest-dom/extend-expect'
 
 import { StockMain } from '../components/StockPage'
 import { Simulate } from 'react-dom/test-utils'
+
+import {TodoList} from '../components/TodoList/TodoList.jsx'
  
 describe('Stock Page', () => {
   test('snapshot renders', () => {
