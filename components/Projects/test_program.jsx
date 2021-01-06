@@ -1,20 +1,20 @@
 import React from "react"
-import styles from 'styled-components'
+import styled from 'styled-components'
 import './project.css'
 
-const MainSpan = styles.span `
+const MainSpan = styled.span `
     display:        block;
     font-size:      2vmin;
 `
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     margin-left:        20%;
     width:              60%;
     display:            ${props => props.isVisible || 'none'};
     text-align:         left;
 `
 
-const MainImg = styles.img `
+const MainImg = styled.img `
     width:              100%;
     height:             auto;
 `

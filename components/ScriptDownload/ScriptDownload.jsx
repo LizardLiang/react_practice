@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import styles from 'styled-components'
+import styled from 'styled-components'
 
-const LinkButton = styles.button `
+const LinkButton = styled.button `
     width:          10%;
     background:     none;
     color:          white;
@@ -36,13 +36,13 @@ const LinkButton = styles.button `
     }
 `
 
-const LinkBlock = styles.div `
+const LinkBlock = styled.div `
     width:          60%;
     display:        flex;
     font-size:      1.5rem;
 `
 
-const LinkName = styles.span `
+const LinkName = styled.span `
     width:          90%;
     word-wrap:      break-word;
 
@@ -59,6 +59,7 @@ const LinkName = styles.span `
     }
 `
 
+// Display the file's name and download button
 function Scripts(props){
     return (
         <LinkBlock>
@@ -70,7 +71,7 @@ function Scripts(props){
     )
 }
 
-const MainDiv = styles.div `       
+const MainDiv = styled.div `       
     display:        flex;
     flex-direction: column;
     align-items:    center;
@@ -79,7 +80,7 @@ const MainDiv = styles.div `
     padding-top:    5rem;
 `
 
-const HeaderDiv = styles.div `
+const HeaderDiv = styled.div `
     display:        flex;
     justify-content:center;
     align-items:    center;
@@ -94,7 +95,7 @@ const HeaderDiv = styles.div `
     }
 `
 
-const LinkDiv = styles.div `
+const LinkDiv = styled.div `
     display:            flex;
     flex-direction:     column;
     width:              100%;
@@ -102,11 +103,12 @@ const LinkDiv = styles.div `
     justify-content:    flex-start;
 `
 
-const LinkCatSpan = styles.span `
+const LinkCatSpan = styled.span `
     width:              70%;
     font-size:          2rem;
 `
 
+// Main view of download page
 export default class ScriptDl extends Component {
     constructor(props){
         super(props)
@@ -126,6 +128,7 @@ export default class ScriptDl extends Component {
     }
 
     FetchScripts = async () => {
+        // Get every scripts I have in my folders
         fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
@@ -172,6 +175,7 @@ export default class ScriptDl extends Component {
                 }
             })
             return (
+                // Category on top
                 <LinkDiv>
                     <LinkCatSpan>{game}</LinkCatSpan>
                     {tmp}
@@ -184,6 +188,7 @@ export default class ScriptDl extends Component {
                     外掛下載區
                 </HeaderDiv>
                 {Spans}
+                {/* this iframe is use for downloading files */}
                 <iframe src={this.state.src} style={{display: 'none'}}></iframe>
             </MainDiv>
         )

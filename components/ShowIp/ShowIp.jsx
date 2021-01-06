@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     display:            flex;
     flex-direction:     column;
     height:             100vh;
@@ -9,7 +9,7 @@ const MainDiv = styles.div `
     justify-content:    center;
     align-items:        center;
     color:              white;
-    padding-top:        2rem;
+    padding-top:        5rem;
     font-size:          5rem;
 
     @media screen and (max-width:   425px){

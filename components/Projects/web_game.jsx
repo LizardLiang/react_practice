@@ -1,17 +1,17 @@
 import React, {Component} from "react"
-import styles from 'styled-components'
+import styled from 'styled-components'
 import './project.css'
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     display:        ${props => props.isVisible || 'none'};
 `
 
-const MainSpan = styles.div `
+const MainSpan = styled.div `
     margin:         auto;
     width:          80%;
 `
 
-const MainIframe = styles.iframe `
+const MainIframe = styled.iframe `
     display:        block;
     position:       relative;
     height:         70%;

@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 
 // An overall div contain all content
-const MainDivCT = styles.div `
+const MainDivCT = styled.div `
     box-sizing:         border-box;
     width:              95%;
     height:             40px;
@@ -15,7 +15,7 @@ const MainDivCT = styles.div `
 `
 
 // Button for title
-const ProjectButtonCT = styles.button `
+const ProjectButtonCT = styled.button `
     position:               relative;
     display:                inline-flex;
     width:                  auto;
@@ -41,7 +41,7 @@ const ProjectButtonCT = styles.button `
 `
 
 // Span contain title
-const TitleSpanCT = styles.span `
+const TitleSpanCT = styled.span `
     display:                inline-flex;
     height:                 100%;
     font-size:              3vmin;

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import './project.css'
 
-const MainDiv = styles.div  `
+const MainDiv = styled.div  `
     display:        ${props => props.isVisible || 'none'};
 `
 
-const MainSpan = styles.span `
+const MainSpan = styled.span `
     font-size:       2vmin;
     color:          white;
     display:        block;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Provider, connect } from 'react-redux'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import { store, addDate, defaultDate, deleteDate } from './index.js'
 
-const EditDiv = styles.div`
+const EditDiv = styled.div`
     width:          70%;
     height:         auto;
     display:        ${props => props.display || 'flex'};
@@ -19,7 +19,7 @@ const EditDiv = styles.div`
     }
 `
 
-const EditInput = styles.input`
+const EditInput = styled.input`
     font-size:      2rem;
     width:          100%;
     background:     rgb(47, 49, 54);
@@ -41,7 +41,7 @@ const EditInput = styles.input`
     }
 `
 
-const EditSecDiv = styles.div`
+const EditSecDiv = styled.div`
     display:        flex;
     width:          100%;
     margin:         1rem 0;
@@ -51,14 +51,14 @@ const EditSecDiv = styles.div`
     }
 `
 
-const EditButSecDiv = styles.div`
+const EditButSecDiv = styled.div`
     display:            flex;
     justify-content:    flex-end;
     width:              100%;
     margin:             1rem 0;
 `
 
-const EditButton = styles.button`
+const EditButton = styled.button`
     margin:             0 1rem;
     font-size:          2rem;
     background:         rgb(47,49,54);
@@ -72,7 +72,7 @@ const EditButton = styles.button`
     }
 `
 
-const OptionDiv = styles.div`
+const OptionDiv = styled.div`
     display:            flex;
     align-items:        center;
     justify-content:    center;
@@ -91,7 +91,7 @@ const OptionDiv = styles.div`
     }
 `
 
-const OptionInput = styles.input`
+const OptionInput = styled.input`
     margin:             5px;
     width:              31.719px;
     height:             31.719px;
@@ -102,7 +102,7 @@ const OptionInput = styles.input`
     }
 `
 
-const OptionLabel = styles.label`
+const OptionLabel = styled.label`
     font-size:          2rem;
     margin-bottom:      0;
 
@@ -127,6 +127,7 @@ class EditPage extends Component {
         }
 
         for (let key in msg) {
+            // To check if message is valid
             if (key == 'isAnnual') {
                 if (isAnnually == null) {
                     alert('checkbox error')
@@ -134,6 +135,7 @@ class EditPage extends Component {
                 }
             }
             else {
+                // Use isNaN to check the input is number or not
                 if (key == 'year' && msg['isAnnual'] == false) {
                     if (isNaN(msg[key]) || msg[key] == "") {
                         alert('未指定年分')
@@ -147,6 +149,7 @@ class EditPage extends Component {
                     }
                 }
                 else if (key == 'day') {
+                    // First need to know how many days in corresponding month
                     let lastDay = new Date(msg.year, msg.month, 0).toString().split(' ')[2]
                     if (msg[key] < 1 || msg[key] > lastDay) {
                         alert('指定日期錯誤')
@@ -184,7 +187,7 @@ class EditPage extends Component {
     }
     render() {
         return (
-            <EditDiv display={this.props.display}>
+            <EditDiv display={this.props.display} className="EditDiv">
                 輸入你自己的計時器
                 <EditSecDiv>
                     <EditInput id='title' className="title" placeholder='Title' />
@@ -216,7 +219,7 @@ class EditPage extends Component {
     }
 }
 
-const TimeDiv = styles.div`
+const TimeDiv = styled.div`
     display:        flex;
     font-size:      2rem;
     text-align:     center;
@@ -234,13 +237,20 @@ const TimeDiv = styles.div`
         font-size:      5rem;
     }
 
-    @media screen and (max-width: 800px) and (min-width:    426px){
+    @media screen and (max-width: 800px){
         div {
             font-size:  2rem;
             margin:     0 2rem;
         }
         p {
             font-size:  3rem;
+        }
+    }
+
+    @media screen and (max-width:   540px){
+        div {
+            font-size:  1rem;
+            margin:     0 1rem;
         }
     }
 
@@ -254,35 +264,29 @@ const TimeDiv = styles.div`
             font-size:  2rem;
         }
     }
+
+    @media screen and (max-width:   280px){
+        div {
+            margin:         0px 0.3rem;
+        }
+    }
 `
 
-const TimerBlockDiv = styles.div`
+const TimerBlockDiv = styled.div`
     display:            flex;
     align-items:        center;
     justify-content:    center;
     flex-direction:     column;
     margin-bottom:      2rem;
     border-radius:      20px;
-    width:              90%;
+    width:              70%;
 
     &:hover {
         box-shadow:     0 0 20px black;
     }
 `
 
-const SettingButton = styles.button`
-    display:            flex;
-    justify-content:    center;
-    align-items:        center;
-    background:         grey;
-    opacity:            0.3;
-    
-    &:hover {
-        opacity:        0.7;
-    }
-`
-
-const HeaderDiv = styles.div`
+const HeaderDiv = styled.div`
     display:            flex;
     width:              100%;
     justify-content:    space-between;
@@ -295,10 +299,14 @@ const HeaderDiv = styles.div`
     .blockTitle {
         justify-content:    center;
         text-align:         center;
+
+        @media screen and (max-width:   280px){
+            font-size:      2rem;
+        }
     }
 `
 
-const HeaderButton = styles.button`
+const HeaderButton = styled.button`
     font-size:          3rem;
     background:         none;
     color:              #B6B8C1;
@@ -321,7 +329,7 @@ const HeaderButton = styles.button`
 `
 // Cuz using justify-content with space-between need to have same width to 
 // center middle element
-const TimerTitleSep = styles.div`
+const TimerTitleSep = styled.div`
     width:  25%;
     display:    flex;
 `
@@ -335,11 +343,13 @@ class TimerBlock extends Component {
     }
 
     ToDays = () => {
+        // count days left
         let days = Math.floor(((this.props.targetDate - this.props.passTime) / SecOfDay))
         return days < 10 ? '0' + days : days
     }
 
     ToHour = () => {
+        // Count hours left
         let hours = Math.floor(
             ((this.props.targetDate - this.props.passTime) % SecOfDay) / SecOfHour
         )
@@ -347,6 +357,7 @@ class TimerBlock extends Component {
     }
 
     ToMin = () => {
+        // Count minutes left
         let mins = Math.floor(
             ((this.props.targetDate - this.props.passTime) % SecOfHour) / SecOfMin
         )
@@ -354,6 +365,7 @@ class TimerBlock extends Component {
     }
 
     ToSec = () => {
+        // Count seconds left
         let secs = Math.floor(
             ((this.props.targetDate - this.props.passTime) % SecOfMin) / 1000
         )
@@ -403,12 +415,11 @@ class TimerBlock extends Component {
     }
 }
 
-const MainDiv = styles.div`
+const MainDiv = styled.div`
     * {
         box-sizing:     border-box;
     }
-    padding-top:        4rem;
-    min-width:          320px;
+    padding-top:        5rem;
     width:              100vw;
     min-height:         100vh;
     height:             auto;
@@ -420,13 +431,12 @@ const MainDiv = styles.div`
     font-size:          3rem;
     font-family:        "Poppins", sans-serif;
     @media screen and (max-width:   800px){
-        padding-top:    0;
         font-size:      2.5rem;
     }
 `
 
 
-const PlusButton = styles.button`
+const PlusButton = styled.button`
     font-size:          5rem;
     border-radius:      50%;
     width:              5.5rem;
@@ -468,6 +478,7 @@ class CountDown extends Component {
     }
 
     FetchOld = async () => {
+        // Fetch old data in database
         fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
@@ -488,15 +499,18 @@ class CountDown extends Component {
     }
 
     countdown = () => {
+        // set Countdown time
         let nowDate = new Date();
         this.setState({ passTime: nowDate })
     }
 
     SetEditDisplay = (dis) => {
+        // Edit view open
         this.setState({ editDis: dis })
     }
 
     SendDateToStore = (obj, isNew = true) => {
+        // If a timer is added add it to store
         if (isNew) {
             fetch('http://114.32.157.74/PythonFlask/api/v1/', {
                 method: 'POST',
@@ -512,6 +526,7 @@ class CountDown extends Component {
                     hour: parseInt(obj.hour),
                     minute: parseInt(obj.minute),
                     second: parseInt(obj.second),
+                    isAnnual:   obj.isAnnual
                 })
             })
         }
@@ -521,6 +536,7 @@ class CountDown extends Component {
     }
 
     deleteTimerAPI = (title) => {
+        // When delete the timer also delete it in database
         fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
@@ -536,11 +552,14 @@ class CountDown extends Component {
     }
 
     deleteTimer = (title) => {
+        // If a timer is no longer in use
         this.deleteTimerAPI(title)
         this.props.deleteDate(title)
     }
 
     componentDidMount() {
+        // Fetch timers if no any give it a default
+        // Start the timer to count
         this.timerID = setInterval(this.countdown, 1000)
         if (this.props.data.length <= 0) {
             this.FetchOld().then(() => {
@@ -556,7 +575,7 @@ class CountDown extends Component {
     }
 
     render() {
-        let Timers = this.props.data.map((value, index) => {
+        let Timers = this.props.data.map((value) => {
             let cur_year = new Date().getFullYear()
             // ignore default date when user add there own
             let date = new Date(
@@ -567,7 +586,8 @@ class CountDown extends Component {
                 value.minute,
                 value.second)
 
-            if (date < (new Date())) {
+            // If the timer is annual set it to the next year
+            if (date < (new Date()) && value.isAnnual == true) {
                 date = new Date(
                     cur_year + 1,
                     value.month - 1,

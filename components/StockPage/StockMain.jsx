@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import styles from 'styled-components'
+import styled from 'styled-components'
 
-const HomeLink = styles(Link) `
+const HomeLink = styled(Link) `
     float:          right;
 `
 
-const DivContainer = styles.div`
+const DivContainer = styled.div`
     display:        flex;
     flex-direction: column;
     position:       absolute;
@@ -16,12 +16,12 @@ const DivContainer = styles.div`
     height:         100vh;
     background:     rgb(32, 34, 37);
     box-sizing:     border-box;
-    padding-top:    4rem;
+    padding-top:    5rem;
     font-size:      2.8rem;
     align-items:    center;
 `
 
-const HeaderDiv = styles.div `
+const HeaderDiv = styled.div `
     position:       relative;
     display:        flex;
     width:          100%;
@@ -40,7 +40,7 @@ const HeaderDiv = styles.div `
 `
 
 
-const InputDiv = styles.div `
+const InputDiv = styled.div `
     display:        flex;
     justify-content:center;
     position:       relative;
@@ -50,13 +50,13 @@ const InputDiv = styles.div `
     font-size:      1.5rem;
 `
 
-const Span = styles.span `
+const Span = styled.span `
     color:          white;
     display:        block;
     text-align:     center
 `
 
-const Button = styles.button `
+const Button = styled.button `
     background:     grey;
     color:          white;
     font-size:      1.5rem;
@@ -71,7 +71,7 @@ const Button = styles.button `
     }
 `
 
-const Svg = styles.svg `
+const Svg = styled.svg `
     font-size:          1rem;
     @media screen and (min-width: 1080px){
         width:          50%;
@@ -99,12 +99,12 @@ const Svg = styles.svg `
     }
 `
 
-const Text = styles.text `
+const Text = styled.text `
     fill:               white;
     font-size:          20%;
 `
 
-const GridLine = styles.line `
+const GridLine = styled.line `
     stroke:             grey;
     stroke-opacity:     .5;
 `
@@ -186,7 +186,7 @@ class SvgChart extends Component    {
                 viewBox='0 0 100 100'
                 preserveAspectRatio='none'
                 svgDisplay={this.props.SvgDisplay}
-                style={styles.MainContainer}>
+                style={styled.MainContainer}>
                 <g style={{stroke: "grey"}}>
                     <line 
                         x1='0'

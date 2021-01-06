@@ -10,7 +10,7 @@ const defaultDate = {
     hour:   0,
     minute: 0,
     second: 0,
-    isAnnually: true
+    isAnnual: true
 }
 
 // create data
