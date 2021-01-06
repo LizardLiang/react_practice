@@ -30,7 +30,7 @@ class Buttons extends React.Component{
     }
 
     render(){
-        const styles = {
+        const styled = {
             containerStyle: {
                 display:        'block',
                 width:          '100%',
@@ -48,7 +48,7 @@ class Buttons extends React.Component{
                 boxSizing:      'border-box'
             }
         };
-        const {containerStyle} = styles
+        const {containerStyle} = styled
         return (<a style={containerStyle} href={"#" + this.props.item}>{this.props.name}</a>)
     }
 }
