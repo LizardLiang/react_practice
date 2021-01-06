@@ -1,7 +1,7 @@
 import React, { Component }    from "react"
 import ReactDOM from "react-dom"
 import {Link} from 'react-router-dom'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import {Buttons}    from "../buttons"
 
 class SideBar extends React.Component{
@@ -66,7 +66,7 @@ class SideBar extends React.Component{
     }
 }
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     position:           fixed;
     display:            flex;
     top:                0;
@@ -82,7 +82,7 @@ const MainDiv = styles.div `
     
 `
 
-const GuideButton = styles.button `
+const GuideButton = styled.button `
     min-width:          5rem;
     width:              auto;
     align-content:      center;
@@ -120,7 +120,7 @@ const GuideButton = styles.button `
     }
 `
 
-const GuideLink = styles(Link) `
+const GuideLink = styled(Link) `
     text-decoration:    none;
 `
 
@@ -151,6 +151,11 @@ export default class HeadBanner extends Component {
                 <GuideButton>
                     <GuideLink to='./Scripts'>
                         外掛下載
+                    </GuideLink>
+                </GuideButton>
+                <GuideButton>
+                    <GuideLink to='./TodoList'>
+                        待辦事項
                     </GuideLink>
                 </GuideButton>
                 {/*<GuideButton>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import './info.css'
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     position:       relative;
     left:           ${props => props.left || 0};
     text-align:     left;
@@ -18,7 +18,7 @@ const MainDiv = styles.div `
     }
 `
 
-const TitleSpan = styles.span `
+const TitleSpan = styled.span `
     display:        block;
     position:       relative;
     width:          95%;
@@ -44,18 +44,18 @@ const TitleSpan = styles.span `
     }
 `
 
-const ContentDiv = styles.div `
+const ContentDiv = styled.div `
     width:          95%;
     margin:         0 auto;
 `
 
-const LeftDiv = styles.div `
+const LeftDiv = styled.div `
     float:          left;
     width:          50%;
     font-size:      3vmin;
 `
 
-const RightDiv = styles.div `
+const RightDiv = styled.div `
     float:          right;
     width:          50%;
 `

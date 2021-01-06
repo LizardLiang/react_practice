@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     color:          white;
     fontSize:       3vmin;
     width:          868px;
@@ -15,7 +15,7 @@ const MainDiv = styles.div `
         height:         auto;
     }
 `
-const TitleSpan = styles.span `
+const TitleSpan = styled.span `
     display:        block;
     position:       relative;
     width:          95%;
@@ -41,7 +41,7 @@ const TitleSpan = styles.span `
     }
 `
 
-const ContentDiv = styles.div `
+const ContentDiv = styled.div `
     font-size:      2vmin;
 `
 

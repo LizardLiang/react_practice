@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import { Test_Program, WebGame, StockChart } from "../../components/Projects"
 import { ContentTitle } from "../../components/ContentTitle"
 
-const ContentDiv = styles.div `
+const ContentDiv = styled.div `
     height:             auto;
     vertical-align:     top;
     margin:             5px 0;
@@ -55,7 +55,7 @@ class Project extends React.Component   {
     }
 }
 
-const MainDiv = styles.div `
+const MainDiv = styled.div `
     position:       relative;
     left:           ${props => props.left || 0};
     color:          ${props => props.color || 'white'};
@@ -70,7 +70,7 @@ const MainDiv = styles.div `
     }
 `
 
-const TitleSpan = styles.span `
+const TitleSpan = styled.span `
     display:        block;
     position:       relative;
     width:          95%;

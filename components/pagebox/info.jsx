@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import "./info.css"
 
-const MainIntroDiv = styles.div `
+const MainIntroDiv = styled.div `
     position:           relative;
     margin:             2.5% auto;
     color:              white;
@@ -18,7 +18,7 @@ const MainIntroDiv = styles.div `
     }
 `
 
-const SpanTitleIntro = styles.span `
+const SpanTitleIntro = styled.span `
     color:                  white;
     
     @media screen and (min-width:   1080px){
@@ -40,7 +40,7 @@ const SpanTitleIntro = styles.span `
     }
 `
 
-const DivTitleIntro  = styles.div `
+const DivTitleIntro  = styled.div `
     @media screen and (min-width: 1080px){
         float:              left;
         width:              15%;
@@ -80,7 +80,7 @@ const DivTitleIntro  = styles.div `
     }
 `
 
-const ShapeDivIntro = styles.div `
+const ShapeDivIntro = styled.div `
     @media screen and (min-width: 1080px){
         height:             176px;
         width:              90px;
@@ -93,7 +93,7 @@ const ShapeDivIntro = styles.div `
     }
 `
 
-const DivContentIntro  = styles.div `
+const DivContentIntro  = styled.div `
     @media screen and (min-width: 1080px){
         float:              left;
         width:              85%;
@@ -106,7 +106,7 @@ const DivContentIntro  = styles.div `
     }
 `
 
-const SpanContentIntro = styles.span `
+const SpanContentIntro = styled.span `
     width:                  100%;
     font-size:              3vmin;
     @media screen and (min-width:   1080px){
@@ -181,7 +181,7 @@ class Intro extends Component {
     }
 }
 
-const MainInfoDiv = styles.div `
+const MainInfoDiv = styled.div `
     position:       relative;
     color:          white;
     margin:         2.5% auto;
@@ -196,7 +196,7 @@ const MainInfoDiv = styles.div `
         height:     150px;
     }
 `
-const ImgdivInfo = styles.div `
+const ImgdivInfo = styled.div `
     @media screen and (min-width:   1080px){
         position:       relative;
         display:        inline-block;
@@ -211,7 +211,7 @@ const ImgdivInfo = styles.div `
     }
 `
 
-const ImgInfo = styles.img `
+const ImgInfo = styled.img `
     position:   absolute;
     height:     100%;
     float:      left;
@@ -219,7 +219,7 @@ const ImgInfo = styles.img `
     left:       0;
 ` 
 
-const SpanInfo = styles.span `
+const SpanInfo = styled.span `
     @media screen and (min-width:   1025px){
         margin-left:    5%;
         font-size:      1.3rem;
@@ -237,7 +237,7 @@ const SpanInfo = styles.span `
         color:          white;
     }
 `
-const InfoMainSpanDiv = styles.div `
+const InfoMainSpanDiv = styled.div `
     @media screen and (min-width:   1080px){
         position:       absolute;
         display:        inline-block;

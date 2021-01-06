@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import styles from 'styled-components'
+import styled from 'styled-components'
 import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./"
 import { SideBar } from '../sidebar'
 
-const HeaderDiv = styles.div `
+const HeaderDiv = styled.div `
     position:       fixed;
     top:            0px;
     left:           0px;
@@ -14,7 +14,7 @@ const HeaderDiv = styles.div `
     -webkit-backface-visibility: hidden;
 `
 
-const HeaderH1 = styles.h1 `
+const HeaderH1 = styled.h1 `
     display:        table-cell;
     text-align:     center;
     vertical-align: middle;
