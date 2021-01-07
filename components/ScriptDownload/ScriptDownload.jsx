@@ -185,7 +185,7 @@ export default class ScriptDl extends Component {
         return (
             <MainDiv>
                 <HeaderDiv>
-                    外掛下載區
+                    檔案下載區
                 </HeaderDiv>
                 {Spans}
                 {/* this iframe is use for downloading files */}
