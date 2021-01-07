@@ -115,6 +115,10 @@ const GuideButton = styled.button `
         font-size:      0.81rem;
     }
 
+    @media screen and (max-width: 280px){
+        min-width: 3rem;
+    }
+
     &:hover {
         opacity:        1;
     }
@@ -150,14 +154,14 @@ export default class HeadBanner extends Component {
                 </GuideButton>
                 <GuideButton>
                     <GuideLink to='./Scripts'>
-                        外掛下載
+                        檔案下載
                     </GuideLink>
                 </GuideButton>
-                <GuideButton>
+                {/* <GuideButton>
                     <GuideLink to='./TodoList'>
                         待辦事項
                     </GuideLink>
-                </GuideButton>
+                </GuideButton> */}
                 {/*<GuideButton>
                     4
                 </GuideButton> */}
