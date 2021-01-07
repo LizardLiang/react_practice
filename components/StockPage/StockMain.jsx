@@ -24,7 +24,7 @@ const DivContainer = styled.div`
 const HeaderDiv = styled.div `
     position:       relative;
     display:        flex;
-    width:          100%;
+    width:          90%;
     justify-content:center;
 
     div {
@@ -44,16 +44,34 @@ const InputDiv = styled.div `
     display:        flex;
     justify-content:center;
     position:       relative;
-    width:          868px;
+    width:          90%;
     height:         auto;
     margin:         0 auto;
     font-size:      1.5rem;
+
+    @media screen and (max-width: 320px){
+        height: 10%;
+    }
+
+    @media screen and (max-width:   280px){
+        font-size: 0.5rem;
+    }
+
+    input {
+        @media screen and (max-width:   280px){
+            width: 70%;
+        }
+    }
 `
 
 const Span = styled.span `
     color:          white;
     display:        block;
-    text-align:     center
+    text-align:     center;
+
+    @media screen and (max-width:   768px){
+        font-size: 2rem;
+    }
 `
 
 const Button = styled.button `
@@ -69,6 +87,10 @@ const Button = styled.button `
         background: white;
         color:      black;
     }
+    
+    @media screen and (max-width:   375px){
+        font-size: 1rem;
+    }
 `
 
 const Svg = styled.svg `
@@ -79,8 +101,8 @@ const Svg = styled.svg `
         max-height:     440.5px;
         max-width:      521px;
         overflow:       visible;
-        margin-bottom:  10%;
-        margin-top:     10%;
+        margin-bottom:  5%;
+        margin-top:     5%;
         margin-left:    auto;
         margin-right:   auto;
         display:        ${props => props.svgDisplay || 
@@ -90,12 +112,16 @@ const Svg = styled.svg `
         width:          50vw;
         height:         50%;
         overflow:       visible;
-        margin-bottom:  10%;
-        margin-top:     10%;
+        margin-bottom:  5%;
+        margin-top:     5%;
         margin-left:    auto;
         margin-right:   auto;
         display:        ${props => props.svgDisplay || 
                                     "block"};
+    }
+
+    @media screen and (max-width:   375px){
+        width: 70%;
     }
 `
 
@@ -145,7 +171,7 @@ class ChartLine extends Component{
         return (
             <polyline
                 fill="none"
-                stroke="green"
+                stroke="white"
                 stroke-width="1"
                 points={this.props.points} />
         )
@@ -155,9 +181,13 @@ class ChartLine extends Component{
 function add_x_text(labels){
     let list = labels.map((value, index)=>{
         if(index % 7 == 0 || index == (labels.length - 1)){
+            let xPos = calxPosition(index, labels.length)
+            if(index !== (labels.length - 1)){
+                xPos -= 15
+            }
             return(
                 <Text 
-                    x={calxPosition(index, labels.length) - 10} 
+                    x={xPos} 
                     y='105'>
                     {value}
                 </Text>
@@ -177,7 +207,7 @@ class SvgChart extends Component    {
                 const point = value.split(',')
                 return(
                     <circle cx={calxPosition(index, pointList.length)}
-                        cy={parseFloat(point[1])} r='1' fill='green'/>
+                        cy={parseFloat(point[1])} r='1' fill='white'/>
                 )
             })
         return (
@@ -283,11 +313,6 @@ export default class StockMain extends Component{
             <DivContainer>
                 <HeaderDiv>
                     <Span>輸入股票代碼以取得股票資訊</Span>
-                    <HomeLink to='/'>
-                        <Button className="homebutton">
-                            回首頁
-                        </Button>
-                    </HomeLink>
                 </HeaderDiv>
                 <InputDiv>
                     <input 
