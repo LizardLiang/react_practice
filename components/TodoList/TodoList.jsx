@@ -46,6 +46,9 @@ const ContButton = styled.button `
 
     & :focus{
         outline: none;
+        div {
+            display: flex;
+        }
     }
 
     &:hover {
@@ -55,13 +58,34 @@ const ContButton = styled.button `
 
 const ContSettings = styled.div ` 
     position: absolute;
-    display: ${props=> props.display || 'none'};
     flex-direction: column;
-    width: auto;
+    width: 160px;
+    z-index: 1;
+    background: rgb(24, 25, 28);
+    border-radius: 5px;
+    display: none;
+
+    &:hover {
+        display: flex;
+    }
+`
+
+const ContRadioBlk = styled.div `
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+    justify-content: space-evenly;
+
+
+    &:hover{
+        background: rgb(92, 111, 177);
+    }
 `
 
 const TodoContent = (props) => {
     const [display, setDis] = useState('none')
+
     return (
         <ContMain>
             <ContNameDiv>
@@ -75,13 +99,33 @@ const TodoContent = (props) => {
             <ContSetting>
                 <ContButton 
                     onClick={()=>{display == 'none' ? setDis('flex') : setDis('none')}}>
-                        more
+                    more
+                    <ContSettings display={display}>
+                        <ContRadioBlk
+                            onClick={()=>{props.setSts(props.name, props.status, 0)}}>
+                            <input
+                                type="radio" 
+                                name={`status${props.so}`} 
+                                checked={props.status == 0 ? true : false}/>
+                                進行中
+                        </ContRadioBlk>
+                        <ContRadioBlk
+                            onClick={()=>{props.setSts(props.name, props.status, 1)}}>
+                            <input
+                                type="radio" 
+                                name={`status${props.so}`}
+                                checked={props.status == 1 ? true : false}/>已完成
+                        </ContRadioBlk>
+                        <ContRadioBlk
+                            onClick={()=>{props.setSts(props.name, props.status, 2)}}>
+                            <input
+                                type="radio" 
+                                name={`status${props.so}`}
+                                checked={props.status == 2 ? true : false}/>暫停中
+                        </ContRadioBlk>
+                    </ContSettings>
                 </ContButton>
-                <ContSettings display={display}>
-                    <input type="radio"/>進行中
-                    <input type="radio"/>已完成
-                    <input type="radio"/>暫停中
-                </ContSettings>
+                
             </ContSetting>
         </ContMain>
     )
@@ -128,10 +172,13 @@ function TodoList() {
     const [finishes, setFinished] = useState([])
     const [inactives, setInactive] = useState([])
 
+    let arrs = [actives, finishes, inactives];
+    let arr_funcs = [setActive, setFinished, setInactive];
+
     useEffect(()=>{
         let ls = datas.lists
-        ls.map((value, index)=>{
-            value['so']  = index + 1
+        ls.map((value)=>{
+            // send data to corresponding section
             if(value.status == 0){
                 setActive(old=>[...old, value])
             }
@@ -144,24 +191,41 @@ function TodoList() {
         })
     }, [])
 
+    let changeStatus = (name, old, newSts) => {
+        // get specify target
+        let target = arrs[old].filter(item=>item.content===name)[0]
+
+        // remove target from old list
+        let func = arr_funcs[old]
+        func(arrs[old].filter(item=>item.content!==name))
+
+        // append target to new list with new status
+        target.status = newSts
+        let newfunc = arr_funcs[newSts]
+        newfunc(prev => [...prev, target])
+    }
+
     return(
         <MainDiv>
             <CateBlock>
                 <CateTitle>Active</CateTitle>
-                {actives.map((value=>{
-                    return <TodoContent name={value.content} date={value.date} so={value.so} />
+                {/* Get active list */}
+                {actives.map(((value, index)=>{
+                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
             <CateBlock>
                 <CateTitle>Finished</CateTitle>
-                {finishes.map((value=>{
-                    return <TodoContent name={value.content} date={value.date} so={value.so} />
+                {/* Get finshed list */}
+                {finishes.map(((value, index)=>{
+                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
             <CateBlock>
                 <CateTitle>Inactive</CateTitle>
-                {inactives.map((value=>{
-                    return <TodoContent name={value.content} date={value.date} so={value.so} />
+                {/* Get inactive list */}
+                {inactives.map(((value, index)=>{
+                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
         </MainDiv>
