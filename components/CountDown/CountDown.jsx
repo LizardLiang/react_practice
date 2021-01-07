@@ -613,7 +613,9 @@ class CountDown extends Component {
                     display={this.state.editDis}
                     setDis={this.SetEditDisplay}
                     sendDate={this.SendDateToStore} />
-                <PlusButton onClick={() => { this.setState({ editDis: 'flex' }) }}>+</PlusButton>
+                <PlusButton onClick={() => {this.setState({editDis: 'flex'})}}>
+                    +
+                </PlusButton>
             </MainDiv>
         )
     }
