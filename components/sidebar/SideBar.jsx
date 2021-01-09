@@ -157,11 +157,11 @@ export default class HeadBanner extends Component {
                         檔案下載
                     </GuideLink>
                 </GuideButton>
-                {/* <GuideButton>
+                <GuideButton>
                     <GuideLink to='./TodoList'>
                         待辦事項
                     </GuideLink>
-                </GuideButton> */}
+                </GuideButton>
                 {/*<GuideButton>
                     4
                 </GuideButton> */}
