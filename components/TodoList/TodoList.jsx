@@ -1,6 +1,24 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 
+const EditMainDiv = styled.div ` 
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
+const EditBlock = () => {
+
+
+    return (
+        <EditMainDiv>
+            123
+        </EditMainDiv>
+    )
+}
+
 const ContMain = styled.div `
     display: flex;
     width: 100%;
@@ -228,6 +246,7 @@ function TodoList() {
                     return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
+            <EditBlock />
         </MainDiv>
     )
 }
