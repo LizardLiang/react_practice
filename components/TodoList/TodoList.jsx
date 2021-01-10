@@ -7,14 +7,57 @@ const EditMainDiv = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: solid 1px white;
+    border-radius: 5px;
+    background:rgb(47, 49, 54);
+
+    div {
+        padding: 5px;
+        border-radius: 5px;
+    }
+`
+
+const EditHeadDiv = styled.div ` 
+    display: flex;
+    font-size: 2rem;
+`
+
+const EditTitleDiv = styled.div ` 
+    width: 100%;
+    display: flex;
+    background-color: rgb(64, 68, 75);
+`
+
+const EditTitleInput = styled.input ` 
+    width: 50%;
+    color: white;
+    border-radius: 5px;
+`
+
+const EditDateDiv = styled.div ` 
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(64, 68, 75);
+`
+
+const EditDateInput = styled.input `
+    color: white;
+    border-radius: 5px;
 `
 
 const EditBlock = () => {
-
-
     return (
         <EditMainDiv>
-            123
+            <EditHeadDiv>新增代辦事項</EditHeadDiv>
+            <EditTitleDiv>
+                <EditTitleInput placeholder={`輸入標題`} />
+            </EditTitleDiv>
+            <EditDateDiv>
+                <EditDateInput placeholder={`輸入年`}/>
+                <EditDateInput placeholder={`輸入月`}/>
+                <EditDateInput placeholder={`輸入日`}/>
+            </EditDateDiv>
         </EditMainDiv>
     )
 }
