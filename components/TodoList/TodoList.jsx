@@ -26,6 +26,7 @@ const EditTitleDiv = styled.div `
     width: 100%;
     display: flex;
     background-color: rgb(64, 68, 75);
+    font-size: 1.5rem;
 `
 
 const EditTitleInput = styled.input ` 
@@ -37,13 +38,24 @@ const EditTitleInput = styled.input `
 const EditDateDiv = styled.div ` 
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     background-color: rgb(64, 68, 75);
+    font-size: 1.5rem;
+    
+    .confirmB {
+        margin-left: auto;
+    }
 `
 
 const EditDateInput = styled.input `
-    color: white;
+    color: black;
     border-radius: 5px;
+`
+
+const EditButton = styled.button ` 
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 5px;
 `
 
 const EditBlock = () => {
@@ -51,12 +63,16 @@ const EditBlock = () => {
         <EditMainDiv>
             <EditHeadDiv>新增代辦事項</EditHeadDiv>
             <EditTitleDiv>
+                標題:
                 <EditTitleInput placeholder={`輸入標題`} />
             </EditTitleDiv>
             <EditDateDiv>
-                <EditDateInput placeholder={`輸入年`}/>
-                <EditDateInput placeholder={`輸入月`}/>
-                <EditDateInput placeholder={`輸入日`}/>
+                日期:
+                <EditDateInput type="date"/>
+                {/* <EditDateInput placeholder={`輸入月`}/>
+                <EditDateInput placeholder={`輸入日`}/> */}
+                <EditButton className="confirmB">確認</EditButton>
+                <EditButton>取消</EditButton>
             </EditDateDiv>
         </EditMainDiv>
     )
