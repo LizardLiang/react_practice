@@ -1,5 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
+import {Provider, useSelector, useDispatch} from 'react-redux'
 import styled from 'styled-components'
+import {store} from './'
 
 const EditMainDiv = styled.div ` 
     width: 70%;
@@ -14,6 +16,10 @@ const EditMainDiv = styled.div `
     div {
         padding: 5px;
         border-radius: 5px;
+    }
+
+    input {
+        color: black;
     }
 `
 
@@ -31,8 +37,8 @@ const EditTitleDiv = styled.div `
 
 const EditTitleInput = styled.input ` 
     width: 50%;
-    color: white;
     border-radius: 5px;
+    margin-left: 5px;
 `
 
 const EditDateDiv = styled.div ` 
@@ -48,30 +54,43 @@ const EditDateDiv = styled.div `
 `
 
 const EditDateInput = styled.input `
-    color: black;
     border-radius: 5px;
+    margin-left: 5px;
 `
 
 const EditButton = styled.button ` 
     margin-top: 0;
     margin-bottom: 0;
     margin-right: 5px;
+
+    color: white;
+    background-color: rgb(64, 68, 75);
+    border: solid grey 1px;
+    border-radius: 5px;
 `
 
-const EditBlock = () => {
+const EditBlock = (props) => {
+    const [title, setTitle] = useState("")
+    const [date, setDate] = useState("")
     return (
         <EditMainDiv>
             <EditHeadDiv>新增代辦事項</EditHeadDiv>
             <EditTitleDiv>
                 標題:
-                <EditTitleInput placeholder={`輸入標題`} />
+                <EditTitleInput 
+                    id="Title" placeholder={`輸入標題`} 
+                    onChange={ e => setTitle(e.target.value)} />
             </EditTitleDiv>
             <EditDateDiv>
                 日期:
-                <EditDateInput type="date"/>
+                <EditDateInput 
+                    type="Date" id="Date"
+                    onChange={e => setDate(e.target.value)} />
                 {/* <EditDateInput placeholder={`輸入月`}/>
                 <EditDateInput placeholder={`輸入日`}/> */}
-                <EditButton className="confirmB">確認</EditButton>
+                <EditButton className="confirmB" onClick={() => {props.addMsg(title, date)}}>
+                    確認
+                </EditButton>
                 <EditButton>取消</EditButton>
             </EditDateDiv>
         </EditMainDiv>
@@ -163,6 +182,7 @@ const ContRadioBlk = styled.div `
 const TodoContent = (props) => {
     const [display, setDis] = useState('none')
 
+
     return (
         <ContMain>
             <ContNameDiv>
@@ -171,7 +191,7 @@ const TodoContent = (props) => {
             </ContNameDiv>
             <ContDateDiv className="Date">
                 <span className="SO">期限:</span>
-                <span>{props.date}</span>
+                <span>{props.Date}</span>
             </ContDateDiv>
             <ContSetting>
                 <ContButton 
@@ -202,7 +222,6 @@ const TodoContent = (props) => {
                         </ContRadioBlk>
                     </ContSettings>
                 </ContButton>
-                
             </ContSetting>
         </ContMain>
     )
@@ -236,50 +255,47 @@ const CateTitle = styled.div `
     font-size: 2rem;
 `
 
-let datas = {
-    lists: [
-        {content: 'This is Active', date: '2021/01/01', status: 0},
-        {content: 'This is Finished', date: '2021/01/01', status: 1},
-        {content: 'This is Inactive', date: '2021/01/01', status: 2}
-    ]
-}
-
 function TodoList() {
+    // Three different task status
     const [actives, setActive] = useState([])
     const [finishes, setFinished] = useState([])
     const [inactives, setInactive] = useState([])
+
+    // Use selector to get store data
+    const ActiveMsgs = useSelector(state => state.ActiveMsg)
+    const FinishMsgs = useSelector(state => state.FinishedMsg)
+    const InactiMsgs = useSelector(state => state.InactiveMsg)
+
+    // Set dispatch to modify store data
+    const MsgDispatch = useDispatch()
 
     let arrs = [actives, finishes, inactives];
     let arr_funcs = [setActive, setFinished, setInactive];
 
     useEffect(()=>{
-        let ls = datas.lists
-        ls.map((value)=>{
-            // send data to corresponding section
-            if(value.status == 0){
-                setActive(old=>[...old, value])
-            }
-            else if(value.status == 1){
-                setFinished(old=>[...old, value])
-            }
-            else if(value.status == 2){
-                setInactive(old=>[...old, value])
-            }
-        })
+        setActive(ActiveMsgs)
+        setFinished(FinishMsgs)
+        setInactive(InactiMsgs)
     }, [])
+
 
     let changeStatus = (name, old, newSts) => {
         // get specify target
-        let target = arrs[old].filter(item=>item.content===name)[0]
+        let target = arrs[old].filter(item=>item.Name===name)[0]
 
         // remove target from old list
         let func = arr_funcs[old]
-        func(arrs[old].filter(item=>item.content!==name))
+        func(arrs[old].filter(item=>item.Name!==name))
 
         // append target to new list with new status
         target.status = newSts
         let newfunc = arr_funcs[newSts]
         newfunc(prev => [...prev, target])
+    }
+
+    const addMsg = (title, date) => {
+        setActive(old => [...old, {Name: title, Date: date, status: 0}])
+        MsgDispatch({type: 'addMsg', payload: {Name: title, Date: date, status: 0}})
     }
 
     return(
@@ -288,26 +304,34 @@ function TodoList() {
                 <CateTitle>Active</CateTitle>
                 {/* Get active list */}
                 {actives.map(((value, index)=>{
-                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
             <CateBlock>
                 <CateTitle>Finished</CateTitle>
                 {/* Get finshed list */}
                 {finishes.map(((value, index)=>{
-                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
             <CateBlock>
                 <CateTitle>Inactive</CateTitle>
                 {/* Get inactive list */}
                 {inactives.map(((value, index)=>{
-                    return <TodoContent name={value.content} date={value.date} so={index + 1} status={value.status} setSts={changeStatus} />
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
                 }))}
             </CateBlock>
-            <EditBlock />
+            <EditBlock addMsg={addMsg} />
         </MainDiv>
     )
 }
 
-export default TodoList
+const FinalList = () => {
+    return(
+        <Provider store={store}>
+            <TodoList />
+        </Provider>
+    )
+} 
+
+export default FinalList
