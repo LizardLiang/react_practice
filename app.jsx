@@ -1,6 +1,7 @@
 import React, {Suspense, lazy} from "react"
 import ReactDOM from "react-dom"
 import {HashRouter, Route} from 'react-router-dom'
+import './components/TodoList/index'
 const Home = lazy(() => 
         import(/*webpackChunkName:"Home"*/ './components/pagebox/home.jsx'))
 const HeadBanner = lazy(() => 
@@ -14,9 +15,10 @@ const ShowIp = lazy(()=>
         import(/*webpackChunkName:"ShowIp"*/"./components/ShowIp/ShowIp.jsx"))
 const ScriptDl = lazy(()=>
         import(/*webpackChunkName:"ScriptDL"*/"./components/ScriptDownload/ScriptDownload.jsx"))
-
 const TodoList = lazy(()=>
         import(/* webpackChunkName: "TodoList" */"./components/TodoList/TodoList.jsx"))
+const Calculator = lazy(()=>
+        import(/* webpackChunkName: "Calculator" */"./components/Calculator/calculator.jsx"))
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -54,6 +56,7 @@ class MainWindow extends React.Component {
                         <Route exact path='/CheckIP' render={() => {return <ShowIp/>}}/>
                         <Route exact path='/Scripts' component={ ScriptDl } />
                         <Route exact path='/TodoList' render={() => {return <TodoList/>}}/>
+                        <Route exact path='/Calculator' render={()=>{return <Calculator />}} />
                     </Suspense>
                 </div>
             </HashRouter>
