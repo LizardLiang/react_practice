@@ -38,9 +38,6 @@ const rootReducer = (state = Datas, action) => {
 // establish store
 const store = createStore(rootReducer)
 
-window.store = store;
-window.deleteDate = deleteDate;
-
 export {store, addDate, deleteDate, defaultDate}
 
 // export default Stores
