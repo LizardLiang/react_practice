@@ -15,6 +15,10 @@ const ResultDiv = styled.div `
     width: 50%;
     display: flex;
     justify-content: flex-end;
+    height: 5rem;
+    font-size: 3rem;
+    border: solid 1px white;
+    border-radius: 5px;
 `
 
 const KeyboardDiv = styled.div `
@@ -35,13 +39,33 @@ const KeyboardRight = styled.div `
 `
 
 const KeysSmall = styled.div ` 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30%;
     margin: 5px;
+    border: solid 1px white;
+    height: 4rem;
+    border-radius: 5px;
+
+    &:hover{
+        background: grey;
+    }
 `
 
 const KeysLandMid = styled.div ` 
-    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(60% + 10px);
     margin: 5px;
+    border: solid 1px white;
+    height: 4rem;
+    border-radius: 5px;
+
+    &:hover{
+        background: grey;
+    }
 `
 
 const KeyboardSection = styled.div `
