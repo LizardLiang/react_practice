@@ -12,40 +12,60 @@ const MainDiv = styled.div `
 `
 
 const ResultDiv = styled.div ` 
-    width: 50%;
+    width: 30%;
     display: flex;
-    justify-content: flex-end;
-    height: 5rem;
+    flex-direction: column;
+    height: 6rem;
     font-size: 3rem;
     border: solid 1px white;
     border-radius: 5px;
+    padding: 0 5px;
+`
+
+const UpperRes = styled.div ` 
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1rem;
+`
+
+const LowerRes = styled.div ` 
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
 `
 
 const KeyboardDiv = styled.div `
-    width: 50%;
+    width: 30%;
     display: flex;
+    justify-content: space-between;
 ` 
 
 const KeyboardLeft = styled.div ` 
-    width: 90%;
+    width: 75%;
     display: flex;
     flex-direction: column;
 `
 
 const KeyboardRight = styled.div `
-    width: 10%;
+    width: 22%;
     display: flex;
-    flex-direction: column;
+
+    .RightElement {
+        flex-direction: column;
+    }
 `
 
 const KeysSmall = styled.div ` 
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    margin: 5px;
+    width: 8rem;
+    height: 5.5rem;
     border: solid 1px white;
-    height: 4rem;
+    height: 5.5rem;
     border-radius: 5px;
 
     &:hover{
@@ -57,10 +77,23 @@ const KeysLandMid = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(60% + 10px);
-    margin: 5px;
+    width: 17.5rem;
     border: solid 1px white;
-    height: 4rem;
+    height: 5.5rem;
+    border-radius: 5px;
+
+    &:hover{
+        background: grey;
+    }
+`
+
+const KeysPortMid = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 13rem;
+    border: solid 1px white;
     border-radius: 5px;
 
     &:hover{
@@ -71,65 +104,139 @@ const KeysLandMid = styled.div `
 const KeyboardSection = styled.div `
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
+    margin-top: 2rem;
+
+    div {
+        font-size: 2rem;
+    }
 `
 
 const Calculator = () => {
+    const [Num1, setNum1] = useState(0)
+    const [Num2, setNum2] = useState(0)   
+    const [Sym, setSym] = useState('')
+    const [upperCont, setUpper] = useState('')
+    const [lowerCont, setLower] = useState('0')
+    const [isNew, setNew] = useState(true)
+    
+    const NumClick = (num) => {
+        if(Sym == ''){
+            // keep number 1
+            setNum1(old=>{return old * 10 + num})
+
+            if (lowerCont == '0' || isNew){
+                // if number1 == 0 just cover old value
+                setLower(`${num}`);
+            }
+            else{
+                // if number1 is not 0 append new value to old value
+                setLower(old=>{return `${old + num}`})
+            }
+        }
+        else{
+            setNum2(old=>{return old * 10 + num})
+            setLower(old=>{return `${old + num}`})
+        }
+        setNew(false)
+    }
+
+    const SymClick = (sym) => {
+        setSym(sym)
+        setUpper(`${Num1}${Sym}`)
+    }
+
+    const CalAns = () => {
+        if(Sym == ''){
+            return
+        }
+        else if(Sym == '+'){
+            setCont(`${Num1 + Num2}`)
+        }
+        else if(Sym == '-'){
+            setCont(`${Num1 - Num2}`)
+        }
+        else if(Sym == '*'){
+            setCont(`${Num1 * Num2}`)
+        }
+        else if(Sym == '/'){
+            setCont(`${Num1 / Num2}`)
+        }
+
+        // reset status
+        setNum1(0)
+        setNum2(0)
+        setSym('')
+        setNew(true)
+    }
+
+    const ClearAll = () => {
+        setNum1(0)
+        setNum2(0)
+        setSym('')
+        setCont('0')
+    }
+
     return (
         <MainDiv>
             <ResultDiv>
-                put result here
+                <UpperRes>
+                    {upperCont}
+                </UpperRes>    
+                <LowerRes>
+                    {lowerCont}
+                </LowerRes>
             </ResultDiv>
             <KeyboardDiv>
                 <KeyboardLeft>
                     <KeyboardSection>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{SymClick('/')}}>
                             /
                         </KeysSmall>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{SymClick('*')}}>
                             *
                         </KeysSmall>
-                        <KeysSmall>
-                            -
+                        <KeysSmall onClick={ClearAll}>
+                            CE
                         </KeysSmall>
                     </KeyboardSection>
                     <KeyboardSection>
-                        <KeysSmall>
-                            9
-                        </KeysSmall>
-                        <KeysSmall>
-                            8
-                        </KeysSmall>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(7)}}>
                             7
                         </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(8)}}>
+                            8
+                        </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(9)}}>
+                            9
+                        </KeysSmall>
                     </KeyboardSection>
                     <KeyboardSection>
-                        <KeysSmall>
-                            6
-                        </KeysSmall>
-                        <KeysSmall>
-                            5
-                        </KeysSmall>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(4)}}>
                             4
                         </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(5)}}>
+                            5
+                        </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(6)}}>
+                            6
+                        </KeysSmall>
                     </KeyboardSection>
                     <KeyboardSection>
-                        <KeysSmall>
-                            3
-                        </KeysSmall>
-                        <KeysSmall>
-                            2
-                        </KeysSmall>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(1)}}>
                             1
                         </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(2)}}>
+                            2
+                        </KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick(3)}}>
+                            3
+                        </KeysSmall>
                     </KeyboardSection>
                     <KeyboardSection>
-                        <KeysLandMid>
+                        <KeysLandMid onClick={()=>{NumClick(0)}}>
                             0
                         </KeysLandMid>
                         <KeysSmall>
@@ -138,7 +245,17 @@ const Calculator = () => {
                     </KeyboardSection>
                 </KeyboardLeft>
                 <KeyboardRight>
-                    right
+                    <KeyboardSection className='RightElement'>
+                        <KeysSmall onClick={()=>{SymClick('-')}}>
+                            -
+                        </KeysSmall>
+                        <KeysPortMid onClick={()=>{SymClick('+')}}>
+                            +
+                        </KeysPortMid>
+                        <KeysPortMid onClick={CalAns}>
+                            =
+                        </KeysPortMid>
+                    </KeyboardSection>
                 </KeyboardRight>
             </KeyboardDiv>
         </MainDiv>
