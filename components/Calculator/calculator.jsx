@@ -145,7 +145,8 @@ const Calculator = () => {
 
     const SymClick = (sym) => {
         setSym(sym)
-        setUpper(`${Num1}${Sym}`)
+        
+        setUpper(`${Num1}${sym}`)
     }
 
     const CalAns = () => {
@@ -153,16 +154,16 @@ const Calculator = () => {
             return
         }
         else if(Sym == '+'){
-            setCont(`${Num1 + Num2}`)
+            setLower(`${Num1 + Num2}`)
         }
         else if(Sym == '-'){
-            setCont(`${Num1 - Num2}`)
+            setLower(`${Num1 - Num2}`)
         }
         else if(Sym == '*'){
-            setCont(`${Num1 * Num2}`)
+            setLower(`${Num1 * Num2}`)
         }
         else if(Sym == '/'){
-            setCont(`${Num1 / Num2}`)
+            setLower(`${Num1 / Num2}`)
         }
 
         // reset status
