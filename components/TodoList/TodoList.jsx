@@ -350,6 +350,7 @@ function TodoList() {
     }
 
     const addMsg = (title, date) => {
+        // when new task is added, set it to active
         setActive(old => [...old, {Name: title, Date: date, status: 0}])
         MsgDispatch({type: 'addMsg', payload: {Name: title, Date: date, status: 0}})
     }
@@ -382,6 +383,7 @@ function TodoList() {
                     <NoItemSpan>沒有項目</NoItemSpan>
                 }
             </CateBlock>
+            {/* Edit section */}
             <EditBlock addMsg={addMsg} />
         </MainDiv>
     )
