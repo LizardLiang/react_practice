@@ -12,7 +12,7 @@ const MainDiv = styled.div `
 `
 
 const ResultDiv = styled.div ` 
-    width: 30%;
+    width: 570px;
     display: flex;
     flex-direction: column;
     height: 6rem;
@@ -39,7 +39,7 @@ const LowerRes = styled.div `
 `
 
 const KeyboardDiv = styled.div `
-    width: 30%;
+    width: 570px;
     display: flex;
     justify-content: space-between;
 ` 
@@ -116,8 +116,8 @@ const KeyboardSection = styled.div `
 `
 
 const Calculator = () => {
-    const [Num1, setNum1] = useState(0)
-    const [Num2, setNum2] = useState(0)   
+    const [Num1, setNum1] = useState('0')
+    const [Num2, setNum2] = useState('0')   
     const [Sym, setSym] = useState('')
     const [upperCont, setUpper] = useState('')
     const [lowerCont, setLower] = useState('0')
@@ -126,21 +126,27 @@ const Calculator = () => {
     const NumClick = (num) => {
         if(Sym == ''){
             // keep number 1
-            setNum1(old=>{return old * 10 + num})
-
-            if (lowerCont == '0' || isNew){
+            if ((lowerCont == '0' || isNew) && num != '.'){
                 // if number1 == 0 just cover old value
+                setNum1(`${num}`);
                 setLower(`${num}`);
             }
             else{
                 // if number1 is not 0 append new value to old value
+                setNum1(old=>{return `${old}` + `${num}`})
                 setLower(old=>{return `${old + num}`})
             }
         }
         else{
-            let newNum2 = Num2 * 10 + num
+            let newNum2 = ''
+            if(Num2 == '0' && num != '.'){
+                newNum2 = `${num}`
+            }
+            else{
+                newNum2 = `${Num2}` + `${num}`
+            }
             setNum2(newNum2)
-            setLower(`${newNum2}`)
+            setLower(newNum2)
         }
         setNew(false)
     }
@@ -152,10 +158,10 @@ const Calculator = () => {
             let ans = DoMath()
             setNum1(parseFloat(ans))
             setNum2(0)
-            setUpper(`${ans}${sym}`)
+            setUpper(`${ans} ${sym}`)
         }
         else{
-            setUpper(`${Num1}${sym}`)
+            setUpper(`${Num1} ${sym}`)
         }
         setSym(sym)
     }
@@ -165,20 +171,20 @@ const Calculator = () => {
             return
         }
         else if(Sym == '+'){
-            setLower(`${Num1 + Num2}`)
-            return Num1 + Num2
+            setLower(`${parseFloat(Num1) + parseFloat(Num2)}`)
+            return parseFloat(Num1) + parseFloat(Num2)
         }
         else if(Sym == '-'){
-            setLower(`${Num1 - Num2}`)
-            return Num1 - Num2
+            setLower(`${parseFloat(Num1) - parseFloat(Num2)}`)
+            return parseFloat(Num1) - parseFloat(Num2)
         }
         else if(Sym == '*'){
-            setLower(`${Num1 * Num2}`)
-            return Num1 * Num2
+            setLower(`${parseFloat(Num1) * parseFloat(Num2)}`)
+            return parseFloat(Num1) * parseFloat(Num2)
         }
         else if(Sym == '/'){
-            setLower(`${Num1 / Num2}`)
-            return Num1 / Num2
+            setLower(`${parseFloat(Num1) / parseFloat(Num2)}`)
+            return parseFloat(Num1) / parseFloat(Num2)
         }
     }
 
@@ -261,7 +267,7 @@ const Calculator = () => {
                         <KeysLandMid onClick={()=>{NumClick(0)}}>
                             0
                         </KeysLandMid>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick('.')}}>
                             .
                         </KeysSmall>
                     </KeyboardSection>
