@@ -150,6 +150,10 @@ const ContSetting = styled.div `
     text-align: center;
     position: relative;
     white-space: nowrap;
+
+    button {
+        height: 100%;
+    }
 `
 
 const FadeIn = keyframes `
@@ -216,10 +220,6 @@ const ContRadioBlk = styled.div `
 
     &:hover{
         background: rgb(92, 111, 177);
-    }
-
-    button {
-        height: 100%;
     }
 `
 
