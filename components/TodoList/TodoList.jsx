@@ -228,6 +228,7 @@ const TodoContent = (props) => {
 
     return (
         <ContMain>
+            {/* Three sections include name, date, status switch */}
             <ContNameDiv>
                 <span className="SO">{props.so}</span>
                 <span>{props.name}</span>
@@ -241,6 +242,7 @@ const TodoContent = (props) => {
                     onClick={()=>{display == 'none' ? setDis('flex') : setDis('none')}}>
                     more
                     <ContSettings>
+                        {/* To switch task's status */}
                         <ContRadioBlk
                             onClick={()=>{props.setSts(props.name, props.status, 0)}}>
                             <input
