@@ -25,6 +25,7 @@ const ResultDiv = styled.div `
 const UpperRes = styled.div ` 
     display: flex;
     width: 100%;
+    height: 24px;
     justify-content: flex-end;
     align-items: center;
     font-size: 1rem;
@@ -137,36 +138,55 @@ const Calculator = () => {
             }
         }
         else{
-            setNum2(old=>{return old * 10 + num})
-            setLower(old=>{return `${old + num}`})
+            let newNum2 = Num2 * 10 + num
+            setNum2(newNum2)
+            setLower(`${newNum2}`)
         }
         setNew(false)
     }
 
     const SymClick = (sym) => {
+        // if a operator is clicked move to upper display section
+        if(Sym != '' && Num1 != 0 && Num2 != 0){
+            // if last result need to be calculated
+            let ans = DoMath()
+            setNum1(parseFloat(ans))
+            setNum2(0)
+            setUpper(`${ans}${sym}`)
+        }
+        else{
+            setUpper(`${Num1}${sym}`)
+        }
         setSym(sym)
-        
-        setUpper(`${Num1}${sym}`)
     }
 
-    const CalAns = () => {
+    const DoMath = () => {
         if(Sym == ''){
             return
         }
         else if(Sym == '+'){
             setLower(`${Num1 + Num2}`)
+            return Num1 + Num2
         }
         else if(Sym == '-'){
             setLower(`${Num1 - Num2}`)
+            return Num1 - Num2
         }
         else if(Sym == '*'){
             setLower(`${Num1 * Num2}`)
+            return Num1 * Num2
         }
         else if(Sym == '/'){
             setLower(`${Num1 / Num2}`)
+            return Num1 / Num2
         }
+    }
 
+    const CalAns = () => {
+        // if '=' is clicked calculate the answer display it in lower section
+        DoMath()
         // reset status
+        setUpper('')
         setNum1(0)
         setNum2(0)
         setSym('')
@@ -174,10 +194,11 @@ const Calculator = () => {
     }
 
     const ClearAll = () => {
+        setUpper('')
+        setLower('0')
         setNum1(0)
         setNum2(0)
         setSym('')
-        setCont('0')
     }
 
     return (
