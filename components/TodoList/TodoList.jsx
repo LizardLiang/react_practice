@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Provider, useSelector, useDispatch} from 'react-redux'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 import {store} from './'
 
 const EditMainDiv = styled.div ` 
     width: 70%;
+    max-width: 1344px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,6 +21,10 @@ const EditMainDiv = styled.div `
 
     input {
         color: black;
+
+        @media screen and (max-width: 600px){
+            font-size: 1rem;
+        }
     }
 `
 
@@ -67,6 +72,10 @@ const EditButton = styled.button `
     background-color: rgb(64, 68, 75);
     border: solid grey 1px;
     border-radius: 5px;
+
+    @media screen and (max-width: 600px){
+        font-size: 1rem;
+    }
 `
 
 const EditBlock = (props) => {
@@ -123,6 +132,12 @@ const ContNameDiv = styled.div `
 
 const ContDateDiv = styled.div `
     display: flex;
+    align-items: flex-end;
+
+    @media screen and (max-width: 600px){
+        font-size: 1rem;
+    }
+
     .SO {
         margin-right: 12px;
     }
@@ -134,35 +149,60 @@ const ContSetting = styled.div `
     align-items: center;
     text-align: center;
     position: relative;
+    white-space: nowrap;
+`
+
+const FadeIn = keyframes `
+    0%{
+        opacity: 0;
+        width: 0px;
+    }
+
+    100% {
+        opacity: 1;
+        width: 160px;
+    }
 `
 
 const ContButton = styled.button ` 
     background: none;
     color: white;
+    display: flex;
+    align-items: flex-end;
+
+    @media screen and (max-width: 600px){
+        font-size: 1rem;
+    }
 
     & :focus{
         outline: none;
         div {
             display: flex;
+            visibility: visible;
+            opacity: 1;
+            width: 160px;
+            animation: ${FadeIn} 1s;
         }
-    }
-
-    &:hover {
-
     }
 ` 
 
 const ContSettings = styled.div ` 
     position: absolute;
     flex-direction: column;
-    width: 160px;
+    width: 0px;
     z-index: 1;
     background: rgb(24, 25, 28);
     border-radius: 5px;
     display: none;
+    visibility: hidden;
+    opacity: 0;
+    /* transition: opacity 500ms; */
 
     &:hover {
         display: flex;
+        opacity: 1;
+        visibility: visible;
+        width: 160px;
     }
 `
 
@@ -172,16 +212,19 @@ const ContRadioBlk = styled.div `
     padding: 5px;
     margin: 5px;
     justify-content: space-evenly;
-
+    border-radius: 5px;
 
     &:hover{
         background: rgb(92, 111, 177);
+    }
+
+    button {
+        height: 100%;
     }
 `
 
 const TodoContent = (props) => {
     const [display, setDis] = useState('none')
-
 
     return (
         <ContMain>
@@ -197,7 +240,7 @@ const TodoContent = (props) => {
                 <ContButton 
                     onClick={()=>{display == 'none' ? setDis('flex') : setDis('none')}}>
                     more
-                    <ContSettings display={display}>
+                    <ContSettings>
                         <ContRadioBlk
                             onClick={()=>{props.setSts(props.name, props.status, 0)}}>
                             <input
@@ -241,6 +284,7 @@ const CateBlock = styled.div `
     display: flex;
     flex-direction: column;
     width: 70%;
+    max-width: 1344px;
     height: auto;
     min-height: 10%;
     border: white solid 1px;
@@ -253,6 +297,16 @@ const CateTitle = styled.div `
     width: 100%;
     height: auto;
     font-size: 2rem;
+    padding-left: 5px;
+`
+
+const NoItemSpan = styled.span`
+    display: flex;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 5px 5px 5px 5%;
+    background-color: rgb(64, 68, 75);
+    border-radius: 5px;
 `
 
 function TodoList() {
@@ -303,23 +357,28 @@ function TodoList() {
             <CateBlock>
                 <CateTitle>Active</CateTitle>
                 {/* Get active list */}
-                {actives.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
-                }))}
+                {actives.length > 0 ? actives.map(((value, index)=>{
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    <NoItemSpan>沒有項目</NoItemSpan>
+                }
             </CateBlock>
             <CateBlock>
                 <CateTitle>Finished</CateTitle>
                 {/* Get finshed list */}
-                {finishes.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
-                }))}
+                {finishes.length > 0 ? 
+                    finishes.map(((value, index)=>{
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    <NoItemSpan>沒有項目</NoItemSpan>
+                }
             </CateBlock>
             <CateBlock>
                 <CateTitle>Inactive</CateTitle>
                 {/* Get inactive list */}
-                {inactives.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />
-                }))}
+                {inactives.length > 0 ? 
+                    inactives.map(((value, index)=>{
+                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    <NoItemSpan>沒有項目</NoItemSpan>
+                }
             </CateBlock>
             <EditBlock addMsg={addMsg} />
         </MainDiv>
