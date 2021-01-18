@@ -3,18 +3,18 @@ import ReactDOM from "react-dom"
 import {HashRouter, Route} from 'react-router-dom'
 import './components/TodoList/index'
 const Home = lazy(() => 
-        import(/*webpackChunkName:"Home"*/ './components/pagebox/home.jsx'))
+        import(/* webpackChunkName:"Home" */ './components/pagebox/home.jsx'))
 const HeadBanner = lazy(() => 
-        import(/*webpackChunkName:"HeadBanner"*/'./components/sidebar/SideBar.jsx'))
+        import(/* webpackChunkName:"HeadBanner" */'./components/sidebar/SideBar.jsx'))
 const MapCountDown = lazy(() => 
-        import(/*webpackChunkName:"CountDown"*/'./components/CountDown/CountDown.jsx'))
+        import(/* webpackChunkName:"CountDown" */'./components/CountDown/CountDown.jsx'))
 const StockMain = lazy(()=>
-        import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
+        import(/* webpackChunkName:"Stock" */'./components/StockPage/StockMain.jsx'))
 import './index.css'
 const ShowIp = lazy(()=>
-        import(/*webpackChunkName:"ShowIp"*/"./components/ShowIp/ShowIp.jsx"))
+        import(/* webpackChunkName:"ShowIp" */"./components/ShowIp/ShowIp.jsx"))
 const ScriptDl = lazy(()=>
-        import(/*webpackChunkName:"ScriptDL"*/"./components/ScriptDownload/ScriptDownload.jsx"))
+        import(/* webpackChunkName:"ScriptDL" */"./components/ScriptDownload/ScriptDownload.jsx"))
 const TodoList = lazy(()=>
         import(/* webpackChunkName: "TodoList" */"./components/TodoList/TodoList.jsx"))
 const Calculator = lazy(()=>
