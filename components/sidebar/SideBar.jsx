@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import {Buttons}    from "../buttons"
+import MenuIcon from '../../img/drawsvg.svg'
 
 class SideBar extends React.Component{
     constructor(props){
@@ -83,7 +84,7 @@ const MainDiv = styled.div `
 `
 
 const GuideButton = styled.button `
-    min-width:          5rem;
+    min-width:          4rem;
     width:              auto;
     align-content:      center;
     background:         rgb(32, 34, 37);
@@ -95,10 +96,12 @@ const GuideButton = styled.button `
 
     @media screen and (max-width:   768px){
         font-size:      1.41rem;
+        margin: 0 1rem;
     }
 
     @media screen and (max-width:   540px){
         min-width:      3rem;
+        margin: 0 1rem;
         font-size:      1rem;
     }
 
@@ -113,19 +116,32 @@ const GuideButton = styled.button `
 
     @media screen and (max-width:   320px){
         font-size:      0.81rem;
-    }
-
-    @media screen and (max-width: 280px){
-        min-width: 3rem;
+        min-width: 2rem;
     }
 
     &:hover {
         opacity:        1;
     }
+
+    a :hover{
+        text-decoration: none;
+    }
 `
 
 const GuideLink = styled(Link) `
     text-decoration:    none;
+
+    @media screen and (max-width: 1280px){
+        font-size: 1.6rem;
+    }
+
+    @media screen and (max-width: 1000px){
+        font-size: 1rem;
+    }
+
+    @media screen and (max-width: 320px){
+        font-size: 0.1rem;
+    }
 `
 
 export default class HeadBanner extends Component {
@@ -162,6 +178,7 @@ export default class HeadBanner extends Component {
                         待辦事項
                     </GuideLink>
                 </GuideButton>
+                {/* <img src={MenuIcon} alt='設定' /> */}
                 {/*<GuideButton>
                     4
                 </GuideButton> */}
