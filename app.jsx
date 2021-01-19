@@ -1,7 +1,7 @@
 import React, {Suspense, lazy} from "react"
 import ReactDOM from "react-dom"
 import {HashRouter, Route} from 'react-router-dom'
-import './components/TodoList/index'
+import './index.css'
 const Home = lazy(() => 
         import(/*webpackChunkName:"Home"*/ './components/pagebox/home.jsx'))
 const HeadBanner = lazy(() => 
@@ -10,7 +10,6 @@ const MapCountDown = lazy(() =>
         import(/*webpackChunkName:"CountDown"*/'./components/CountDown/CountDown.jsx'))
 const StockMain = lazy(()=>
         import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
-import './index.css'
 const ShowIp = lazy(()=>
         import(/*webpackChunkName:"ShowIp"*/"./components/ShowIp/ShowIp.jsx"))
 const ScriptDl = lazy(()=>
@@ -19,6 +18,10 @@ const TodoList = lazy(()=>
         import(/* webpackChunkName: "TodoList" */"./components/TodoList/TodoList.jsx"))
 const Calculator = lazy(()=>
         import(/* webpackChunkName: "Calculator" */"./components/Calculator/calculator.jsx"))
+const Register = lazy(()=>
+        import(/* webpackChunkName: "Register" */"./components/RegisterAndLogin/register.jsx"))
+const Login = lazy(()=>
+        import(/* webpackChunkName: "Login" */"./components/RegisterAndLogin/login.jsx"))
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -56,7 +59,9 @@ class MainWindow extends React.Component {
                         <Route exact path='/CheckIP' render={() => {return <ShowIp/>}}/>
                         <Route exact path='/Scripts' component={ ScriptDl } />
                         <Route exact path='/TodoList' render={() => {return <TodoList/>}}/>
-                        <Route exact path='/Calculator' render={()=>{return <Calculator />}} />
+                        <Route exact path='/Calculator' render={()=>{return <Calculator/>}} />
+                        <Route exact path='/Regist' render={()=>{return <Register/>}}/>
+                        <Route exact path='/Login' render={()=>{return <Login/>}}/>
                     </Suspense>
                 </div>
             </HashRouter>
