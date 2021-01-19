@@ -27,6 +27,10 @@ const Input = styled.input `
     margin: 0.5rem 0;
     width: 275px;
     color: white;
+
+    &:focus{
+        outline: none;
+    }
 `
 
 const FootDiv = styled.div ` 
@@ -41,11 +45,21 @@ const FootButton = styled.button `
     border-radius:      9px;
     color:              white;
     font-size: 1.5rem;
+
+    &:focus{
+        outline: none;
+    }
+`
+
+const ErrSpan = styled.span ` 
+    color: red;
+    font-size: 1.5rem;
 `
 
 const Register = () => {
     const [username, setName] = useState('')
     const [password, setPswd] = useState('')
+    const [errmsg, setErrMsg] = useState('')
 
     useEffect(() => {
         axios.post(`http://114.32.157.74/ExpressServer/api/`, {
@@ -57,6 +71,10 @@ const Register = () => {
     }, [])
 
     const RegistUser = () => {
+        if(username == '' || password == ''){
+            setErrMsg('請輸入完整資訊')
+            return
+        }
         let hashpwd = ''
         // Bcrypt.hash(password, 8, function(err, res){
         //     hashpwd = res
@@ -68,19 +86,27 @@ const Register = () => {
             username: username,
             password: hashpwd
         }).then(res=>{
-            console.log(hashpwd)
+            if(res.data.err.code == 'ER_DUP_ENTRY'){
+                setErrMsg('帳號已使用')
+            }
+            else{
+                setErrMsg('')
+            }
         })
     }
 
     return (
         <MainDiv>
-            Registration
+            註冊
             <Input 
                 id="account" placeholder={`輸入帳號`}
                 onChange={(e)=>{setName(e.target.value)}} />
-            <Input id="pw" placeholder={`輸入密碼`}
+            <Input id="password" placeholder={`輸入密碼`}
                 onChange={(e)=>{setPswd(e.target.value)}} />
             <FootDiv>
+                <ErrSpan>
+                    {errmsg}
+                </ErrSpan>
                 <FootButton onClick={RegistUser}>
                     送出
                 </FootButton>
