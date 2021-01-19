@@ -34,14 +34,11 @@ app.post('/ExpressServer/api', (req, res) => {
     if(req.body.action == 'Regist'){
         let username = req.body.username;
         let password = privateKey.decrypt(req.body.password, 'utf8')
-        console.log(password)
         Bcrypt.hash(password, 10).then(hash=>{
-            console.log(hash)
             db.query("INSERT INTO users (username, password) VALUES (?, ?)", 
             [username, hash], 
             (err, result)=>{
                 if(err){
-                    console.log(err)
                     res.send({status: 'Failed', err: err})
                 }
                 else{
@@ -53,9 +50,20 @@ app.post('/ExpressServer/api', (req, res) => {
     else if(req.body.action == 'KeyRequest'){
         res.send({key:public})
     }
-    else if(req.body.action == 'CheckKey'){
-        let enc = req.body.enc
-        let dec = privateKey.decrypt(enc, 'utf8')
+    else if(req.body.action == 'login'){
+        let dec = privateKey.decrypt(req.body.password, 'utf8')
+        db.query('SELECT password FROM users WHERE username = ?', [req.body.username], 
+            function(err, row){
+                Bcrypt.compare(dec, row[0].password).then(result=>{
+                    if(result == true){
+                        res.send({status: 'Success'})
+                    }
+                    else{
+                        res.send({status: 'Fail'})
+                    }
+                })
+            }
+        )
     }
 })
 
