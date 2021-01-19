@@ -11,9 +11,9 @@ module.exports = {
     module: {
         rules: [
             //第一個loader編譯JSX
-            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
+            { test: /\.(js|jsx)$/, exclude: [/node_modules/, /ExpressServer/], loader: 'babel-loader' },
             //第二個loader編譯ES6
-            { test: /.css$/, exclude: /node_modules/, use: ['style-loader','css-loader'] }
+            { test: /.css$/, exclude: [/node_modules/, /ExpressServer/], use: ['style-loader','css-loader'] }
         ]
     },
     devServer:{
