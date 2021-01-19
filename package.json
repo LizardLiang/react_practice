@@ -43,6 +43,7 @@
     "weinre-webpack-plugin": "^2.3.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "identity-obj-proxy": "^3.0.0",
     "ios-webkit-debug-proxy": "0.0.3",
     "react": "^17.0.1",
