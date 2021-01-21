@@ -6,7 +6,8 @@ module.exports = {
     entry: ['./app.jsx'],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './'),
+        path: path.resolve('E:/Programing/Web/resume'),
+        chunkFilename: '[name].bundle.js',
     },
     module: {
         rules: [
