@@ -125,7 +125,9 @@ const GuideButton = styled.button `
 `
 
 const GuideLink = styled(Link) `
-    text-decoration:    none;
+    &:focus, &:hover{
+        text-decoration:    none;
+    }
 `
 
 export default class HeadBanner extends Component {
