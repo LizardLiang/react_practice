@@ -8,6 +8,7 @@ let rsa = new JSEncrypt()
 
 const MainDiv = styled.div ` 
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,9 +65,19 @@ const Login = () => {
         })
     }, [])
 
+    const valid_username = (name) => {
+        let pattern = /^\w*$/
+        let valid = name.match(pattern)
+
+        if (valid == null)
+            return false
+        else
+            return true
+    }
+
     const LoginServer = () => {
-        if(username == '' || password == ''){
-            setErrMsg('請輸入完整資訊')
+        if(!valid_username(username)){
+            setErrMsg('請檢查帳號格式')
         }
         else{
             let hashpwd = rsa.encrypt(password)
