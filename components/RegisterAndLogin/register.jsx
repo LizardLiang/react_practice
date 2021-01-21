@@ -70,29 +70,54 @@ const Register = () => {
         })
     }, [])
 
+    const valid_username = (name) => {
+        let pattern = /^\w*$/
+        let valid = name.match(pattern)
+
+        if (valid == null)
+            return false
+        else
+            return true
+    }
+
+    const valid_password = (pwd) => {
+        let pattern = /^[-\w.?!@#$%^&*]*$/
+        let valid = pwd.match(pattern)
+        console.log(valid)
+
+        if (valid == null)
+            return false
+        else
+            return true
+    }
+
     const RegistUser = () => {
-        if(username == '' || password == ''){
-            setErrMsg('請輸入完整資訊')
-            return
+        if(!valid_username(username)){
+            setErrMsg('帳號格式錯誤')
         }
-        let hashpwd = ''
-        // Bcrypt.hash(password, 8, function(err, res){
-        //     hashpwd = res
-        //     console.log(username, hashpwd)
-        // })
-        hashpwd = rsa.encrypt(password)
-        axios.post(`http://114.32.157.74/ExpressServer/api/`,{
-            action: 'Regist',
-            username: username,
-            password: hashpwd
-        }).then(res=>{
-            if(res.data.err.code == 'ER_DUP_ENTRY'){
-                setErrMsg('帳號已使用')
-            }
-            else{
-                setErrMsg('')
-            }
-        })
+        else if(!valid_password(password)){
+            setErrMsg('密碼格式錯誤')
+        }
+        else{
+            let hashpwd = ''
+            // Bcrypt.hash(password, 8, function(err, res){
+            //     hashpwd = res
+            //     console.log(username, hashpwd)
+            // })
+            hashpwd = rsa.encrypt(password)
+            axios.post(`http://114.32.157.74/ExpressServer/api/`,{
+                action: 'Regist',
+                username: username,
+                password: hashpwd
+            }).then(res=>{
+                if(res.data.err.code == 'ER_DUP_ENTRY'){
+                    setErrMsg('帳號已使用')
+                }
+                else{
+                    setErrMsg('')
+                }
+            })
+        }
     }
 
     return (
