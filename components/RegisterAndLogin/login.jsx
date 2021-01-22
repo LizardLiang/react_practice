@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import {JSEncrypt} from 'jsencrypt'
 import axios from 'axios'
@@ -13,7 +13,6 @@ const MainDiv = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 5rem;
     color: white;
     font-size: 2rem;
 `
@@ -48,6 +47,15 @@ const FootButton = styled.button `
     font-size: 1.5rem;
 
     &:focus{
+        outline: none;
+    }
+`
+
+const RegistLink = styled(Link) ` 
+    font-size: 1rem;
+
+    &:focus, &:hover {
+        text-decoration: none;
         outline: none;
     }
 `
@@ -99,12 +107,15 @@ const Login = () => {
     return (
         <MainDiv>
             登入
-            <Input id="account" onChange={(e)=>{setUser(e.target.value)}} />
-            <Input id="password" onChange={(e)=>{setPswd(e.target.value)}} />
+            <Input id="account" placeholder='輸入帳號'
+                onChange={(e)=>{setUser(e.target.value)}} />
+            <Input id="password" placeholder='輸入密碼'
+            onChange={(e)=>{setPswd(e.target.value)}} />
             <FootDiv>
                 {ErrMsg}
                 <FootButton onClick={LoginServer}>登入</FootButton>
             </FootDiv>
+            <RegistLink to='Regist'>沒有帳號嗎? 點這裡註冊！</RegistLink>
         </MainDiv>
     )
 }
