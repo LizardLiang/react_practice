@@ -1,6 +1,7 @@
 import React, {Suspense, lazy} from "react"
 import ReactDOM from "react-dom"
-import {HashRouter, Route} from 'react-router-dom'
+import styled from 'styled-components'
+import {HashRouter, Route, Link} from 'react-router-dom'
 import './index.css'
 const Home = lazy(() => 
         import(/* webpackChunkName:"Home" */ './components/pagebox/home.jsx'))
@@ -24,6 +25,19 @@ const Login = lazy(()=>
         import(/* webpackChunkName: "Login" */"./components/RegisterAndLogin/login.jsx"))
 const Projects = lazy(()=>
         import(/* webpackChunkName: "Projects" */"./components/Projects/projects.jsx"))
+const Privacy = lazy(()=>
+        import(/* webpackChunkName: "Privacy" */"./components/pagebox/privacy.jsx"))
+
+const Footer = styled.div ` 
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    background:     rgb(47, 49, 54);
+    color: white;
+`
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -65,8 +79,13 @@ class MainWindow extends React.Component {
                         <Route exact path='/Regist' render={()=>{return <Register/>}}/>
                         <Route exact path='/Login' render={()=>{return <Login/>}}/>
                         <Route exact path='/Projects' render={()=>{return <Projects />}} />
+                        <Route exact path='/Privacy' render={()=>{return <Privacy />}} />
                     </Suspense>
                 </div>
+                <Footer>
+                    Copyright © 2021 Lizard Demo. All Rights Reserved.
+                    <Link to='/Privacy'>隱私權政策 Privacy Policy</Link>
+                </Footer>
             </HashRouter>
         )
     }
