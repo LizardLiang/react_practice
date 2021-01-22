@@ -2,4 +2,5 @@
 *.pem
 *.key
 web.config
+bundle.js
 *.bundle.js
