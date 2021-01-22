@@ -88,22 +88,6 @@ const GuideLink = styled(Link) `
     }
 `
 
-{/* <GuideLink to='/StockSearch'>
-                    股票查詢
-                </GuideLink>
-<GuideLink to='./CountDown'>
-                    計時器
-                </GuideLink>
-<GuideLink to='./CheckIP'>
-                    IP 查詢
-                </GuideLink>
-<GuideLink to='./Scripts'>
-                    檔案下載
-                </GuideLink>
-<GuideLink to='./TodoList'>
-                    待辦事項
-                </GuideLink> */}
-
 const ProjectColumn = (props) => {
     return (
         <SectionDiv>
@@ -111,7 +95,7 @@ const ProjectColumn = (props) => {
                 <HeadDiv>
                     計時器
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/countdownCut.png'>
+                <IntroDiv bgurl='./img/countdownCut.png'>
                     <span>可自定義事件的倒數計時器。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -126,7 +110,7 @@ const ProjectColumn = (props) => {
                 <HeadDiv>
                     股票查詢
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/stock.png'>
+                <IntroDiv bgurl='./img/stock.png'>
                     <span>查詢一個月內該股票價格。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -141,7 +125,7 @@ const ProjectColumn = (props) => {
                 <HeadDiv>
                     IP 查詢
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/checkip.png'>
+                <IntroDiv bgurl='./img/checkip.png'>
                     <span>利用API查詢使用者的IP</span>
                 </IntroDiv>
                 <FootDiv>
@@ -163,7 +147,7 @@ const ProjectColumn1 = (props) => {
                 <HeadDiv>
                     檔案下載
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/script.png'>
+                <IntroDiv bgurl='./img/script.png'>
                     <span>分享模組檔案。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -178,7 +162,7 @@ const ProjectColumn1 = (props) => {
                 <HeadDiv>
                     待辦事項
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/todolist.png'>
+                <IntroDiv bgurl='./img/todolist.png'>
                     <span>紀錄待辦事項，可分為三種狀態。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -193,7 +177,7 @@ const ProjectColumn1 = (props) => {
                 <HeadDiv>
                     計算機
                 </HeadDiv>
-                <IntroDiv bgurl='../../img/calculator.png'>
+                <IntroDiv bgurl='./img/calculator.png'>
                     <span>基本計算機功能。</span>
                 </IntroDiv>
                 <FootDiv>
