@@ -1,14 +1,18 @@
-import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, {useCallback} from 'react'
+import {Link, useHistory} from 'react-router-dom'
 import styled, {keyframes} from 'styled-components'
 
 const SectionDiv = styled.div ` 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 90%;
     color: white;
     margin: 5px 0;
+
+    @media screen and (max-width: 1000px){
+        flex-direction: column;
+    }
 `
 
 const BlockDiv = styled.div ` 
@@ -27,11 +31,17 @@ const BlockDiv = styled.div `
         height: 500px;
         transition: height 1s, width 1s;
     }
+
+    @media screen and (max-width: 1000px){
+        width: 100%;
+        margin: 5px 0;
+    }
 `
 
 const HeadDiv = styled.div ` 
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
     width: 100%;
     height: 15%;
@@ -47,6 +57,7 @@ const FootDiv = styled.div `
 
 const FootButton = styled.button ` 
     width: 100px;
+    height: 100%;
     white-space: nowrap;
     overflow: hidden;
     transition: width 1s;
@@ -69,6 +80,10 @@ const IntroDiv = styled.div `
     width: 100%;
     height: 70%;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     span {
         position: absolute;
         bottom: 0;
@@ -89,13 +104,18 @@ const GuideLink = styled(Link) `
 `
 
 const ProjectColumn = (props) => {
+    const history = useHistory()
+    const handleCountdown = useCallback(() => history.push('/CountDown'), [history]);
+    const handleStock = useCallback(() => history.push('/StockSearch'), [history]);
+    const handleCheckIP = useCallback(() => history.push('/CheckIP'), [history]);
+
     return (
         <SectionDiv>
             <BlockDiv>
                 <HeadDiv>
                     計時器
                 </HeadDiv>
-                <IntroDiv bgurl='./img/countdownCut.png'>
+                <IntroDiv bgurl='./img/countdownCut.png' onClick={handleCountdown}>
                     <span>可自定義事件的倒數計時器。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -110,7 +130,7 @@ const ProjectColumn = (props) => {
                 <HeadDiv>
                     股票查詢
                 </HeadDiv>
-                <IntroDiv bgurl='./img/stock.png'>
+                <IntroDiv bgurl='./img/stock.png' onClick={handleStock}>
                     <span>查詢一個月內該股票價格。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -125,7 +145,7 @@ const ProjectColumn = (props) => {
                 <HeadDiv>
                     IP 查詢
                 </HeadDiv>
-                <IntroDiv bgurl='./img/checkip.png'>
+                <IntroDiv bgurl='./img/checkip.png' onClick={handleCheckIP}>
                     <span>利用API查詢使用者的IP</span>
                 </IntroDiv>
                 <FootDiv>
@@ -141,13 +161,18 @@ const ProjectColumn = (props) => {
 }
 
 const ProjectColumn1 = (props) => {
+    const history = useHistory()
+    const handleScripts = useCallback(() => history.push('/Scripts', [history]))
+    const handleTodoList = useCallback(() => history.push('/TodoList', [history]))
+    const handleCalculator = useCallback(() => history.push('/Calculator', [history]))
+
     return (
         <SectionDiv>
             <BlockDiv>
                 <HeadDiv>
                     檔案下載
                 </HeadDiv>
-                <IntroDiv bgurl='./img/script.png'>
+                <IntroDiv bgurl='./img/script.png' onClick={handleScripts}>
                     <span>分享模組檔案。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -162,7 +187,7 @@ const ProjectColumn1 = (props) => {
                 <HeadDiv>
                     待辦事項
                 </HeadDiv>
-                <IntroDiv bgurl='./img/todolist.png'>
+                <IntroDiv bgurl='./img/todolist.png' onClick={handleTodoList}>
                     <span>紀錄待辦事項，可分為三種狀態。</span>
                 </IntroDiv>
                 <FootDiv>
@@ -177,7 +202,7 @@ const ProjectColumn1 = (props) => {
                 <HeadDiv>
                     計算機
                 </HeadDiv>
-                <IntroDiv bgurl='./img/calculator.png'>
+                <IntroDiv bgurl='./img/calculator.png' onClick={handleCalculator}>
                     <span>基本計算機功能。</span>
                 </IntroDiv>
                 <FootDiv>
