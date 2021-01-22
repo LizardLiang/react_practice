@@ -10,8 +10,12 @@ const MapCountDown = lazy(() =>
         import(/* webpackChunkName:"CountDown" */'./components/CountDown/CountDown.jsx'))
 const StockMain = lazy(()=>
 <<<<<<< HEAD
+<<<<<<< HEAD
         import(/* webpackChunkName:"Stock" */'./components/StockPage/StockMain.jsx'))
 import './index.css'
+=======
+        import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
+>>>>>>> 8141407b56f1a662258b10cf370f496b07822f4c
 =======
         import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
 >>>>>>> 8141407b56f1a662258b10cf370f496b07822f4c
