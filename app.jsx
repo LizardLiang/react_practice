@@ -22,6 +22,8 @@ const Register = lazy(()=>
         import(/* webpackChunkName: "Register" */"./components/RegisterAndLogin/register.jsx"))
 const Login = lazy(()=>
         import(/* webpackChunkName: "Login" */"./components/RegisterAndLogin/login.jsx"))
+const Projects = lazy(()=>
+        import(/* webpackChunkName: "Projects" */"./components/Projects/projects.jsx"))
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -62,6 +64,7 @@ class MainWindow extends React.Component {
                         <Route exact path='/Calculator' render={()=>{return <Calculator/>}} />
                         <Route exact path='/Regist' render={()=>{return <Register/>}}/>
                         <Route exact path='/Login' render={()=>{return <Login/>}}/>
+                        <Route exact path='/Projects' render={()=>{return <Projects />}} />
                     </Suspense>
                 </div>
             </HashRouter>
