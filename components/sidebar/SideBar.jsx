@@ -129,23 +129,8 @@ const GuideButton = styled.button `
 `
 
 const GuideLink = styled(Link) `
-<<<<<<< HEAD
-    text-decoration:    none;
-
-    @media screen and (max-width: 1280px){
-        font-size: 1.6rem;
-    }
-
-    @media screen and (max-width: 1000px){
-        font-size: 1rem;
-    }
-
-    @media screen and (max-width: 320px){
-        font-size: 0.1rem;
-=======
     &:focus, &:hover{
         text-decoration:    none;
->>>>>>> 8141407b56f1a662258b10cf370f496b07822f4c
     }
 `
 
