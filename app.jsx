@@ -3,17 +3,17 @@ import ReactDOM from "react-dom"
 import {HashRouter, Route} from 'react-router-dom'
 import './index.css'
 const Home = lazy(() => 
-        import(/*webpackChunkName:"Home"*/ './components/pagebox/home.jsx'))
+        import(/* webpackChunkName:"Home" */ './components/pagebox/home.jsx'))
 const HeadBanner = lazy(() => 
-        import(/*webpackChunkName:"HeadBanner"*/'./components/sidebar/SideBar.jsx'))
+        import(/* webpackChunkName:"HeadBanner" */'./components/sidebar/SideBar.jsx'))
 const MapCountDown = lazy(() => 
-        import(/*webpackChunkName:"CountDown"*/'./components/CountDown/CountDown.jsx'))
+        import(/* webpackChunkName:"CountDown" */'./components/CountDown/CountDown.jsx'))
 const StockMain = lazy(()=>
-        import(/*webpackChunkName:"Stock"*/'./components/StockPage/StockMain.jsx'))
+        import(/* webpackChunkName:"Stock" */'./components/StockPage/StockMain.jsx'))
 const ShowIp = lazy(()=>
-        import(/*webpackChunkName:"ShowIp"*/"./components/ShowIp/ShowIp.jsx"))
+        import(/* webpackChunkName:"ShowIp" */"./components/ShowIp/ShowIp.jsx"))
 const ScriptDl = lazy(()=>
-        import(/*webpackChunkName:"ScriptDL"*/"./components/ScriptDownload/ScriptDownload.jsx"))
+        import(/* webpackChunkName:"ScriptDL" */"./components/ScriptDownload/ScriptDownload.jsx"))
 const TodoList = lazy(()=>
         import(/* webpackChunkName: "TodoList" */"./components/TodoList/TodoList.jsx"))
 const Calculator = lazy(()=>
@@ -22,6 +22,8 @@ const Register = lazy(()=>
         import(/* webpackChunkName: "Register" */"./components/RegisterAndLogin/register.jsx"))
 const Login = lazy(()=>
         import(/* webpackChunkName: "Login" */"./components/RegisterAndLogin/login.jsx"))
+const Projects = lazy(()=>
+        import(/* webpackChunkName: "Projects" */"./components/Projects/projects.jsx"))
 
 class MainWindow extends React.Component {
     constructor(props){
@@ -62,6 +64,7 @@ class MainWindow extends React.Component {
                         <Route exact path='/Calculator' render={()=>{return <Calculator/>}} />
                         <Route exact path='/Regist' render={()=>{return <Register/>}}/>
                         <Route exact path='/Login' render={()=>{return <Login/>}}/>
+                        <Route exact path='/Projects' render={()=>{return <Projects />}} />
                     </Suspense>
                 </div>
             </HashRouter>

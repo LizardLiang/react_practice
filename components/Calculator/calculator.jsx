@@ -12,7 +12,7 @@ const MainDiv = styled.div `
 `
 
 const ResultDiv = styled.div ` 
-    width: 30%;
+    width: 570px;
     display: flex;
     flex-direction: column;
     height: 6rem;
@@ -25,6 +25,7 @@ const ResultDiv = styled.div `
 const UpperRes = styled.div ` 
     display: flex;
     width: 100%;
+    height: 24px;
     justify-content: flex-end;
     align-items: center;
     font-size: 1rem;
@@ -38,7 +39,7 @@ const LowerRes = styled.div `
 `
 
 const KeyboardDiv = styled.div `
-    width: 30%;
+    width: 570px;
     display: flex;
     justify-content: space-between;
 ` 
@@ -115,8 +116,8 @@ const KeyboardSection = styled.div `
 `
 
 const Calculator = () => {
-    const [Num1, setNum1] = useState(0)
-    const [Num2, setNum2] = useState(0)   
+    const [Num1, setNum1] = useState('0')
+    const [Num2, setNum2] = useState('0')   
     const [Sym, setSym] = useState('')
     const [upperCont, setUpper] = useState('')
     const [lowerCont, setLower] = useState('0')
@@ -125,48 +126,73 @@ const Calculator = () => {
     const NumClick = (num) => {
         if(Sym == ''){
             // keep number 1
-            setNum1(old=>{return old * 10 + num})
-
-            if (lowerCont == '0' || isNew){
+            if ((lowerCont == '0' || isNew) && num != '.'){
                 // if number1 == 0 just cover old value
+                setNum1(`${num}`);
                 setLower(`${num}`);
             }
             else{
                 // if number1 is not 0 append new value to old value
+                setNum1(old=>{return `${old}` + `${num}`})
                 setLower(old=>{return `${old + num}`})
             }
         }
         else{
-            setNum2(old=>{return old * 10 + num})
-            setLower(old=>{return `${old + num}`})
+            let newNum2 = ''
+            if(Num2 == '0' && num != '.'){
+                newNum2 = `${num}`
+            }
+            else{
+                newNum2 = `${Num2}` + `${num}`
+            }
+            setNum2(newNum2)
+            setLower(newNum2)
         }
         setNew(false)
     }
 
     const SymClick = (sym) => {
+        // if a operator is clicked move to upper display section
+        if(Sym != '' && Num1 != 0 && Num2 != 0){
+            // if last result need to be calculated
+            let ans = DoMath()
+            setNum1(parseFloat(ans))
+            setNum2(0)
+            setUpper(`${ans} ${sym}`)
+        }
+        else{
+            setUpper(`${Num1} ${sym}`)
+        }
         setSym(sym)
-        
-        setUpper(`${Num1}${sym}`)
     }
 
-    const CalAns = () => {
+    const DoMath = () => {
         if(Sym == ''){
             return
         }
         else if(Sym == '+'){
-            setLower(`${Num1 + Num2}`)
+            setLower(`${parseFloat(Num1) + parseFloat(Num2)}`)
+            return parseFloat(Num1) + parseFloat(Num2)
         }
         else if(Sym == '-'){
-            setLower(`${Num1 - Num2}`)
+            setLower(`${parseFloat(Num1) - parseFloat(Num2)}`)
+            return parseFloat(Num1) - parseFloat(Num2)
         }
         else if(Sym == '*'){
-            setLower(`${Num1 * Num2}`)
+            setLower(`${parseFloat(Num1) * parseFloat(Num2)}`)
+            return parseFloat(Num1) * parseFloat(Num2)
         }
         else if(Sym == '/'){
-            setLower(`${Num1 / Num2}`)
+            setLower(`${parseFloat(Num1) / parseFloat(Num2)}`)
+            return parseFloat(Num1) / parseFloat(Num2)
         }
+    }
 
+    const CalAns = () => {
+        // if '=' is clicked calculate the answer display it in lower section
+        DoMath()
         // reset status
+        setUpper('')
         setNum1(0)
         setNum2(0)
         setSym('')
@@ -174,10 +200,11 @@ const Calculator = () => {
     }
 
     const ClearAll = () => {
+        setUpper('')
+        setLower('0')
         setNum1(0)
         setNum2(0)
         setSym('')
-        setCont('0')
     }
 
     return (
@@ -240,7 +267,7 @@ const Calculator = () => {
                         <KeysLandMid onClick={()=>{NumClick(0)}}>
                             0
                         </KeysLandMid>
-                        <KeysSmall>
+                        <KeysSmall onClick={()=>{NumClick('.')}}>
                             .
                         </KeysSmall>
                     </KeyboardSection>

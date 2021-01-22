@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import Axios from 'axios'
-import Bcrypt from 'bcryptjs'
 import styled from 'styled-components'
 import {JSEncrypt} from 'jsencrypt'
-import axios from 'axios'
 
 let rsa = new JSEncrypt()
 
@@ -15,7 +14,6 @@ const MainDiv = styled.div `
     color: white;
     justify-content: center;
     align-items: center;
-    padding-top: 5rem;
     font-size: 2rem;
 `
 
@@ -56,13 +54,22 @@ const ErrSpan = styled.span `
     font-size: 1.5rem;
 `
 
+const LoginLink = styled(Link) `
+    font-size: 1rem;
+    
+    &:focus, &:hover {
+        text-decoration: none;
+        outline: none;
+    }
+`
+
 const Register = () => {
     const [username, setName] = useState('')
     const [password, setPswd] = useState('')
     const [errmsg, setErrMsg] = useState('')
 
     useEffect(() => {
-        axios.post(`http://114.32.157.74/ExpressServer/api/`, {
+        Axios.post(`http://114.32.157.74/ExpressServer/api/`, {
             action: 'KeyRequest'
         }).then(res=>{
             let key = res.data.key
@@ -105,7 +112,7 @@ const Register = () => {
             //     console.log(username, hashpwd)
             // })
             hashpwd = rsa.encrypt(password)
-            axios.post(`http://114.32.157.74/ExpressServer/api/`,{
+            Axios.post(`http://114.32.157.74/ExpressServer/api/`,{
                 action: 'Regist',
                 username: username,
                 password: hashpwd
@@ -136,6 +143,7 @@ const Register = () => {
                     送出
                 </FootButton>
             </FootDiv>
+            <LoginLink to='/Login'>已經有帳號了嗎? 點這裡登入</LoginLink>
         </MainDiv>
     )
 }

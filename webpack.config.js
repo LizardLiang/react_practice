@@ -6,15 +6,16 @@ module.exports = {
     entry: ['./app.jsx'],
     output: {
         filename: 'bundle.js',
-        path: path.resolve('E:/Programing/Web/resume'),
-        chunkFilename: '[name].bundle.js',
+        path: path.resolve(__dirname, './'),
+        chunkFilename: '[name].bundle.js'
     },
     module: {
         rules: [
-            //第一個loader編譯JSX
-            { test: /\.(js|jsx)$/, exclude: [/node_modules/, /ExpressServer/], loader: 'babel-loader' },
-            //第二個loader編譯ES6
-            { test: /.css$/, exclude: [/node_modules/, /ExpressServer/], use: ['style-loader','css-loader'] }
+            //第一個 loader編譯 JSX
+            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
+            //第二個 loader編譯 css
+            { test: /.css$/, exclude: /node_modules/, use: ['style-loader','css-loader'] },
+            { test: /\.(svg)$/, exclude: /node_modules/, use: [{loader: 'file-loader', options:{name: 'images/[hash]-[name].[ext]'},}]}
         ]
     },
     devServer:{
