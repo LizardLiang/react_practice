@@ -19,7 +19,11 @@ const HeaderH1 = styled.h1 `
     text-align:     center;
     vertical-align: middle;
     font-size:      5rem;
-    color:          white
+    color:          white;
+
+    @media screen and (max-width: 280px){
+        font-size: 3.5rem;
+    }
 `
 
 export default class Home extends Component{
@@ -56,7 +60,6 @@ export default class Home extends Component{
                     <MyTool         id="4" />
                     <AdditionInfo   id="5" />
                 </div>
-                {/* <SideBar /> */}
             </div>
         )
     }
