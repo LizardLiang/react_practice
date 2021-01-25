@@ -30,7 +30,6 @@ export default class Home extends Component{
     render(){
         const Styles = {
             MainPageContainer: {
-                marginTop:  '100vh',
                 position:   'relative',
                 margin:     '100vh 0 0 0',
                 // background: 'rgb(54, 57, 63)',
