@@ -279,7 +279,7 @@ const MainDiv = styled.div `
     align-items: center;
     padding-top: 5rem;
     color: white;
-    min-height: 100vh;
+    min-height: calc(100vh -24px);
 `
 
 const CateBlock = styled.div `
