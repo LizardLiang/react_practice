@@ -37,6 +37,8 @@ const Footer = styled.div `
     font-size: 1rem;
     background:     rgb(47, 49, 54);
     color: white;
+    position: relative;
+    bottom: 0;
 `
 
 class MainWindow extends React.Component {
