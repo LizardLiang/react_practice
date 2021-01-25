@@ -220,7 +220,7 @@ const ProjectColumn1 = (props) => {
 const MainDiv = styled.div ` 
     display: flex;
     flex-direction: column;
-    min-height: 1000px;
+    min-height: calc(1000px - 24px);
     align-items: center;
     justify-content: center;
     width: 100%;
