@@ -8,7 +8,7 @@ let rsa = new JSEncrypt()
 
 const MainDiv = styled.div ` 
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 24px);
     display: flex;
     flex-direction: column;
     color: white;
