@@ -99,6 +99,7 @@ const Login = () => {
                 if(res.data.status == 'Success'){
                     accDispatch({type:'set_account', payload: {status: 1, account: username}})
                     setErrMsg('登入成功')
+                    setTimeout(()=>{setErrMsg('')}, 5000)
                 }
                 else{
                     setErrMsg('登入失敗')
