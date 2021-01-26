@@ -1,6 +1,4 @@
 export * from './app.jsx'
-import {createContext} from 'react'
-import {createStore} from "redux" // import createStore component from redux
 
 {/*
     define date with 

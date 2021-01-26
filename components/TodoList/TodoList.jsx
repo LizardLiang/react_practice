@@ -361,7 +361,7 @@ function TodoList() {
                 <CateTitle>Active</CateTitle>
                 {/* Get active list */}
                 {actives.length > 0 ? actives.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    return <TodoContent key={index} name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
                     <NoItemSpan>沒有項目</NoItemSpan>
                 }
             </CateBlock>
@@ -370,7 +370,7 @@ function TodoList() {
                 {/* Get finshed list */}
                 {finishes.length > 0 ? 
                     finishes.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    return <TodoContent key={index} name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
                     <NoItemSpan>沒有項目</NoItemSpan>
                 }
             </CateBlock>
@@ -379,7 +379,7 @@ function TodoList() {
                 {/* Get inactive list */}
                 {inactives.length > 0 ? 
                     inactives.map(((value, index)=>{
-                    return <TodoContent name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
+                    return <TodoContent key={index} name={value.Name} Date={value.Date} so={index + 1} status={value.status} setSts={changeStatus} />})) : 
                     <NoItemSpan>沒有項目</NoItemSpan>
                 }
             </CateBlock>

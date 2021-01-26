@@ -63,7 +63,7 @@ class AdditionInfo extends Component{
         window.removeEventListener('scroll', this.scrollHandler)
     }
 
-    scrollHandler(e){
+    scrollHandler(){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
         let height = rec['height']
@@ -99,14 +99,14 @@ class AdditionInfo extends Component{
                         <li>
                             <a  
                                 href="https://github.com/lizrad?tab=repositories"
-                                target='_blank'>
+                                target='_blank' rel="noreferrer">
                                 Github repositories
                             </a>
                         </li>
                         <li>
                             <a  
                                 href="https://github.com/lizrad/react_practice"
-                                target='_blank'>
+                                target='_blank' rel="noreferrer">
                                 本頁原碼
                             </a>
                         </li>

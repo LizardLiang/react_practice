@@ -1,0 +1,12 @@
+*.json
+*.md
+node_modules/
+img/
+*.bundle.js
+bundle.js
+*.txt
+setupTests.js
+webpack.config.js
+*.html
+*.css
+*.svg

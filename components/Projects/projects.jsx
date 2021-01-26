@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 import {Link, useHistory} from 'react-router-dom'
-import styled, {keyframes} from 'styled-components'
+import styled from 'styled-components'
 
 const SectionDiv = styled.div ` 
     display: flex;

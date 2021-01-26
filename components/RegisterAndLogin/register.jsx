@@ -69,7 +69,7 @@ const Register = () => {
     const [errmsg, setErrMsg] = useState('')
 
     useEffect(() => {
-        Axios.post(`http://114.32.157.74/ExpressServer/api/`, {
+        Axios.post(`http://MyIP/ExpressServer/api/`, {
             action: 'KeyRequest'
         }).then(res=>{
             let key = res.data.key
@@ -111,7 +111,7 @@ const Register = () => {
             //     console.log(username, hashpwd)
             // })
             hashpwd = rsa.encrypt(password)
-            Axios.post(`http://114.32.157.74/ExpressServer/api/`,{
+            Axios.post(`http://MyIP/ExpressServer/api/`,{
                 action: 'Regist',
                 username: username,
                 password: hashpwd

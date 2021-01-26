@@ -588,7 +588,7 @@ class CountDown extends Component {
     }
 
     render() {
-        let Timers = this.props.data.map((value) => {
+        let Timers = this.props.data.map((value, index) => {
             let cur_year = new Date().getFullYear()
             // ignore default date when user add there own
             let date = new Date(
@@ -613,6 +613,7 @@ class CountDown extends Component {
 
             return (
                 <TimerBlock
+                    key={index}
                     title={value.title}
                     targetDate={date}
                     passTime={this.state.passTime}

@@ -35,12 +35,12 @@ class WebGame extends Component{
                     當遊戲結束時根據是否找出所有汙染源，還是計時器結束，顯示訊息框。<br/>
                     <a 
                         href="https://github.com/lizrad/AirPollutionWithReactJS"
-                        target="_blank">
+                        target="_blank" rel="noreferrer">
                         原碼連結
                     </a>
                 </MainSpan>
                 <MainIframe 
-                    src="http://114.32.157.74" 
+                    src="http://MyIP" 
                     scrolling='no'/>
             </MainDiv>
         )

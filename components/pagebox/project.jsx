@@ -23,14 +23,12 @@ class Project extends React.Component   {
         switch(name){
             case "Test Program":
                 return <Test_Program isVisible={isVisible}/>
-                break
             case "Web Game":
                 return <WebGame isVisible={isVisible}/>
             case "Python Web API":
                 return <StockChart isVisible={isVisible} />
             default:
                 return  <div></div>
-                break
         }
     }
 

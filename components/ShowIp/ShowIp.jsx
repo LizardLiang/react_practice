@@ -26,7 +26,7 @@ function ShowIp() {
 
     let FetchIp = () => {
         // use fetch post 
-        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+        fetch('http://MyIP/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 // need to set content-type to determine body type

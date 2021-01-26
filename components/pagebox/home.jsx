@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./"
-import { SideBar } from '../sidebar'
 
 const HeaderDiv = styled.div `
     position:       fixed;

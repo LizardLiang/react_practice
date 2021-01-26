@@ -1,5 +1,4 @@
 import React    from 'react'
-import ReactDOM from 'react-dom'
 
 class Buttons extends React.Component{
     constructor (props){
@@ -40,7 +39,6 @@ class Buttons extends React.Component{
                 fontSize:       '2vmin' ,
                 border:         0,
                 borderBottom:   '1px solid grey',
-                boxShadow:      'none',
                 borderRadius:   '0px',
                 textAlign:      'center',
                 padding:        '25% 0',

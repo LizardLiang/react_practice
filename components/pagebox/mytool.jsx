@@ -78,7 +78,7 @@ class MyTool extends Component{
         window.removeEventListener('scroll', this.scrollHandler)
     }
 
-    scrollHandler(e){
+    scrollHandler(){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
         let height = rec['height']

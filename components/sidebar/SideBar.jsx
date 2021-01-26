@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react"
+import React, {useContext} from "react"
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import {IconContext} from 'react-icons'
@@ -6,51 +6,51 @@ import {BiUser, BiDownArrow, BiLogOut} from 'react-icons/bi'
 import {AccountContext} from '../../app.jsx'
 // import MenuIcon from '../../img/drawsvg.svg'
 
-const PLMainDiv = styled.div ` 
-    position: absolute;
-    width: 10%;
-    display: none;
-    flex-direction: column;
-    background: inherit;
-    border-radius: 5px;
-    top: 3rem;
+// const PLMainDiv = styled.div ` 
+//     position: absolute;
+//     width: 10%;
+//     display: none;
+//     flex-direction: column;
+//     background: inherit;
+//     border-radius: 5px;
+//     top: 3rem;
 
-    &:hover {
-        display: flex;
-    }
-`
-const ProjectList = () => {
+//     &:hover {
+//         display: flex;
+//     }
+// `
+// const ProjectList = () => {
 
-    return (
-        <PLMainDiv>
-            <GuideButton>
-                <GuideLink to='/StockSearch'>
-                    股票查詢
-                </GuideLink>
-            </GuideButton>
-            <GuideButton>
-                <GuideLink to='./CountDown'>
-                    計時器
-                </GuideLink>
-            </GuideButton>
-            <GuideButton>
-                <GuideLink to='./CheckIP'>
-                    IP 查詢
-                </GuideLink>
-            </GuideButton>
-            <GuideButton>
-                <GuideLink to='./Scripts'>
-                    檔案下載
-                </GuideLink>
-            </GuideButton>
-            <GuideButton>
-                <GuideLink to='./TodoList'>
-                    待辦事項
-                </GuideLink>
-            </GuideButton>
-        </PLMainDiv>
-    )
-}
+//     return (
+//         <PLMainDiv>
+//             <GuideButton>
+//                 <GuideLink to='/StockSearch'>
+//                     股票查詢
+//                 </GuideLink>
+//             </GuideButton>
+//             <GuideButton>
+//                 <GuideLink to='./CountDown'>
+//                     計時器
+//                 </GuideLink>
+//             </GuideButton>
+//             <GuideButton>
+//                 <GuideLink to='./CheckIP'>
+//                     IP 查詢
+//                 </GuideLink>
+//             </GuideButton>
+//             <GuideButton>
+//                 <GuideLink to='./Scripts'>
+//                     檔案下載
+//                 </GuideLink>
+//             </GuideButton>
+//             <GuideButton>
+//                 <GuideLink to='./TodoList'>
+//                     待辦事項
+//                 </GuideLink>
+//             </GuideButton>
+//         </PLMainDiv>
+//     )
+// }
 
 const SubMenuDiv = styled.div `
     position: absolute;
@@ -134,7 +134,6 @@ const MainDiv = styled.div `
     color:              white;
     justify-content:    flex-end;
     background:     rgb(47, 49, 54);
-    /* box-shadow:         0 0 10px 20px rgba(0, 0, 0, 0.5); */
 `
 
 const GuideButton = styled.button `
@@ -144,6 +143,7 @@ const GuideButton = styled.button `
     align-content:      center;
     background:         inherit;
     border:             none;
+    /* box-shadow:         0 0 10px 20px rgba(0, 0, 0, 0.5); */
     color:              white;
     font-size:          2rem;
     opacity:            0.3;

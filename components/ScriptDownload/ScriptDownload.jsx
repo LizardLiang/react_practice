@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 const LinkButton = styled.button `
@@ -129,7 +128,7 @@ export default class ScriptDl extends Component {
 
     FetchScripts = async () => {
         // Get every scripts I have in my folders
-        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
+        fetch('http://MyIP/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -155,7 +154,7 @@ export default class ScriptDl extends Component {
                 path.splice(0, 2)
 
                 // rejoin the path to server location
-                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
+                let newPath = 'http://MyIP/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
                     fullpath: newPath,
@@ -169,9 +168,9 @@ export default class ScriptDl extends Component {
     render(){
         let Spans = this.state.Games.map((game)=>{
             let tmp = []
-            tmp = this.state.Game.map((item)=>{
+            tmp = this.state.Game.map((item, index)=>{
                 if (item.dir == game){
-                    return (<Scripts setSrc={this.setSource} name={item.name} fullpath={item.fullpath} />)
+                    return (<Scripts key={index} setSrc={this.setSource} name={item.name} fullpath={item.fullpath} />)
                 }
             })
             return (

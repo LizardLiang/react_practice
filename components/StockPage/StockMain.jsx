@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const HomeLink = styled(Link) `
-    float:          right;
-`
-
 const DivContainer = styled.div`
     display:        flex;
     flex-direction: column;
@@ -138,8 +134,7 @@ const GridLine = styled.line `
 // calculate axis x text position
 function calxPosition(num, leng){
     return (num / leng) * 100
-};
-
+}
 
 // add lines to grid
 function add_y_line(){
@@ -172,7 +167,7 @@ class ChartLine extends Component{
             <polyline
                 fill="none"
                 stroke="white"
-                stroke-width="1"
+                strokeWidth="1"
                 points={this.props.points} />
         )
     }
@@ -206,7 +201,7 @@ class SvgChart extends Component    {
             pointList.map((value, index)=>{
                 const point = value.split(',')
                 return(
-                    <circle cx={calxPosition(index, pointList.length)}
+                    <circle key={index} cx={calxPosition(index, pointList.length)}
                         cy={parseFloat(point[1])} r='1' fill='white'/>
                 )
             })
@@ -266,7 +261,7 @@ export default class StockMain extends Component{
         }
         else{
             let url = 
-            'http://114.32.157.74/PythonFlask/api/v1/?id='
+            'http://MyIP/PythonFlask/api/v1/?id='
             fetch(url + id)
             .then((response)=>{
                 return response.json()
@@ -287,7 +282,7 @@ export default class StockMain extends Component{
                     point += ' '
                 }
                 this.setState({points: point, svgDisplay: 'block'})
-            }).catch((error)=>{
+            }).catch(()=>{
                 this.setState({svgDisplay: 'none'})
             })
         }
@@ -298,17 +293,6 @@ export default class StockMain extends Component{
     }
 
     render(){
-        const Styles = {
-            headerSpanContainer:{
-                display:    'block',
-                textAlign:  'center',
-                color:      'white'
-            },
-            centerDiv:{
-                width:  '50%',
-                margin: '2% auto'
-            }
-        }
         return(
             <DivContainer>
                 <HeaderDiv>
