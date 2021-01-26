@@ -103,7 +103,7 @@ const GuideLink = styled(Link) `
     }
 `
 
-const ProjectColumn = (props) => {
+const ProjectColumnUpper = (props) => {
     const history = useHistory()
     const handleCountdown = useCallback(() => history.push('/CountDown'), [history]);
     const handleStock = useCallback(() => history.push('/StockSearch'), [history]);
@@ -160,7 +160,7 @@ const ProjectColumn = (props) => {
     )
 }
 
-const ProjectColumn1 = (props) => {
+const ProjectColumnLower = (props) => {
     const history = useHistory()
     const handleScripts = useCallback(() => history.push('/Scripts', [history]))
     const handleTodoList = useCallback(() => history.push('/TodoList', [history]))
@@ -231,8 +231,8 @@ const Projects = () => {
 
     return (
         <MainDiv>
-            <ProjectColumn />
-            <ProjectColumn1 />
+            <ProjectColumnUpper />
+            <ProjectColumnLower />
         </MainDiv>
     )
 }
