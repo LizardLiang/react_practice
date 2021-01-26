@@ -68,6 +68,18 @@ const SubMenuDiv = styled.div `
     &:hover {
         display: flex;
     }
+
+    span{
+        font-size: 1.8rem;
+        margin: 5px;
+    }
+
+    hr {
+        width: 70%;
+        border-top: .5px solid white;
+        margin: .1rem auto;
+        
+    }
 `
 
 const GuideLink = styled(Link) `
@@ -84,6 +96,7 @@ const SubButton = styled.button `
     background: inherit;
     color: white;
     margin: 5px;
+    border-radius: 10px;
 
     &:hover{
         background: rgb(92, 111, 177);
@@ -103,7 +116,8 @@ const SubLoginMenu = (props) => {
     }
     return (
         <SubMenuDiv>
-            <span style={{margin: '5px'}}>{props.account}</span>
+            <span>{props.account}</span>
+            <hr />
             <SubButton onClick={dispatch}><BiLogOut />登出</SubButton>
         </SubMenuDiv>
     )
