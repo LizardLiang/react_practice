@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider, connect } from 'react-redux'
 import styled from 'styled-components'
 import {AccountContext} from '../../app.jsx'
-import { store, addDate, defaultDate, deleteDate, setUser } from './index.js'
+import { store, addDate, defaultDate, deleteDate, setUser, clearTimer} from './index.js'
 
 const EditDiv = styled.div`
     width:          70%;
@@ -421,7 +421,7 @@ const MainDiv = styled.div`
     }
     padding-top:        5rem;
     width:              100vw;
-    min-height:         100vh;
+    min-height:         calc(100vh - 24px);
     height:             auto;
     color:              white;
     display:            flex;
@@ -481,7 +481,6 @@ class CountDown extends Component {
 
     FetchOld = async (name) => {
         // Fetch old data in database
-        console.log(name)
         fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
@@ -550,7 +549,8 @@ class CountDown extends Component {
             },
             body: JSON.stringify({
                 method: 'del-timer',
-                title: title
+                title: title,
+                name: this.props.name
             })
         }).catch((e) => {
             console.log(e)
@@ -568,13 +568,18 @@ class CountDown extends Component {
         // Fetch timers if no any give it a default
         // Start the timer to count
         this.timerID = setInterval(this.countdown, 1000)
-        if (this.props.data.length <= 0 || this.props.name != accState.account) {
-            this.FetchOld(accState.account).then(() => {
-                if (this.props.data.length <= 0) {
-                    this.props.addDate(defaultDate)
-                }
-            })
-            this.props.setUser(accState.account)
+        if (accState.account != ''){
+            if (this.props.data.length <= 0 || this.props.name != accState.account) {
+                this.FetchOld(accState.account).then(() => {
+                    if (this.props.data.length <= 0) {
+                        this.props.addDate(defaultDate)
+                    }
+                })
+                this.props.setUser(accState.account)
+            }
+        }
+        else{
+            this.props.clearTimer()
         }
     }
 
@@ -637,7 +642,8 @@ const mapDispatchToProps = dispatch => {
     return {
         addDate: article => dispatch(addDate(article)),
         deleteDate: article => dispatch(deleteDate(article)),
-        setUser: article => dispatch(setUser(article))
+        setUser: article => dispatch(setUser(article)),
+        clearTimer: article => dispatch(clearTimer(article))
     }
 }
 

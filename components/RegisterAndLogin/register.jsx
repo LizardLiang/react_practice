@@ -90,7 +90,6 @@ const Register = () => {
     const valid_password = (pwd) => {
         let pattern = /^[-\w.?!@#$%^&*]*$/
         let valid = pwd.match(pattern)
-        console.log(valid)
 
         if (valid == null)
             return false
