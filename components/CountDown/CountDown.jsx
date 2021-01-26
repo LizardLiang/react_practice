@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Provider, connect } from 'react-redux'
 import styled from 'styled-components'
-import { store, addDate, defaultDate, deleteDate } from './index.js'
+import {AccountContext} from '../../app.jsx'
+import { store, addDate, defaultDate, deleteDate, setUser } from './index.js'
 
 const EditDiv = styled.div`
     width:          70%;
@@ -114,7 +115,6 @@ const OptionLabel = styled.label`
 class EditPage extends Component {
     gatherDateInfo = () => {
         let isAnnually = document.getElementById('IsAnnually').checked
-        console.log("checked ? ", isAnnually)
         let msg = {
             title: document.getElementById('title').value,
             year: document.getElementById('y').value,
@@ -466,6 +466,8 @@ const PlusButton = styled.button`
 
 
 class CountDown extends Component {
+    static contextType = AccountContext
+
     constructor(props) {
         super(props)
         this.state = {
@@ -477,15 +479,17 @@ class CountDown extends Component {
         this.timerID = 0
     }
 
-    FetchOld = async () => {
+    FetchOld = async (name) => {
         // Fetch old data in database
+        console.log(name)
         fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify({
-                method: 'get-timer'
+                method: 'get-timer',
+                name: name
             })
         }).then((res) => {
             return res.json()
@@ -511,7 +515,7 @@ class CountDown extends Component {
 
     SendDateToStore = (obj, isNew = true) => {
         // If a timer is added add it to store
-        if (isNew) {
+        if (isNew && this.props.name != '') {
             fetch('http://114.32.157.74/PythonFlask/api/v1/', {
                 method: 'POST',
                 headers: {
@@ -526,7 +530,9 @@ class CountDown extends Component {
                     hour: parseInt(obj.hour),
                     minute: parseInt(obj.minute),
                     second: parseInt(obj.second),
-                    isAnnual:   obj.isAnnual
+                    isAnnual:   obj.isAnnual,
+                    important: false,
+                    name: this.props.name
                 })
             })
         }
@@ -558,15 +564,17 @@ class CountDown extends Component {
     }
 
     componentDidMount() {
+        const {accState} = this.context
         // Fetch timers if no any give it a default
         // Start the timer to count
         this.timerID = setInterval(this.countdown, 1000)
-        if (this.props.data.length <= 0) {
-            this.FetchOld().then(() => {
+        if (this.props.data.length <= 0 || this.props.name != accState.account) {
+            this.FetchOld(accState.account).then(() => {
                 if (this.props.data.length <= 0) {
                     this.props.addDate(defaultDate)
                 }
             })
+            this.props.setUser(accState.account)
         }
     }
 
@@ -622,13 +630,14 @@ class CountDown extends Component {
 }
 
 const mapStateToProps = state => {
-    return { data: state.dates }
+    return { data: state.dates, name: state.curUser }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         addDate: article => dispatch(addDate(article)),
-        deleteDate: article => dispatch(deleteDate(article))
+        deleteDate: article => dispatch(deleteDate(article)),
+        setUser: article => dispatch(setUser(article))
     }
 }
 

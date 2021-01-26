@@ -16,12 +16,14 @@ const defaultDate = {
 // create data
 const Datas = {
     dates: [
-    ]
+    ],
+    curUser: ''
 }
 
 // define actions
 const addDate = article => ({type: 'addDate', payload: article})
 const deleteDate = article => ({type: 'deleteDate', payload: article})
+const setUser = article => ({type: 'setUser', payload: article})
 
 // define actual method for actions
 const rootReducer = (state = Datas, action) => {
@@ -30,6 +32,9 @@ const rootReducer = (state = Datas, action) => {
             return {...state, dates: [...state.dates, action.payload]}
         case 'deleteDate':
             return {...state, dates: state.dates.filter((item => item.title !== action.payload))}
+        case 'setUser':
+            console.log('reducer', action.payload)
+            return (Object.assign({}, state, {curUser: action.payload}))
         default:
             return state
     }
@@ -38,6 +43,6 @@ const rootReducer = (state = Datas, action) => {
 // establish store
 const store = createStore(rootReducer)
 
-export {store, addDate, deleteDate, defaultDate}
+export {store, addDate, deleteDate, defaultDate, setUser}
 
 // export default Stores
