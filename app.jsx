@@ -1,7 +1,8 @@
-import React, {Suspense, lazy} from "react"
+import React, {Suspense, lazy, useReducer, createContext} from "react"
 import ReactDOM from "react-dom"
 import styled from 'styled-components'
 import {HashRouter, Route, Link} from 'react-router-dom'
+import {accountReducer, accountStatus} from './'
 import './index.css'
 const Home = lazy(() => 
         import(/* webpackChunkName:"Home" */ './components/pagebox/home.jsx'))
@@ -41,36 +42,29 @@ const Footer = styled.div `
     bottom: 0;
 `
 
-class MainWindow extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            date: [],
-            value: []
-        }
-    }
+const MainStyle = styled.div ` 
+    width: 100%;
+    height: auto;
+    margin: 0;
+    box-sizing: border-box;
+`
 
-    render(){
-        const Styles = {
-            StyleContainer: {
-                width:      '100%',
-                height:     'auto',
-                margin:     '0',
-                boxSizing:  'border-box'
-            }
-        }
-        const {StyleContainer} = Styles
+const AccountContext = createContext()
+export {AccountContext}
+
+const MainWindow = () => {
+        const [accState, accDispatch] = useReducer(accountReducer, accountStatus)
         return (
-            <HashRouter>
-                <div style={StyleContainer}>
-                    {/* <div style={Styles.headerContainer}>
-                        <h1 style={Styles.h1Container}>
-                            Hello Everyone!
-                        </h1>
-                    </div> */}
-                    {/* Use route to switch pages */}
-                    <Suspense fallback={<div>Loading</div>}>
-                        <HeadBanner/>
+        <HashRouter>
+                <MainStyle>
+                {/* Use route to switch pages */}
+                <AccountContext.Provider value={{
+                        accState,
+                        accDispatch
+                        }}>
+                        <Suspense fallback={<div>Loading</div>}>
+                        <HeadBanner />
+                        <Route exact path='/Login' render={()=>{return <Login/>}}/>
                         <Route exact path='/' component={Home}/>
                         <Route exact path='/StockSearch' component={ StockMain }/>
                         <Route exact path='/CountDown' component={ MapCountDown }/>
@@ -79,18 +73,17 @@ class MainWindow extends React.Component {
                         <Route exact path='/TodoList' render={() => {return <TodoList/>}}/>
                         <Route exact path='/Calculator' render={()=>{return <Calculator/>}} />
                         <Route exact path='/Regist' render={()=>{return <Register/>}}/>
-                        <Route exact path='/Login' render={()=>{return <Login/>}}/>
                         <Route exact path='/Projects' render={()=>{return <Projects />}} />
                         <Route exact path='/Privacy' render={()=>{return <Privacy />}} />
-                    </Suspense>
-                </div>
+                        </Suspense>
+                </AccountContext.Provider>
+                </MainStyle>
                 <Footer>
-                    Copyright © 2021 Lizard Demo. All Rights Reserved.
-                    <Link to='/Privacy'>隱私權政策 Privacy Policy</Link>
-                </Footer>
-            </HashRouter>
-        )
-    }
+                Copyright © 2021 Lizard Demo. All Rights Reserved.
+                <Link to='/Privacy'>隱私權政策 Privacy Policy</Link>
+            </Footer>
+        </HashRouter>
+    )
 }
 
 ReactDOM.render(<MainWindow />, document.getElementById("root"))
