@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import {JSEncrypt} from 'jsencrypt'
 import axios from 'axios'
+import {AccountContext} from '../../app.jsx'
 
 let rsa = new JSEncrypt()
 
@@ -64,6 +65,7 @@ const Login = () => {
     const [username, setUser] = useState('')
     const [password, setPswd] = useState('')
     const [ErrMsg, setErrMsg] = useState('')
+    const {status, account, accDispatch} = useContext(AccountContext)
 
     useEffect(()=>{
         axios.post(`http://114.32.157.74/ExpressServer/api`, {
@@ -95,6 +97,7 @@ const Login = () => {
                 password: hashpwd
             }).then(res=>{
                 if(res.data.status == 'Success'){
+                    accDispatch({type:'set_account', payload: {status: 1, account: username}})
                     setErrMsg('登入成功')
                 }
                 else{
