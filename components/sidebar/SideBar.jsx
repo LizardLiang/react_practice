@@ -1,6 +1,9 @@
-import React, { Component }    from "react"
+import React, {useContext, useState, useEffect} from "react"
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import {IconContext} from 'react-icons'
+import {BiUser, BiDownArrow, BiLogOut} from 'react-icons/bi'
+import {AccountContext} from '../../app.jsx'
 // import MenuIcon from '../../img/drawsvg.svg'
 
 const PLMainDiv = styled.div ` 
@@ -49,6 +52,63 @@ const ProjectList = () => {
     )
 }
 
+const SubMenuDiv = styled.div `
+    position: absolute;
+    top: 3.5rem;
+    left: -6.5rem;
+    opacity: 1;
+    color: white;
+    display: none;
+    background: #2f3136;
+    width: 11rem;
+    border-radius: 10px;
+    justify-content: center;
+    flex-direction: column;
+
+    &:hover {
+        display: flex;
+    }
+`
+
+const GuideLink = styled(Link) `
+    &:focus, &:hover{
+        text-decoration:    none;
+    }
+`
+
+const SubButton = styled.button `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background: inherit;
+    color: white;
+    margin: 5px;
+
+    &:hover{
+        background: rgb(92, 111, 177);
+    }
+
+    &:focus{
+        outline: none;
+        text-decoration: none;
+    }
+`
+
+const SubLoginMenu = (props) => {
+    const {accDispatch} = useContext(AccountContext)
+
+    const dispatch = () => {
+        accDispatch({type: 'set_account', payload: {status: 0, account: ''}})
+    }
+    return (
+        <SubMenuDiv>
+            <span style={{margin: '5px'}}>{props.account}</span>
+            <SubButton onClick={dispatch}><BiLogOut />登出</SubButton>
+        </SubMenuDiv>
+    )
+}
+
 const MainDiv = styled.div `
     position:           fixed;
     display:            flex;
@@ -64,8 +124,9 @@ const MainDiv = styled.div `
 `
 
 const GuideButton = styled.button `
+    position: relative;
     min-width:          4rem;
-    width:              auto;
+    width:              76px;
     align-content:      center;
     background:         inherit;
     border:             none;
@@ -116,36 +177,38 @@ const GuideButton = styled.button `
     }
 `
 
-const GuideLink = styled(Link) `
-    &:focus, &:hover{
-        text-decoration:    none;
-    }
-`
+const HeadBanner = () => {
+    const {accState} = useContext(AccountContext)
 
-export default class HeadBanner extends Component {
-    render(){
-        return (
-            <MainDiv>
-                <GuideButton>
-                    <GuideLink to='/'>
-                        首頁
-                    </GuideLink> 
-                </GuideButton>
-                <GuideButton>
-                    <GuideLink to='/Projects'>
-                        Projects
-                    </GuideLink>
-                </GuideButton>
+    return (
+        <MainDiv>
+            <GuideButton>
+                <GuideLink to='/'>
+                    首頁
+                </GuideLink> 
+            </GuideButton>
+            <GuideButton>
+                <GuideLink to='/Projects'>
+                    作品
+                </GuideLink>
+            </GuideButton>
+            {accState.status == 0 ?
                 <GuideButton>
                     <GuideLink to='/Login'>
-                        登入/註冊
+                        登入
                     </GuideLink>
                 </GuideButton>
-                {/* <img src={MenuIcon} alt='設定' /> */}
-                {/*<GuideButton>
-                    4
-                </GuideButton> */}
-            </MainDiv>
-        )
-    }
+            :
+                <GuideButton>
+                    <BiUser />
+                    {/* Use IconContext.Provider to set CSS on Icon */}
+                    <IconContext.Provider value={{size: '20px'}}>
+                        <BiDownArrow />
+                    </IconContext.Provider>
+                    <SubLoginMenu status={accState.status} account={accState.account} />
+                </GuideButton>}
+        </MainDiv>
+    )
 }
+
+export default HeadBanner
