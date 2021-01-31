@@ -10,3 +10,6 @@ webpack.config.js
 *.html
 *.css
 *.svg
+babel.config.js
+__tests__/
+ExpressServer/
