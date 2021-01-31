@@ -27,7 +27,7 @@ const SpanTitleIntro = styled.span `
         display:            inline-block;
         // border-bottom:   1px solid grey;
         height:             100%;
-        left:               40px;
+        left:               50px;
         font-size:          3vmin;
     }
 
