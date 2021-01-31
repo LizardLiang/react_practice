@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Provider, connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {AccountContext} from '../../app.jsx'
 import { store, addDate, defaultDate, deleteDate, setUser, clearTimer} from './index.js'
@@ -113,6 +114,15 @@ const OptionLabel = styled.label`
 `
 
 class EditPage extends Component {
+    static get propTypes(){
+        return {
+            clickevent: PropTypes.func,
+            sendDate: PropTypes.func,
+            display: PropTypes.string,
+            setDis: PropTypes.func
+        }
+    }
+
     gatherDateInfo = () => {
         let isAnnually = document.getElementById('IsAnnually').checked
         let msg = {
@@ -342,6 +352,15 @@ class TimerBlock extends Component {
         super(props)
     }
 
+    static get propTypes(){
+        return {
+            targetDate: PropTypes.instanceOf(Date),
+            passTime: PropTypes.instanceOf(Date),
+            delTimer: PropTypes.func,
+            title: PropTypes.string
+        }
+    }
+
     ToDays = () => {
         // count days left
         let days = Math.floor(((this.props.targetDate - this.props.passTime) / SecOfDay))
@@ -479,9 +498,20 @@ class CountDown extends Component {
         this.timerID = 0
     }
 
+    static get propTypes(){
+        return {
+            name: PropTypes.string,
+            deleteDate: PropTypes.func,
+            data: PropTypes.array,
+            addDate: PropTypes.func,
+            setUser: PropTypes.func,
+            clearTimer: PropTypes.func
+        }
+    }
+
     FetchOld = async (name) => {
         // Fetch old data in database
-        fetch('http://MyIP/PythonFlask/api/v1/', {
+        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -515,7 +545,7 @@ class CountDown extends Component {
     SendDateToStore = (obj, isNew = true) => {
         // If a timer is added add it to store
         if (isNew && this.props.name != '') {
-            fetch('http://MyIP/PythonFlask/api/v1/', {
+            fetch('http://114.32.157.74/PythonFlask/api/v1/', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -542,7 +572,7 @@ class CountDown extends Component {
 
     deleteTimerAPI = (title) => {
         // When delete the timer also delete it in database
-        fetch('http://MyIP/PythonFlask/api/v1/', {
+        fetch('http://114.32.157.74/PythonFlask/api/v1/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Provider, useSelector, useDispatch} from 'react-redux'
+import PropTypes from 'prop-types'
 import styled, {keyframes} from 'styled-components'
 import {store} from './'
 
@@ -104,6 +105,10 @@ const EditBlock = (props) => {
             </EditDateDiv>
         </EditMainDiv>
     )
+}
+
+EditBlock.propTypes = {
+    addMsg: PropTypes.func
 }
 
 const ContMain = styled.div `
@@ -270,6 +275,14 @@ const TodoContent = (props) => {
             </ContSetting>
         </ContMain>
     )
+}
+
+TodoContent.propTypes = {
+    status: PropTypes.number,
+    so: PropTypes.number,
+    setSts: PropTypes.func,
+    name: PropTypes.string,
+    Date: PropTypes.string
 }
 
 const MainDiv = styled.div `

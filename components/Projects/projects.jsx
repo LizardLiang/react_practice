@@ -25,6 +25,7 @@ const BlockDiv = styled.div `
     align-items: center;
     margin: 0 5px;
     transition: height 1s, width 1s;
+    border: solid 1px grey;
 
     &:hover {
         width: 300px;
@@ -103,7 +104,7 @@ const GuideLink = styled(Link) `
     }
 `
 
-const ProjectColumnUpper = (props) => {
+const ProjectColumnUpper = () => {
     const history = useHistory()
     const handleCountdown = useCallback(() => history.push('/CountDown'), [history]);
     const handleStock = useCallback(() => history.push('/StockSearch'), [history]);
@@ -160,7 +161,7 @@ const ProjectColumnUpper = (props) => {
     )
 }
 
-const ProjectColumnLower = (props) => {
+const ProjectColumnLower = () => {
     const history = useHistory()
     const handleScripts = useCallback(() => history.push('/Scripts', [history]))
     const handleTodoList = useCallback(() => history.push('/TodoList', [history]))

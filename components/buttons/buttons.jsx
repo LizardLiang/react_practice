@@ -1,4 +1,5 @@
 import React    from 'react'
+import PropTypes from 'prop-types'
 
 class Buttons extends React.Component{
     constructor (props){
@@ -6,6 +7,13 @@ class Buttons extends React.Component{
         this.state = {
             height: window.innerHeight,
             width:  window.innerWidth,
+        }
+    }
+
+    static get propTypes(){
+        return {
+            item: PropTypes.string,
+            name: PropTypes.string
         }
     }
 

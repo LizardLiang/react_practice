@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const LinkButton = styled.button `
@@ -68,6 +69,12 @@ function Scripts(props){
             </LinkButton>
         </LinkBlock>
     )
+}
+
+Scripts.propTypes = {
+    name: PropTypes.string,
+    setSrc: PropTypes.func,
+    fullpath: PropTypes.string
 }
 
 const MainDiv = styled.div `       
@@ -166,7 +173,7 @@ export default class ScriptDl extends Component {
     }
 
     render(){
-        let Spans = this.state.Games.map((game)=>{
+        let Spans = this.state.Games.map((game, index)=>{
             let tmp = []
             tmp = this.state.Game.map((item, index)=>{
                 if (item.dir == game){
@@ -175,7 +182,7 @@ export default class ScriptDl extends Component {
             })
             return (
                 // Category on top
-                <LinkDiv>
+                <LinkDiv key={index}>
                     <LinkCatSpan>{game}</LinkCatSpan>
                     {tmp}
                 </LinkDiv>

@@ -34,7 +34,6 @@ const rootReducer = (state = Datas, action) => {
         case 'deleteDate':
             return {...state, dates: state.dates.filter((item => item.title !== action.payload))}
         case 'setUser':
-            console.log('reducer', action.payload)
             return (Object.assign({}, state, {curUser: action.payload}))
         case 'clearTimer':
             return (Object.assign({}, state, {curUser: '', dates: [defaultDate]}))
