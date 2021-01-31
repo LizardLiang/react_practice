@@ -17,7 +17,7 @@ const NavDiv = styled.div `
     width: 100%;
     background: rgb(41, 43, 47);
     color: white;
-    margin-top: 100vh;
+    margin-top: calc(100vh + 1px);
     z-index: 2;
 `
 
@@ -74,7 +74,7 @@ const HeaderDiv = styled.div `
     height:         100vh;
     width:          100vw;
     display:        table;
-    background:     rgb(32, 34, 37);
+    background:     #121212;
     backface-visibility: hidden;
     overflow: auto;
 `
@@ -98,6 +98,7 @@ const MainPage = styled.div `
     background: rgb(32, 34, 37);
     box-sizing: border-box;
     width: 100vw;
+    border-top: 1px solid grey;
     // overflowX:  'hidden',
 `
 
@@ -106,6 +107,8 @@ const Container = styled.div `
     position:   relative;
     width: 100%;
     border: 1px solid white;
+    display: flex;
+    flex-direction: column;
 `
 
 export default class Home extends Component{
