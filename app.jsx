@@ -1,7 +1,7 @@
 import React, {Suspense, lazy, useReducer, createContext} from "react"
 import ReactDOM from "react-dom"
 import styled from 'styled-components'
-import {HashRouter, Route, Link} from 'react-router-dom'
+import {HashRouter, Route, Link, Redirect} from 'react-router-dom'
 import {accountReducer, accountStatus} from './'
 import './index.css'
 const Home = lazy(() => 
@@ -40,6 +40,11 @@ const Footer = styled.div `
     color: white;
     position: relative;
     bottom: 0;
+    z-index: 3;
+
+    @media screen and (max-width: 600px){
+        flex-direction: column;
+    }
 `
 
 const MainStyle = styled.div ` 
@@ -56,7 +61,7 @@ const MainWindow = () => {
         const [accState, accDispatch] = useReducer(accountReducer, accountStatus)
         return (
         <HashRouter>
-                <MainStyle>
+                {/* <MainStyle> */}
                 {/* Use route to switch pages */}
                 <AccountContext.Provider value={{
                         accState,
@@ -64,7 +69,10 @@ const MainWindow = () => {
                         }}>
                         <Suspense fallback={<div>Loading</div>}>
                         <HeadBanner />
-                        <Route exact path='/Login' render={()=>{return <Login/>}}/>
+                        <Route exact path='/Login'>
+                            {accState.status == 0 ? <Login /> : 
+                                <Redirect push to='/Projects' />}
+                        </Route>
                         <Route exact path='/' component={Home}/>
                         <Route exact path='/StockSearch' component={ StockMain }/>
                         <Route exact path='/CountDown' component={ MapCountDown }/>
@@ -77,9 +85,9 @@ const MainWindow = () => {
                         <Route exact path='/Privacy' render={()=>{return <Privacy />}} />
                         </Suspense>
                 </AccountContext.Provider>
-                </MainStyle>
-                <Footer>
-                Copyright © 2021 Lizard Demo. All Rights Reserved.
+                {/* </MainStyle> */}
+            <Footer>
+                <span>Copyright © 2021 Lizard Demo. All Rights Reserved.</span>
                 <Link to='/Privacy'>隱私權政策 Privacy Policy</Link>
             </Footer>
         </HashRouter>
