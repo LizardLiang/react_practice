@@ -23,7 +23,7 @@ const NavDiv = styled.div `
 
 const NavButton = styled.button ` 
     position: relative;
-    top: 1rem;
+    /* top: 1rem; */
     width: 100%;
     background: inherit;
     color: white;
@@ -31,20 +31,29 @@ const NavButton = styled.button `
     /* justify-content: center; */
     align-items: center;
     font-size: 1.3rem;
-    margin: 1rem 0;
+    padding: 1rem 0px 1rem 5px;
     border-radius: 5px;
     border-bottom: 1px solid grey;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        background: rgb(54, 57, 63);
+    }
 `
 
-const SideNav = () => {
+const SideNav = (props) => {
     return (
         <SideWrap>
             <NavDiv>
-                <NavButton>個人資料</NavButton>
-                <NavButton>簡歷</NavButton>
-                <NavButton>專業 / 經驗</NavButton>
-                <NavButton>常用工具</NavButton>
-                <NavButton>相關連結</NavButton>
+                <NavButton onClick={()=>{props.click(0)}}>個人資料</NavButton>
+                <NavButton onClick={()=>{props.click(1)}}>自我介紹</NavButton>
+                <NavButton onClick={()=>{props.click(2)}}>簡歷</NavButton>
+                <NavButton onClick={()=>{props.click(3)}}>專業 / 經驗</NavButton>
+                <NavButton onClick={()=>{props.click(4)}}>常用工具</NavButton>
+                <NavButton onClick={()=>{props.click(5)}}>相關連結</NavButton>
             </NavDiv>
         </SideWrap>
     )
@@ -122,6 +131,27 @@ export default class Home extends Component{
         this.AddRef = React.createRef()
     }
 
+    const JumpToRef = (index) => {
+        if(index == 0){
+            this.InfoRef.current.scrollintoview()
+        }
+        else if(index == 1){
+            this.IntroRef.current.scrollintoview()
+        }
+        else if(index == 2){
+            this.ExpRef.current.scrollintoview()
+        }
+        else if(index == 3){
+            this.ProjRef.current.scrollintoview()
+        }
+        else if(index == 4){
+            this.MyToolRef.current.scrollintoview()
+        }
+        else if(index == 5){
+            this.AddRef.current.scrollintoview()
+        }
+    }
+
     render(){
         return(
             <Container>
@@ -131,7 +161,7 @@ export default class Home extends Component{
                         Hi! Everyone
                     </HeaderH1>
                 </HeaderDiv>
-                <SideNav />
+                <SideNav click={this.JumpToRef}/>
                 <MainPage>
                     <Info         id="1" ref={this.InfoRef} />
                     <Intro               ref={this.IntroRef}/>
