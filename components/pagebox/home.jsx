@@ -50,20 +50,20 @@ const SideNav = () => {
     )
 }
 
-const DirMain = styled.div ` 
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100vw;
-    background-color: rgba( 0, 0, 0, 0.8);
-    z-index: 2;
-`
+// const DirMain = styled.div ` 
+//     position: absolute;
+//     top: 0;
+//     height: 100%;
+//     width: 100vw;
+//     background-color: rgba( 0, 0, 0, 0.8);
+//     z-index: 2;
+// `
 
-const Directorys = () => {
-    return (
-        <DirMain></DirMain>        
-    )
-}
+// const Directorys = () => {
+//     return (
+//         <DirMain></DirMain>        
+//     )
+// }
 
 const HeaderDiv = styled.div `
     position: fixed;
