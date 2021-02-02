@@ -135,7 +135,7 @@ export default class ScriptDl extends Component {
 
     FetchScripts = async () => {
         // Get every scripts I have in my folders
-        fetch('http://MyIP/PythonFlask/api/v1/',{
+        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -161,7 +161,7 @@ export default class ScriptDl extends Component {
                 path.splice(0, 2)
 
                 // rejoin the path to server location
-                let newPath = 'http://MyIP/Scripts/' + path.join('/')
+                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
                     fullpath: newPath,
