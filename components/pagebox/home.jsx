@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Info, Experience, Projects, MyTool, AdditionInfo, Intro } from "./"
 
 const SideWrap = styled.div ` 
     position: absolute;
     top: 0;
     height: calc(100% + 24px);
-    width: 6%;
+    width: 10%;
     /* overflow: auto; */
 `
 
@@ -31,7 +32,7 @@ const NavButton = styled.button `
     /* justify-content: center; */
     align-items: center;
     font-size: 1.3rem;
-    padding: 1rem 0px 1rem 5px;
+    padding: 1rem 0px 1rem 20px;
     border-radius: 5px;
     border-bottom: 1px solid grey;
 
@@ -59,20 +60,24 @@ const SideNav = (props) => {
     )
 }
 
-// const DirMain = styled.div ` 
-//     position: absolute;
-//     top: 0;
-//     height: 100%;
-//     width: 100vw;
-//     background-color: rgba( 0, 0, 0, 0.8);
-//     z-index: 2;
-// `
+SideNav.propTypes = {
+    click: PropTypes.func
+}
 
-// const Directorys = () => {
-//     return (
-//         <DirMain></DirMain>        
-//     )
-// }
+const DirMain = styled.div ` 
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100vw;
+    background-color: rgba( 0, 0, 0, 0.8);
+    z-index: 2;
+`
+
+const Directorys = () => {
+    return (
+        <DirMain></DirMain>        
+    )
+}
 
 const HeaderDiv = styled.div `
     position: fixed;
@@ -131,24 +136,24 @@ export default class Home extends Component{
         this.AddRef = React.createRef()
     }
 
-    const JumpToRef = (index) => {
+    SetRef = (ref, index) => {
         if(index == 0){
-            this.InfoRef.current.scrollintoview()
+            this.InfoRef = ref
         }
         else if(index == 1){
-            this.IntroRef.current.scrollintoview()
+            this.IntroRef = ref
         }
         else if(index == 2){
-            this.ExpRef.current.scrollintoview()
+            this.ExpRef = ref
         }
         else if(index == 3){
-            this.ProjRef.current.scrollintoview()
+            this.ProjRef = ref
         }
         else if(index == 4){
-            this.MyToolRef.current.scrollintoview()
+            this.MyToolRef = ref
         }
         else if(index == 5){
-            this.AddRef.current.scrollintoview()
+            this.AddRef = ref
         }
     }
 
@@ -163,14 +168,41 @@ export default class Home extends Component{
                 </HeaderDiv>
                 <SideNav click={this.JumpToRef}/>
                 <MainPage>
-                    <Info         id="1" ref={this.InfoRef} />
-                    <Intro               ref={this.IntroRef}/>
-                    <Experience   id="2" ref={this.ExpRef}/>
-                    <Projects     id="3" ref={this.ProjRef}/>
-                    <MyTool       id="4" ref={this.MyToolRef}/>
-                    <AdditionInfo id="5" ref={this.AddRef}/>
+                    <Info         id="1" setRef={this.SetRef} />
+                    <Intro               setRef={this.SetRef}/>
+                    <Experience   id="2" setRef={this.SetRef}/>
+                    <Projects     id="3" setRef={this.SetRef}/>
+                    <MyTool       id="4" setRef={this.SetRef}/>
+                    <AdditionInfo id="5" setRef={this.SetRef}/>
                 </MainPage>
             </Container>
         )
+    }
+
+    JumpToRef = (index) => {
+        if(index == 0){
+            const y = this.InfoRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
+        else if(index == 1){
+            const y = this.IntroRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
+        else if(index == 2){
+            const y = this.ExpRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
+        else if(index == 3){
+            const y = this.ProjRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
+        else if(index == 4){
+            const y = this.MyToolRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
+        else if(index == 5){
+            const y = this.AddRef.getBoundingClientRect().top - 96 + window.pageYOffset
+            window.scrollTo({top: y, behavior: "smooth"})
+        }
     }
 }

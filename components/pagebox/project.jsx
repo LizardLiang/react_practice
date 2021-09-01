@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {lazy} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Test_Program, WebGame, StockChart } from "../../components/Projects"
+import { Test_Program, StockChart } from "../../components/Projects"
 import { ContentTitle } from "../../components/ContentTitle"
+const WebGame = lazy(()=>
+        import(/* WebpackChunkName: "WebGame" */'../../components/Projects'))
 
 const ContentDiv = styled.div `
     height:             auto;

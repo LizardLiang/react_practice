@@ -77,12 +77,14 @@ class Experience extends React.Component    {
 
     static get propTypes(){
         return {
-            id: PropTypes.number
+            id: PropTypes.number,
+            setRef: PropTypes.func
         }
     }
 
     componentDidMount(){
         window.addEventListener('scroll', this.scrollHandler)
+        this.props.setRef(this.MainElement, 2)
     }
 
     componentWillUnmount(){
