@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // An overall div contain all content
@@ -10,7 +11,7 @@ const MainDivCT = styled.div `
     text-align:         left;
     margin:             0 auto;
     @media screen and (max-width:   1079px){
-        height          30px;
+        height:         30px;
     }
 `
 
@@ -51,6 +52,14 @@ const TitleSpanCT = styled.span `
 `
 
 class ContentTitle extends React.Component{
+    static get propTypes(){
+        return {
+            clickevent: PropTypes.func,
+            isVisible: PropTypes.string,
+            titletext: PropTypes.string
+        }
+    }
+
     render(){
         return (
             <MainDivCT>

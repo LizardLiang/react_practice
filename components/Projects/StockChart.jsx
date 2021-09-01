@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import './project.css'
@@ -34,6 +35,14 @@ class StockChart extends Component{
         // this.FetchStockInfo = this.FetchStockInfo.bind(this)
     }
 
+    static get propTypes(){
+        return {
+            maxNum: PropTypes.number,
+            minNum: PropTypes.number,
+            isVisible: PropTypes.string
+        }
+    }
+
     calyPosition(num){
         return ((num - this.state.minNum) / (this.state.maxNum - this.state.minNum)) * 100
     }
@@ -44,7 +53,7 @@ class StockChart extends Component{
 
     FetchStockInfo = () => {
         let id = this.inputElement.value
-        let url = 'https://cors-anywhere.herokuapp.com/http://MyIP/PythonFlask/api/test?id='
+        let url = 'https://cors-anywhere.herokuapp.com/http://114.32.157.74/PythonFlask/api/test?id='
         fetch(url + id)
         .then((response)=>{
             return response.json()

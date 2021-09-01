@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import './project.css'
 
@@ -26,6 +27,13 @@ class Test_Program extends React.Component  {
             isVisible: this.props.isVisible
         }
     }
+
+    static get propTypes(){
+        return {
+            isVisible: PropTypes.string
+        }
+    }
+
     render(){
         return(
             <MainDiv    

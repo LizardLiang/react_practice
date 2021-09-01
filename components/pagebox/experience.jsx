@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import "./info.css"
 
@@ -74,8 +75,16 @@ class Experience extends React.Component    {
         // this.scrollHandler = this.scrollHandler.bind(this)
     }
 
+    static get propTypes(){
+        return {
+            id: PropTypes.number,
+            setRef: PropTypes.func
+        }
+    }
+
     componentDidMount(){
         window.addEventListener('scroll', this.scrollHandler)
+        this.props.setRef(this.MainElement, 2)
     }
 
     componentWillUnmount(){

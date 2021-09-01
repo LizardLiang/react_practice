@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {lazy} from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Test_Program, WebGame, StockChart } from "../../components/Projects"
+import { Test_Program, StockChart } from "../../components/Projects"
 import { ContentTitle } from "../../components/ContentTitle"
+const WebGame = lazy(()=>
+        import(/* WebpackChunkName: "WebGame" */'../../components/Projects'))
 
 const ContentDiv = styled.div `
     height:             auto;
@@ -17,6 +20,13 @@ class Project extends React.Component   {
         }
 
         this.setVisibility = this.setVisibility.bind(this)
+    }
+
+    static get propTypes(){
+        return {
+            id: PropTypes.number,
+            name: PropTypes.string,
+        }
     }
 
     switchProject(name, isVisible){
@@ -107,6 +117,14 @@ class Projects extends React.Component{
         // important to set this function to bind
         this.scrollHandler = this.scrollHandler.bind(this)
     }
+
+    static get propTypes(){
+        return {
+            id: PropTypes.number,
+            name: PropTypes.string
+        }
+    }
+
     componentDidMount(){
         window.addEventListener('scroll', this.scrollHandler)
     }
@@ -115,7 +133,7 @@ class Projects extends React.Component{
         window.removeEventListener('scroll', this.scrollHandler)
     }
 
-    scrollHandler(e){
+    scrollHandler(){
         let rec = this.MainElement.getBoundingClientRect()
         let pos = rec['top']
         let height = rec['height']

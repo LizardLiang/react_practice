@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import './project.css'
 
@@ -22,6 +23,11 @@ const MainIframe = styled.iframe `
 `
 
 class WebGame extends Component{
+    static get propTypes(){
+        return {
+            isVisible: PropTypes.string
+        }
+    }
     render(){
         return (
             <MainDiv    
@@ -48,3 +54,6 @@ class WebGame extends Component{
 }
 
 export {WebGame}
+
+
+/* 使用 styled-components 做 CSS-in-JS */

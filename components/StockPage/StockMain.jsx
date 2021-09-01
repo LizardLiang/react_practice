@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const DivContainer = styled.div`
@@ -162,6 +162,11 @@ function add_y_grid(min, max){
 
 // dealing with line and data
 class ChartLine extends Component{
+    static get propTypes(){
+        return {
+            points: PropTypes.array
+        }
+    }
     render(){
         return (
             <polyline
@@ -193,7 +198,16 @@ function add_x_text(labels){
 }
 
 // dealing with svg
-class SvgChart extends Component    {
+class SvgChart extends Component{
+    static get propTypes(){
+        return {
+            points: PropTypes.array,
+            SvgDisplay: PropTypes.string,
+            min: PropTypes.number,
+            max: PropTypes.number,
+            xlabel: PropTypes.array
+        }
+    }
     render(){
         let pointList = this.props.points.split(' ')
         pointList = pointList.slice(0, -1)
@@ -261,7 +275,7 @@ export default class StockMain extends Component{
         }
         else{
             let url = 
-            'http://MyIP/PythonFlask/api/v1/?id='
+            'http://114.32.157.74/PythonFlask/api/v1/?id='
             fetch(url + id)
             .then((response)=>{
                 return response.json()

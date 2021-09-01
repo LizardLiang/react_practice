@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const MainDiv = styled.div `
@@ -53,6 +54,12 @@ class AdditionInfo extends Component{
             left:       '0%'
         }
         this.scrollHandler = this.scrollHandler.bind(this)
+    }
+
+    static get propTypes(){
+        return {
+            id: PropTypes.number
+        }
     }
 
     componentDidMount(){

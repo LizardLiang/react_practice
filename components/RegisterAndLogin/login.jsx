@@ -68,7 +68,7 @@ const Login = () => {
     const {accDispatch} = useContext(AccountContext)
 
     useEffect(()=>{
-        axios.post(`http://MyIP/ExpressServer/api`, {
+        axios.post(`http://114.32.157.74/ExpressServer/api`, {
             action: 'KeyRequest'
         }).then(res=>{
             rsa.setPublicKey(res.data.key)
@@ -91,7 +91,7 @@ const Login = () => {
         }
         else{
             let hashpwd = rsa.encrypt(password)
-            axios.post(`http://MyIP/ExpressServer/api`, {
+            axios.post(`http://114.32.157.74/ExpressServer/api`, {
                 action: 'login',
                 username: username,
                 password: hashpwd

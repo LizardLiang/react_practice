@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const LinkButton = styled.button `
@@ -70,6 +71,12 @@ function Scripts(props){
     )
 }
 
+Scripts.propTypes = {
+    name: PropTypes.string,
+    setSrc: PropTypes.func,
+    fullpath: PropTypes.string
+}
+
 const MainDiv = styled.div `       
     display:        flex;
     flex-direction: column;
@@ -128,7 +135,7 @@ export default class ScriptDl extends Component {
 
     FetchScripts = async () => {
         // Get every scripts I have in my folders
-        fetch('http://MyIP/PythonFlask/api/v1/',{
+        fetch('http://114.32.157.74/PythonFlask/api/v1/',{
             method: 'POST',
             headers:    {
                 'content-type': 'application/json'
@@ -154,7 +161,7 @@ export default class ScriptDl extends Component {
                 path.splice(0, 2)
 
                 // rejoin the path to server location
-                let newPath = 'http://MyIP/Scripts/' + path.join('/')
+                let newPath = 'http://114.32.157.74/Scripts/' + path.join('/')
                 let obj_game = {
                     name: obj.name, 
                     fullpath: newPath,
@@ -166,7 +173,7 @@ export default class ScriptDl extends Component {
     }
 
     render(){
-        let Spans = this.state.Games.map((game)=>{
+        let Spans = this.state.Games.map((game, index)=>{
             let tmp = []
             tmp = this.state.Game.map((item, index)=>{
                 if (item.dir == game){
@@ -175,7 +182,7 @@ export default class ScriptDl extends Component {
             })
             return (
                 // Category on top
-                <LinkDiv>
+                <LinkDiv key={index}>
                     <LinkCatSpan>{game}</LinkCatSpan>
                     {tmp}
                 </LinkDiv>
